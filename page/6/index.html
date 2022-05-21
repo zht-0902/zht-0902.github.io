@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/21/java%E6%8B%A6%E6%88%AA%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/Redis%E4%BA%8B%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/02/21/java%E6%8B%A6%E6%88%AA%E5%99%A8/" class="post-title-link" itemprop="url">java拦截器</a>
+            <a href="/2021/11/07/Redis%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">Redis事务</a>
         </h2>
 
         <div class="post-meta">
@@ -212,14 +212,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-02-21 09:53:25" itemprop="dateCreated datePublished" datetime="2022-02-21T09:53:25+08:00">2022-02-21</time>
+              <time title="Created: 2021-11-07 09:53:25" itemprop="dateCreated datePublished" datetime="2021-11-07T09:53:25+08:00">2021-11-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-21 15:25:02" itemprop="dateModified" datetime="2022-04-21T15:25:02+08:00">2022-04-21</time>
+                <time title="Modified: 2022-01-07 11:44:58" itemprop="dateModified" datetime="2022-01-07T11:44:58+08:00">2022-01-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,7 +227,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
                 </span>
             </span>
 
@@ -237,14 +237,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.4k</span>
+              <span>853</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
+              <span>1 mins.</span>
             </span>
 
         </div>
@@ -256,27 +256,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="java拦截器"><a href="#java拦截器" class="headerlink" title="java拦截器"></a>java拦截器</h2><p><strong>概念：</strong>java里的拦截器是动态拦截Action调用的对象，它提供了一种机制可以使开发者在一个Action执行的前后执行一段代码，也可以在一个Action执行前阻止其执行，同时也提供了一种可以提取Action中可重用部分代码的方式。</p>
-<p><strong>作用域：</strong>动态拦截Action调用的对象（也就是我们的controller层）</p>
+          <h1 id="Redis事务"><a href="#Redis事务" class="headerlink" title="Redis事务"></a>Redis事务</h1><p><strong>概念</strong></p>
+<p>Redis 事务的本质是一组命令的集合。事务支持一次执行多个命令，一个事务中所有命令都会被序列</p>
+<p>化。在事务执行过程，会按照顺序串行化执行队列中的命令，其他客户端提交的命令请求不会插入到事</p>
+<p>务执行命令序列中。redis事务就是一次性、顺序性、排他性的执行一个队列中的一系列命令。</p>
+<p><strong>注意：</strong></p>
 <ul>
-<li><p>写一个实现了<strong>WebMvcConfigurer</strong>接口的配置类</p>
-</li>
-<li><p>重写其中的addCorsMappings()方法【配置跨域信息】和addInterceptors()方法【配置拦截器信息，如拦截路径和开放路径等】</p>
-</li>
+<li>批量操作在发送 EXEC 命令前被放入队列缓存，并不会被实际执行！</li>
+<li>Redis中，单条命令是原子性执行的，但事务不保证原子性，且没有回滚。事务中任意命令执行失败，其余的命令仍会被执行。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterceptorConfiguration</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        <span class="comment">//注册Interceptor拦截器(Interceptor这个类是我们自己写的拦截器类)</span></span><br><span class="line">        <span class="type">InterceptorRegistration</span> <span class="variable">registration</span> <span class="operator">=</span> registry.addInterceptor(<span class="keyword">new</span> <span class="title class_">Interceptor</span>());</span><br><span class="line">        <span class="comment">//addPathPatterns()方法添加需要拦截的路径</span></span><br><span class="line">        registration.addPathPatterns(<span class="string">&quot;/**&quot;</span>);                      <span class="comment">//所有路径都被拦截</span></span><br><span class="line">        <span class="comment">//excludePathPatterns()方法添加不拦截的路径</span></span><br><span class="line">        registration.excludePathPatterns(                         <span class="comment">//添加不拦截路径</span></span><br><span class="line">            <span class="string">&quot;/demo/loginPage&quot;</span>,               <span class="comment">//登录页面的地址【不拦截】</span></span><br><span class="line">                <span class="string">&quot;/**/*.html&quot;</span>,                 <span class="comment">//html静态资源</span></span><br><span class="line">                <span class="string">&quot;/**/*.js&quot;</span>,                  <span class="comment">//js静态资源</span></span><br><span class="line">                <span class="string">&quot;/**/*.css&quot;</span>) ;             <span class="comment">//css静态资源</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> &#123;</span><br><span class="line">        registry.addMapping(<span class="string">&quot;/**&quot;</span>)<span class="comment">//指哪些接口URL需要增加跨域设置</span></span><br><span class="line">                .allowedOrigins(<span class="string">&quot;*&quot;</span>)<span class="comment">//指的是前端哪些域名被允许跨域</span></span><br><span class="line">                .allowCredentials(<span class="literal">true</span>)<span class="comment">//需要带cookie等凭证时，设置为true，就会把cookie的相关信息带上</span></span><br><span class="line">                .allowedMethods(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;HEAD&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>, <span class="string">&quot;OPTIONS&quot;</span>)<span class="comment">//指的是允许哪些方法</span></span><br><span class="line">                .maxAge(<span class="number">3600</span>);<span class="comment">//cookie的失效时间，单位为秒（s），若设置为-1，则关闭浏览器就失效</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+<p><strong>相关命令：</strong></p>
+<ol>
+<li>watch key1 key2 … 监视一或多个key,如果在事务执行之前，被监视的key被其他命令改动，则 事务被打断 （ 类似乐观锁 ） </li>
+<li>multi 标记一个事务块的开始（ queued ） </li>
+<li>exec 执行所有事务块的命令 （ 一旦执行exec后，之前加的监控锁都会被取消掉 ） </li>
+<li>discard  在执行exec命令之前，取消事务，放弃事务块中的所有命令，如果不取消事务再次执行 multi 会报错（”ERR MULTI calls can not be nested”）</li>
+<li>unwatch  取消watch对所有key的监控</li>
+</ol>
+<p><strong>简单操作：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/7pugAO"><img src="https://s4.ax1x.com/2022/01/07/7pugAO.png" alt="7pugAO.png"></a></p>
+<p><strong>补充：</strong></p>
 <ul>
-<li><p>写一个实现<strong>HandlerInterceptor</strong>接口的自定义拦截器 </p>
-<p>preHandle：在业务处理器处理请求之前被调用。预处理，可以进行编码、安全控制、权限校验等处理；<br>postHandle：在业务处理器处理请求执行完成后，生成视图之前执行。后处理（调用了Service并返回							ModelAndView，但未进行页面渲染），有机会修改ModelAndView；<br>afterCompletion：在DispatcherServlet完全处理完请求后被调用，可用于清理资源等。返回处理（已										经渲染了页面）；</p>
-</li>
-<li><p>4、重写其中的preHandle()方法，方法内容为拦截到请求后的处理</p>
-</li>
+<li>若事务队列中存在命令性错误（类似于java编译性错误），则执行EXEC命令时，所有命令都不会执行</li>
+<li>若事务队列中存在语法性错误（类似于java的1&#x2F;0的运行时异常），执行EXEC命令时，其他正确命令被执行，错误命令抛出异常。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Interceptor</span>  <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//在这里可以通过request获取前台带来的用户信息或者token并且进行验证</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;判断条件&quot;</span>)&#123;</span><br><span class="line">            <span class="comment">//判断成功 return true</span></span><br><span class="line">            <span class="keyword">return</span>  <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            response.sendRedirect(request.getContextPath()+<span class="string">&quot;loginPage&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>  <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        HandlerInterceptor.<span class="built_in">super</span>.postHandle(request, response, handler, modelAndView);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        HandlerInterceptor.<span class="built_in">super</span>.afterCompletion(request, response, handler, ex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><strong>watch</strong>：</p>
+<ol>
+<li><p>使用watch监听某个key时，如果在执行exec命令前被改动了，那么exec执行后事务执行回滚操作。</p>
+</li>
+<li><p>一但执行 EXEC 开启事务的执行后，无论事务使用执行成功， WARCH 对变量的监控都将被取消。故当事务执行失败后，需重新执行WATCH命令对变量进行监控，并开启新的事务进行操作。</p>
+</li>
+<li><p>watch指令类似于乐观锁，在事务提交时，如果watch监控的多个KEY中任何KEY的值已经被其他客户端更改，则使用EXEC执行事务时，事务队列将不会被执行，同时返回Nullmulti-bulk应答以通知调用者事务执行失败。</p>
+</li>
+</ol>
 
       
     </div>
@@ -295,7 +307,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -363,7 +375,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -412,12 +424,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">90k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:21</span>
+    <span title="Reading time total">1:18</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>

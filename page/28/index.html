@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/05/String%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/01/%E5%85%B3%E4%BA%8Ejavaweb%E9%A1%B5%E9%9D%A2js,css%E7%AD%89%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/09/05/String%E7%B1%BB/" class="post-title-link" itemprop="url">String类</a>
+            <a href="/2021/09/01/%E5%85%B3%E4%BA%8Ejavaweb%E9%A1%B5%E9%9D%A2js,css%E7%AD%89%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">关于javaweb页面js,css等失效问题</a>
         </h2>
 
         <div class="post-meta">
@@ -212,14 +212,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-09-05 09:53:25" itemprop="dateCreated datePublished" datetime="2021-09-05T09:53:25+08:00">2021-09-05</time>
+              <time title="Created: 2021-09-01 09:53:25" itemprop="dateCreated datePublished" datetime="2021-09-01T09:53:25+08:00">2021-09-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-23 09:17:06" itemprop="dateModified" datetime="2021-09-23T09:17:06+08:00">2021-09-23</time>
+                <time title="Modified: 2021-09-11 11:49:22" itemprop="dateModified" datetime="2021-09-11T11:49:22+08:00">2021-09-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,7 +227,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                  <a href="/categories/javaweb/" itemprop="url" rel="index"><span itemprop="name">javaweb</span></a>
                 </span>
             </span>
 
@@ -237,14 +237,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.4k</span>
+              <span>509</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
+              <span>1 mins.</span>
             </span>
 
         </div>
@@ -256,181 +256,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="一、java-String类"><a href="#一、java-String类" class="headerlink" title="一、java String类"></a>一、java String类</h1><p>​    字符串广泛应用 在 Java 编程中，在 Java 中字符串属于对象，Java 提供了 String 类来创建和操作字符串。</p>
-<p>​    <strong>注意:</strong> String 类是不可改变的，所以你一旦创建了 String 对象，那它的值就无法改变了析如果需要对字符串做很多修改，那么应该选择使用 StringBuffer&amp;StringBuilder类</p>
-<h3 id="String方法"><a href="#String方法" class="headerlink" title="String方法"></a>String方法</h3><table>
-<thead>
-<tr>
-<th>序号</th>
-<th>方法描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>char  charAt(int index) 返回指定索引处的char值</td>
-</tr>
-<tr>
-<td>2</td>
-<td>int compareTo (Object to)   把这个字符串和另一个对象比较</td>
-</tr>
-<tr>
-<td>3</td>
-<td>int compareTo (String  anotherString) 按字典顺序比较两个字符串</td>
-</tr>
-<tr>
-<td>4</td>
-<td>int compareTolgnoreCase(String str) 按字典顺序比较两个字符串,不考虑大小写</td>
-</tr>
-<tr>
-<td>5</td>
-<td>String concat(String str)  将指定字符串连接到此字符串的结尾</td>
-</tr>
-<tr>
-<td>6</td>
-<td>boolean contentEquals(StringBuffer sb)  当且仅当字符串与指定的StringBuffer有相同顺序的字符时候返回真</td>
-</tr>
-<tr>
-<td>7</td>
-<td>static String copyValueOf(char[] data) 返回指定数组中表示该字符序列的 String。</td>
-</tr>
-<tr>
-<td>8</td>
-<td>static String copyValueOf(char[] data, int offset, int count) 返回指定数组中表示该字符序列的 String</td>
-</tr>
-<tr>
-<td>9</td>
-<td>boolean endsWith(String suffix) 测试此字符串是否以指定的后缀结束</td>
-</tr>
-<tr>
-<td>10</td>
-<td>boolean equals(Object anObject) 将此字符串与指定的对象比较</td>
-</tr>
-<tr>
-<td>11</td>
-<td>boolean equalsIgnoreCase(String anotherString) 将此 String 与另一个 String 比较，不考虑大小写</td>
-</tr>
-<tr>
-<td>12</td>
-<td>byte[] getBytes()   使用平台的默认字符集将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中</td>
-</tr>
-<tr>
-<td>13</td>
-<td>byte[] getBytes(String charsetName) 使用指定的字符集将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中</td>
-</tr>
-<tr>
-<td>14</td>
-<td>int hashCode()  返回此字符串的哈希码</td>
-</tr>
-<tr>
-<td>15</td>
-<td>int indexOf(int ch) 返回指定字符在此字符串中第一次出现处的索引</td>
-</tr>
-<tr>
-<td>16</td>
-<td>int indexOf(int ch, int fromIndex) 返回在此字符串中第一次出现指定字符处的索引，从指定的索引开始搜索</td>
-</tr>
-<tr>
-<td>17</td>
-<td>int indexOf(String str)  返回指定子字符串在此字符串中第一次出现处的索引</td>
-</tr>
-<tr>
-<td>18</td>
-<td>int indexOf(String str, int fromIndex) 返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始</td>
-</tr>
-<tr>
-<td>19</td>
-<td>String intern()   返回字符串对象的规范化表示形式</td>
-</tr>
-<tr>
-<td>20</td>
-<td>int lastIndexOf(int ch)  返回指定字符在此字符串中最后一次出现处的索引</td>
-</tr>
-<tr>
-<td>21</td>
-<td>int lastIndexOf(int ch, int fromIndex) 返回指定字符在此字符串中最后一次出现处的索引，从指定的索引处开始进行反向搜索</td>
-</tr>
-<tr>
-<td>22</td>
-<td>int length() 返回此字符串的长度</td>
-</tr>
-<tr>
-<td>23</td>
-<td>boolean matches(String regex) 告知此字符串是否匹配给定的正则表达式</td>
-</tr>
-<tr>
-<td>24</td>
-<td>String replace(char oldChar, char newChar) 返回一个新的字符串，它是通过用 newChar 替换此字符串中出现的所有 oldChar 得到的</td>
-</tr>
-<tr>
-<td>25</td>
-<td>String replaceAll(String regex, String replacement) 使用给定的 replacement 替换此字符串所有匹配给定的正则表达式的子字符串</td>
-</tr>
-<tr>
-<td>26</td>
-<td>String replaceFirst(String regex, String replacement) 使用给定的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串</td>
-</tr>
-<tr>
-<td>27</td>
-<td>String[] split(String regex)  根据给定正则表达式的匹配拆分此字符串</td>
-</tr>
-<tr>
-<td>28</td>
-<td>String[] split(String regex, int limit) 根据匹配给定的正则表达式来拆分此字符串</td>
-</tr>
-<tr>
-<td>29</td>
-<td>boolean startsWith(String prefix) 测试此字符串是否以指定的前缀开始</td>
-</tr>
-<tr>
-<td>30</td>
-<td>boolean startsWith(String prefix, int toffset) 测试此字符串从指定索引开始的子字符串是否以指定前缀开始</td>
-</tr>
-<tr>
-<td>31</td>
-<td>String substring(int beginIndex) 返回一个新的字符串，它是此字符串的一个子字符串</td>
-</tr>
-<tr>
-<td>32</td>
-<td>String substring(int beginIndex, int endIndex) 返回一个新字符串，它是此字符串的一个子字符串</td>
-</tr>
-<tr>
-<td>33</td>
-<td>char[] toCharArray()  将此字符串转换为一个新的字符数组</td>
-</tr>
-<tr>
-<td>34</td>
-<td>String toLowerCase()  使用默认语言环境的规则将此 String 中的所有字符都转换为小写</td>
-</tr>
-<tr>
-<td>35</td>
-<td>String toLowerCase(Locale locale)  使用给定 Locale 的规则将此 String 中的所有字符都转换为小写</td>
-</tr>
-<tr>
-<td>36</td>
-<td>String toString()   返回此对象本身（它已经是一个字符串！）。</td>
-</tr>
-<tr>
-<td>37</td>
-<td>String toUpperCase() 使用默认语言环境的规则将此 String 中的所有字符都转换为大写</td>
-</tr>
-<tr>
-<td>38</td>
-<td>String trim() 返回字符串的副本，忽略前导空白和尾部空白</td>
-</tr>
-<tr>
-<td>39</td>
-<td>static String valueOf(primitive data type x)   返回给定data type类型x参数的字符串表示形式</td>
-</tr>
-<tr>
-<td>40</td>
-<td>contains(CharSequence chars)  判断是否包含指定的字符系列</td>
-</tr>
-<tr>
-<td>41</td>
-<td>isEmpty()  判断字符串是否为空</td>
-</tr>
-</tbody></table>
-<p>​    </p>
+          <p>1.当我们运行web项目时，html页面改jsp页面之前在首行提前添加如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;</span><br><span class="line">    pageEncoding=&quot;UTF-8&quot;%&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2.但是加入代码修改后，可能会出现页面样式失效或者js失效等问题，如图所示：</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/hx0DC8"><img src="https://z3.ax1x.com/2021/09/11/hx0DC8.png" alt="hx0DC8.png"></a></p>
+<p>3.然后我们按f12就可以看到一些css，js文件404找不到的问题，如图所示：</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/hxBpxe"><img src="https://z3.ax1x.com/2021/09/11/hxBpxe.png" alt="hxBpxe.png"></a></p>
+<p>4.在这时，我们就可以在页面的前面加上如图所示的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">   String path = request.getRequestURI();</span><br><span class="line">   String basePath = request.getScheme() + &quot;://&quot;</span><br><span class="line">         + request.getServerName() + &quot;:&quot; + request.getServerPort()</span><br><span class="line">         + path;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;base href=&quot;&lt;%=basePath%&gt;&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/hxBZPf"><img src="https://z3.ax1x.com/2021/09/11/hxBZPf.png" alt="hxBZPf.png"></a></p>
+<p>5.完美解决：</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/hxBdsJ"><img src="https://z3.ax1x.com/2021/09/11/hxBdsJ.png" alt="hxBdsJ.png"></a></p>
+<p>注：这不一定是唯一的方式，但亲测可行！</p>
 
       
     </div>
@@ -449,7 +288,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/27/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/29/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/27/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/29/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -517,7 +356,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -566,12 +405,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">90k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:21</span>
+    <span title="Reading time total">1:18</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>

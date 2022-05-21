@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/05/%E5%9B%9B%E5%A4%A7%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/01/%E5%8F%8D%E5%B0%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/11/05/%E5%9B%9B%E5%A4%A7%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">四大函数式接口</a>
+            <a href="/2021/11/01/%E5%8F%8D%E5%B0%84/" class="post-title-link" itemprop="url">Java反射</a>
         </h2>
 
         <div class="post-meta">
@@ -212,14 +212,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-11-05 09:53:25" itemprop="dateCreated datePublished" datetime="2021-11-05T09:53:25+08:00">2021-11-05</time>
+              <time title="Created: 2021-11-01 09:53:25" itemprop="dateCreated datePublished" datetime="2021-11-01T09:53:25+08:00">2021-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-20 20:49:45" itemprop="dateModified" datetime="2022-05-20T20:49:45+08:00">2022-05-20</time>
+                <time title="Modified: 2022-01-10 17:42:33" itemprop="dateModified" datetime="2022-01-10T17:42:33+08:00">2022-01-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,14 +237,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -256,20 +256,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>java.util.function , Java 内置核心四大函数式接口。</p>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/7FT2Xn"><img src="https://s4.ax1x.com/2022/01/09/7FT2Xn.png" alt="7FT2Xn.png"></a></p>
-<h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><p>函数型接口，有一个输入有一个输出</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;String,Integer&gt; function=<span class="keyword">new</span> <span class="title class_">Function</span>&lt;String ,Integer&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">apply</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (s.length()==<span class="number">3</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>  -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>  <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> a=function.apply(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">System.out.println(a);</span><br></pre></td></tr></table></figure>
+          <h1 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h1><p>Reflflection（反射）是Java被视为动态语言的关键，反射机制允许程序在执行期借助于Reflflection API取得任何类的内部信息，并能直接操作任意对象的内部属性及方法。加载完类之后，在堆内存的方法区中就产生了一个Class类型的对象（一个类只有一个Class对象），这个对象就包含了完整的类的结构信息。我们可以通过这个对象看到类的结构。</p>
+<p><strong>优点：</strong>可以实现动态创建对象和编译，体现出很大的灵活性 !</p>
+<p><strong>缺点：</strong>对性能有影响。使用反射基本上是一种解释操作，我们可以告诉JVM，我们希望做什么并且它满</p>
+<p>​             足我们的要求。这类操作总是慢于 直接执行相同的操作。</p>
+<p><strong>java反射机制提供的功能：</strong></p>
+<ul>
+<li>在运行时判断任意一个对象所属的类</li>
+<li>在运行时构造任意一个类的对象</li>
+<li>在运行时判断任意一个类所具有的成员变量和方法</li>
+<li>在运行时获取泛型信息</li>
+<li>在运行时调用任意一个对象的成员变量和方法</li>
+<li>在运行时处理注解</li>
+<li>生成动态代理</li>
+<li>……</li>
+</ul>
+<p><strong>获取Class对象的几种方式：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">    <span class="comment">//方式1 通过类的静态成员class获得</span></span><br><span class="line">    <span class="type">Class</span> <span class="variable">studentClass</span> <span class="operator">=</span> Student.class;</span><br><span class="line">    <span class="comment">//方式2 通过字符串获得(包名+类名)</span></span><br><span class="line">    <span class="type">Class</span> <span class="variable">studentClass2</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;com.zht.pojo.Student&quot;</span>);</span><br><span class="line">    <span class="comment">//方式3 通过对象获得</span></span><br><span class="line">    Student student=<span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">    <span class="type">Class</span> <span class="variable">studentClass3</span> <span class="operator">=</span> student.getClass();</span><br><span class="line">    <span class="comment">// 只针对内置的基本数据类型</span></span><br><span class="line">    <span class="type">Class</span> <span class="variable">integerClass</span> <span class="operator">=</span> Integer.class;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Supplier"><a href="#Supplier" class="headerlink" title="Supplier"></a>Supplier</h2><p>供给型接口，没有输入参数，只有返回参数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Supplier&lt;String&gt; supplier=new Supplier&lt;String&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public String get() &#123;</span><br><span class="line">        return &quot;782&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">String b=supplier.get();</span><br><span class="line">System.out.println(b);</span><br></pre></td></tr></table></figure>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><strong>static ClassforName(String name)</strong>  返回指定类名name的Class对象</li>
+<li><strong>Object newInstance()</strong> 调用缺省构造函数，返回Class对象的一个实例</li>
+<li>**getName()**返回此Class对象所表示的实体（类，接口，数组类或void）的名称。</li>
+<li><strong>Class getSuperClass()</strong> 返回当前Class对象的父类的Class对象</li>
+<li><strong>Class[] getinterfaces()</strong> 获取当前Class对象的接口</li>
+<li><strong>ClassLoader getClassLoader()</strong> 返回该类的类加载器</li>
+<li><strong>Constructor[] getConstructors()</strong> 返回一个包含某些Constructor对象的数组</li>
+<li>**Method getMothed(Stringname,Class.. T)**返回一个Method对象，此对象的形参类型为paramType</li>
+<li><strong>Field[] getDeclaredFields()</strong> 返回Field对象的一个数组</li>
+</ul>
+<p>简单举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchFieldException &#123;</span><br><span class="line">    Student student=<span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">    <span class="type">Class</span> <span class="variable">studentClass</span> <span class="operator">=</span> student.getClass();</span><br><span class="line">    <span class="comment">//获取所有非私有方法包括父类</span></span><br><span class="line">    Method[] methods1 = studentClass.getMethods();</span><br><span class="line">    <span class="comment">//获取所有当前类中（this）中的所有方法</span></span><br><span class="line">    Method[] methods2 = studentClass.getDeclaredMethods();</span><br><span class="line">    <span class="comment">//获取所有当前类的非私有属性</span></span><br><span class="line">    Field[] fields = studentClass.getFields();</span><br><span class="line">    <span class="comment">//获取某一个属性</span></span><br><span class="line">    <span class="type">Field</span> <span class="variable">sex</span> <span class="operator">=</span> studentClass.getDeclaredField(<span class="string">&quot;sex&quot;</span>);</span><br><span class="line">    <span class="comment">//属性赋值</span></span><br><span class="line">    sex.set(student,<span class="string">&quot;男&quot;</span>);</span><br><span class="line">    System.out.println(sex.get(student));</span><br><span class="line">    <span class="comment">//获取某一个方法</span></span><br><span class="line">    <span class="type">Method</span> <span class="variable">methods</span> <span class="operator">=</span> studentClass.getDeclaredMethod(<span class="string">&quot;say&quot;</span>);</span><br><span class="line">                <span class="comment">//private修饰 暴露私有 不然会报错</span></span><br><span class="line">               methods.setAccessible(<span class="literal">true</span>);</span><br><span class="line">               <span class="comment">//调用方法</span></span><br><span class="line">               methods.invoke(studentClass.newInstance());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Predicate"><a href="#Predicate" class="headerlink" title="Predicate"></a>Predicate</h2><p>断定型接口，有一个输入参数，返回只有布尔值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Predicate&lt;String&gt; predicate=<span class="keyword">new</span> <span class="title class_">Predicate</span>&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">test</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (s.length()==<span class="number">3</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>  <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>  <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">boolean</span> c=predicate.test(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">System.out.println(c);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a>Consumer</h2><p>消费型接口，有一个输入参数，没有返回值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Consumer&lt;String&gt; consumer=<span class="keyword">new</span> <span class="title class_">Consumer</span>&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">accept</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是&quot;</span>+s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">consumer.accept(<span class="string">&quot;猪&quot;</span>);</span><br></pre></td></tr></table></figure>
-
+<p>多练…………………………..</p>
 
       
     </div>
@@ -288,7 +308,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -356,7 +376,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -405,12 +425,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">90k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:21</span>
+    <span title="Reading time total">1:18</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>

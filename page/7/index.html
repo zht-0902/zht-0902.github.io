@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/Redis%E4%BA%8B%E5%8A%A1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/06/Redis%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/11/07/Redis%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">Redis事务</a>
+            <a href="/2021/11/06/Redis%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">Redis常用指令</a>
         </h2>
 
         <div class="post-meta">
@@ -212,14 +212,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-11-07 09:53:25" itemprop="dateCreated datePublished" datetime="2021-11-07T09:53:25+08:00">2021-11-07</time>
+              <time title="Created: 2021-11-06 09:53:25" itemprop="dateCreated datePublished" datetime="2021-11-06T09:53:25+08:00">2021-11-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-07 11:44:58" itemprop="dateModified" datetime="2022-01-07T11:44:58+08:00">2022-01-07</time>
+                <time title="Modified: 2022-01-07 10:42:48" itemprop="dateModified" datetime="2022-01-07T10:42:48+08:00">2022-01-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,14 +237,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>853</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -256,39 +256,81 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Redis事务"><a href="#Redis事务" class="headerlink" title="Redis事务"></a>Redis事务</h1><p><strong>概念</strong></p>
-<p>Redis 事务的本质是一组命令的集合。事务支持一次执行多个命令，一个事务中所有命令都会被序列</p>
-<p>化。在事务执行过程，会按照顺序串行化执行队列中的命令，其他客户端提交的命令请求不会插入到事</p>
-<p>务执行命令序列中。redis事务就是一次性、顺序性、排他性的执行一个队列中的一系列命令。</p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>批量操作在发送 EXEC 命令前被放入队列缓存，并不会被实际执行！</li>
-<li>Redis中，单条命令是原子性执行的，但事务不保证原子性，且没有回滚。事务中任意命令执行失败，其余的命令仍会被执行。</li>
-</ul>
-<p><strong>相关命令：</strong></p>
-<ol>
-<li>watch key1 key2 … 监视一或多个key,如果在事务执行之前，被监视的key被其他命令改动，则 事务被打断 （ 类似乐观锁 ） </li>
-<li>multi 标记一个事务块的开始（ queued ） </li>
-<li>exec 执行所有事务块的命令 （ 一旦执行exec后，之前加的监控锁都会被取消掉 ） </li>
-<li>discard  在执行exec命令之前，取消事务，放弃事务块中的所有命令，如果不取消事务再次执行 multi 会报错（”ERR MULTI calls can not be nested”）</li>
-<li>unwatch  取消watch对所有key的监控</li>
-</ol>
-<p><strong>简单操作：</strong></p>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/7pugAO"><img src="https://s4.ax1x.com/2022/01/07/7pugAO.png" alt="7pugAO.png"></a></p>
-<p><strong>补充：</strong></p>
-<ul>
-<li>若事务队列中存在命令性错误（类似于java编译性错误），则执行EXEC命令时，所有命令都不会执行</li>
-<li>若事务队列中存在语法性错误（类似于java的1&#x2F;0的运行时异常），执行EXEC命令时，其他正确命令被执行，错误命令抛出异常。</li>
-</ul>
-<p><strong>watch</strong>：</p>
-<ol>
-<li><p>使用watch监听某个key时，如果在执行exec命令前被改动了，那么exec执行后事务执行回滚操作。</p>
-</li>
-<li><p>一但执行 EXEC 开启事务的执行后，无论事务使用执行成功， WARCH 对变量的监控都将被取消。故当事务执行失败后，需重新执行WATCH命令对变量进行监控，并开启新的事务进行操作。</p>
-</li>
-<li><p>watch指令类似于乐观锁，在事务提交时，如果watch监控的多个KEY中任何KEY的值已经被其他客户端更改，则使用EXEC执行事务时，事务队列将不会被执行，同时返回Nullmulti-bulk应答以通知调用者事务执行失败。</p>
-</li>
-</ol>
+          <h1 id="Redis常用指令"><a href="#Redis常用指令" class="headerlink" title="Redis常用指令"></a>Redis常用指令</h1><p>select   Index(默认16个库,从0开始，默认为0)</p>
+<p>dbsize (查看当前库的key的数量)</p>
+<p>keys * （查看当前数据库具体的key）</p>
+<p>flushdb (清空当前库)</p>
+<p>flushall (清空全部的库)</p>
+<h2 id="1-字符串String"><a href="#1-字符串String" class="headerlink" title="1.字符串String"></a>1.字符串String</h2><p>set key1 value1（设置值）</p>
+<p>get key1 （获得key）</p>
+<p>del key1 （删除key）</p>
+<p>exists key1 （判断是否存在key）</p>
+<p>append key1 （对不存在的 key 进行 APPEND ，等同于 SET   key1  “hello” ，否则追加字符串）</p>
+<p>strlen key1 （获取字符串长度）</p>
+<p>incr  views （将views所对应的值+1）</p>
+<p>decr  views （将views所对应的值-1）</p>
+<p>incrby  views  2 （将views所对应的值+2）</p>
+<p>decrby views  2（将views所对应的值-2）</p>
+<p>getrange  key2 0 -1 （获取全部字符串）</p>
+<p>getrange  key2 0  2 （截取部分字符串）</p>
+<p>setrange  key2  1  2  （替换值）</p>
+<p>setex key3 60 expire （设置过期时间）</p>
+<p>ttl key3 （查看过期时间）</p>
+<p>setnx  mykey  “Redis” （如果不存在设置返回1，否则返回0）</p>
+<p>mget k1 k2 k3 （存在的就返回key的值，不存在的就返回nil）</p>
+<p>mset k1 v1 k2 v2 (同时设置多个键值对)</p>
+<p>msetnx   k1 v1  k3 v2 (如果都设置成功，返回1，如果所有给定 key 都设置失败(至少有一个 key 已存在)，那么返回 0 ，原子性操作)</p>
+<p>getset  k1 v2 (先返回v1的值再设置成v2)</p>
+<h2 id="2-列表List"><a href="#2-列表List" class="headerlink" title="2.列表List"></a>2.列表List</h2><p>lpush list1 value （从列表左边插入）</p>
+<p>rpush list1 value （从列表右边插入）</p>
+<p>lrange list1 0 -1 （返回全部值）</p>
+<p>lrange list1 0 1 （返回下标从0到1的值）</p>
+<p>lpop list1 （移除最左边并返回该值，不存在时返回nil）</p>
+<p>rpop list1 （移除最右边并返回该值，不存在时返回nil）</p>
+<p>lindex list  0  （按照索引下标获得元素（-1代表最后一个，0代表是第一个））</p>
+<p>llen list （返回列表的长度）</p>
+<p>lrem list  1  “zht” (根据参数 COUNT 的值，移除列表中与参数 VALUE 相等的元素。)</p>
+<p>ltirm list  1 2 ( 对一个列表进行修剪(trim)，就是说，让列表只保留指定区间内的元素，不在指定区间之内的元素都将被删除。)</p>
+<p>rpoplpush  mylist  myotherlist  “bar” (移除列表的最后一个元素，并将该元素添加到另一个列表并返回。)</p>
+<p>lset key index value (将列表 key 下标为 index 的元素的值设置为 value 。 )</p>
+<p>linsert key before&#x2F;after pivot value (用于在列表的元素前或者后插入元素。)</p>
+<h2 id="3-集合Set"><a href="#3-集合Set" class="headerlink" title="3.集合Set"></a>3.集合Set</h2><p>sadd myset value（将一个或多个成员元素加入到集合中，不能重复）</p>
+<p>smembers myset （返回集合中的所有的成员。）</p>
+<p>sismember myset value （命令判断成员元素是否是集合的成员。）</p>
+<p>scard myset （获取集合里面的元素个数）</p>
+<p>srem key value （用于移除集合中的一个或多个成员元素）</p>
+<p>srandmember key （命令用于返回集合中的一个随机元素。后面可以加数字，表示返回几个）</p>
+<p>spop key （用于移除集合中的指定 key 的一个或多个随机元素）</p>
+<p>smove myset myset2 “zht”   （ 将指定成员 member 元素从 source 集合移动到 destination 集合。）</p>
+<p>SDIFF key1 key2  （差集）</p>
+<p>SINTER key1 key2 # （交集）</p>
+<p>SUNION key1 key2 （并集）</p>
+<h2 id="4-哈希Hash（kv模式不变，但V是一个键值对）"><a href="#4-哈希Hash（kv模式不变，但V是一个键值对）" class="headerlink" title="4.哈希Hash（kv模式不变，但V是一个键值对）"></a>4.哈希Hash（kv模式不变，但V是一个键值对）</h2><p>hset  myhash k1 v1(命令用于为哈希表中的字段赋值)</p>
+<p>hget myhash k1 </p>
+<p>hmset   myhash k1 v1 k2 v2(同时将多个k-v对设置到哈希表中。会覆盖哈希表中已存在的字段)</p>
+<p>hmget myhash k1  k2</p>
+<p>hgetall myhash (用于返回哈希表中，所有的字段和值。)</p>
+<p>hdel  myhash k1 (用于删除哈希表 key 中的一个或多个指定字段)</p>
+<p>hlen  myhash (获取哈希表中字段的数量。)</p>
+<p>hexists myhash k1 (查看哈希表的指定字段是否存在。 )</p>
+<p>hkeys  myhash( 获取哈希表中的所有域)</p>
+<p>hvals myhash  (返回哈希表所有域的值)</p>
+<p>hincrby  myhash num  1 (为哈希表中的字段值加上指定增量值。)</p>
+<p>hsetnx  myhash k10  “zht” (为哈希表中不存在的的字段赋值 。)  </p>
+<h2 id="5-有序集合（在set基础上，加一个score值。之前set是k1-v1-v2-v3，现在zset是-k1-score1-v1-score2-v2）"><a href="#5-有序集合（在set基础上，加一个score值。之前set是k1-v1-v2-v3，现在zset是-k1-score1-v1-score2-v2）" class="headerlink" title="5.有序集合（在set基础上，加一个score值。之前set是k1 v1 v2 v3，现在zset是 k1 score1 v1 score2 v2）"></a>5.有序集合（在set基础上，加一个score值。之前set是k1 v1 v2 v3，现在zset是 k1 score1 v1 score2 v2）</h2><p>zadd myset 分数值  “zht”  （将一个或多个成员元素及其分数值加入到有序集当中。） </p>
+<p>zrange  myset 0 -1  （返回有序集中，指定区间内的成员 ，-1为全部）</p>
+<p>ZRANGEBYSCORE  myset -inf  +inf（显示整个有序集）</p>
+<p>ZRANGEBYSCORE myset -inf +inf withscores  （递增排序）</p>
+<p>ZRANGEBYSCORE myset 0 -1 withscores  （递剪排序）</p>
+<p>ZRANGEBYSCORE myset -inf 2500 WITHSCORES （显示小于2500的成员）</p>
+<p>zrem myset “zht” （移除有序集中的一个或多个成员 ）</p>
+<p>zcard myset  （命令用于计算集合中元素的数量。）</p>
+<p>zcount myset 1  3 （计算有序集合中指定分数区间的成员数量。）</p>
+<p> zrank  myset  “zht” （返回有序集中指定成员的排名。其中有序集成员按分数值递增(从小到大)顺序排列。 ）</p>
+<p>zrevrank  myset  “zht” （返回有序集中成员的排名。其中有序集成员按分数值递减(从大到小)排序。） </p>
+<h2 id="6-其他类型"><a href="#6-其他类型" class="headerlink" title="6.其他类型"></a>6.其他类型</h2><p>GEO地理位置</p>
+<p>HyperLogLog</p>
+<p>BitMap</p>
 
       
     </div>
@@ -307,7 +349,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -375,7 +417,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -424,12 +466,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">90k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:21</span>
+    <span title="Reading time total">1:18</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>

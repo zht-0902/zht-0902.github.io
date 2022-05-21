@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/22/Linux%E9%83%A8%E7%BD%B2Web%E5%BA%94%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/21/(%E9%9B%86%E5%90%88)%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/10/22/Linux%E9%83%A8%E7%BD%B2Web%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">Linux部署Web应用</a>
+            <a href="/2021/10/21/(%E9%9B%86%E5%90%88)%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">（集合）多线程</a>
         </h2>
 
         <div class="post-meta">
@@ -212,14 +212,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-10-22 09:53:25" itemprop="dateCreated datePublished" datetime="2021-10-22T09:53:25+08:00">2021-10-22</time>
+              <time title="Created: 2021-10-21 09:53:25" itemprop="dateCreated datePublished" datetime="2021-10-21T09:53:25+08:00">2021-10-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-20 20:48:47" itemprop="dateModified" datetime="2022-05-20T20:48:47+08:00">2022-05-20</time>
+                <time title="Modified: 2022-04-25 09:54:17" itemprop="dateModified" datetime="2022-04-25T09:54:17+08:00">2022-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,7 +227,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaweb/" itemprop="url" rel="index"><span itemprop="name">javaweb</span></a>
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
                 </span>
             </span>
 
@@ -237,14 +237,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.3k</span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -256,50 +256,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Linux部署Web应用"><a href="#Linux部署Web应用" class="headerlink" title="Linux部署Web应用"></a>Linux部署Web应用</h2><h2 id="一：安装JDK"><a href="#一：安装JDK" class="headerlink" title="一：安装JDK"></a>一：安装JDK</h2><p>1.卸载之前的jdk，openjdk</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum remove *openjdk（卸载之前的jdk）</span><br><span class="line"></span><br><span class="line">java -verion （查看jdk版本）</span><br></pre></td></tr></table></figure>
+          <h2 id="List不安全"><a href="#List不安全" class="headerlink" title="List不安全"></a>List不安全</h2><p><strong>单线程下：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadList</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;String&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            list.add(<span class="string">&quot;a+&quot;</span>+i);</span><br><span class="line">        &#125;</span><br><span class="line">        list.forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>2.安装自己的jdk</p>
-<p>先进入到usr目录下，再新建java文件夹，再到java文件夹中通过rz命令上传jdk文件，在解压</p>
-<p>命令步骤：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr </span><br><span class="line">mkdir java </span><br><span class="line">cd java  </span><br><span class="line">输入rz再选择文件直接上传</span><br><span class="line">tar -xvf  tar包名 （解压）</span><br></pre></td></tr></table></figure>
+<p><strong>多线程下：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadList</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;String&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt;&#123;</span><br><span class="line">                list.add(UUID.randomUUID().toString().substring(<span class="number">0</span>,<span class="number">8</span>));</span><br><span class="line">                System.out.println(list);</span><br><span class="line">            &#125;,String.valueOf(i)).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>3.配置文件</p>
-<p>输入<strong>vim  &#x2F;etc&#x2F;profile</strong></p>
-<p>在文件的末尾插入如下配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_181</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib</span><br><span class="line">export JAVA_HOME PATH CLASSPATH</span><br></pre></td></tr></table></figure>
-
-<p>配置完成后直接<strong>esc</strong>然后<strong>：wq</strong>保存并退出</p>
-<p>然后执行命令：source &#x2F;etc&#x2F;profile（让配置文件生效）</p>
-<p>4.查看jdk版本</p>
-<p>java -version</p>
-<h2 id="二：安装Tomcat"><a href="#二：安装Tomcat" class="headerlink" title="二：安装Tomcat"></a>二：安装Tomcat</h2><p>1.同样的步骤在usr下新建tomcat文件夹，然后上传解压：</p>
-<p>命令步骤：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr</span><br><span class="line">mkdir tomcat</span><br><span class="line">rz （选择tomcat文件直接上传）</span><br><span class="line">tar -xvf tomcat.tar文件</span><br></pre></td></tr></table></figure>
-
-<p>2.配置文件</p>
-<p>vim &#x2F;etc&#x2F;profile</p>
-<p>将刚才的java配置文件与其合并</p>
-<p>新配置文件如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_181</span><br><span class="line">export CATALINA_HOME=/usr/tomcat/apache-tomcat-7.0.56</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$CATALINA_HOME/lib</span><br><span class="line">export JAVA_HOME PATH CLASSPATH CATALINA_HOME</span><br></pre></td></tr></table></figure>
-
-<p>3.进入 apache-tomcat-7.0.56中的bin目录</p>
-<p>startup.sh命令启动</p>
-<p>shutdown.sh 命令关闭</p>
-<p>在访问tomcat时，首先关闭防火墙或者放行端口</p>
-<p>systemctl stop firewalld 关闭防火墙</p>
-<p>输入IP地址：8080即可访问</p>
-<h2 id="三：安装mysql"><a href="#三：安装mysql" class="headerlink" title="三：安装mysql"></a>三：安装mysql</h2><p>在这里安装的是的mariadb，与mysql语法差不多一模一样</p>
-<p>安装地址教程：<a target="_blank" rel="noopener" href="https://blog.51cto.com/u_13866901/2177779">https://blog.51cto.com/u_13866901/2177779</a></p>
-<p>安装完成后：</p>
+<p><strong>运行结果：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/7pxISg"><img src="https://s4.ax1x.com/2022/01/07/7pxISg.png" alt="7pxISg.png"></a></p>
+<p>因为ArrayList源码中的add方法没有加锁而CopyOnWriteArrayList加了Lock锁，所以会一个ConcurrentModificationException    的异常。</p>
+<p><strong>解决方案：</strong></p>
 <ol>
-<li>在usr目录下新建sqlscript，并且将sql脚本文件rz上传进来</li>
-<li>输入mysql -uroot -p 命令登录并且会提示你输入密码，密码输入成功后就可以输入sql了</li>
-<li>create dadabase  数据库名</li>
-<li>use 数据库名</li>
-<li>source  &#x2F;sql脚本所在位置</li>
+<li>List<String> list &#x3D; new Vector&lt;&gt;();</li>
+<li>List<String> list &#x3D; Collections.synchronizedList(new ArrayList&lt;&gt; ()); </li>
+<li>List<String> list &#x3D; new CopyOnWriteArrayList&lt;&gt;();</li>
 </ol>
-<h2 id="四：启动web项目"><a href="#四：启动web项目" class="headerlink" title="四：启动web项目"></a>四：启动web项目</h2><p>上述步骤完成后，进入到tomcat的webapps下，将web项目先打包成.war文件，然后通过rz命令上传到bin目录下，然后启动tomcat就可以访问了！</p>
+<p><strong>举例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadList</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;String&gt; list=<span class="keyword">new</span> <span class="title class_">CopyOnWriteArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt;&#123;</span><br><span class="line">                list.add(UUID.randomUUID().toString().substring(<span class="number">0</span>,<span class="number">8</span>));</span><br><span class="line">                System.out.println(list);</span><br><span class="line">            &#125;,String.valueOf(i)).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/7pzEtK"><img src="https://s4.ax1x.com/2022/01/07/7pzEtK.png" alt="7pzEtK.png"></a></p>
+<p><strong>写入时复制（CopyOnWrite）思想</strong></p>
+<p>​                  写入时复制（CopyOnWrite，简称COW）思想是计算机程序设计领域中的一种优化策略。其核心思想是，如果有多个调用者（Callers）同时要求相同的资源（如内存或者是磁盘上的数据存储），他们会共同获取相同的指针指向相同的资源，直到某个调用者视图修改资源内容时，系统才会真正复制一份专用副本（private copy）给该调用者，而其他调用者所见到的最初的资源仍然保持不变。这过程对其他的调用者都是透明的（transparently）。此做法主要的优点是如果调用者没有修改资源，就不会有副本（private copy）被创建，因此多个调用者只是读取操作时可以共享同一份资源。读写分离，写时复制出一个新的数组，完成插入、修改或者移除操作后将新数组赋值给array</p>
+<p><strong>CopyOnWriteArrayList为什么并发安全且性能比Vector好</strong></p>
+<p>​                   Vector是增删改查方法都加了synchronized，保证同步，但是每个方法执行的时候都要去获得锁，性能就会大大下降，而CopyOnWriteArrayList 只是在增删改上加锁，但是读不加锁，在读方面的性能就好于Vector，CopyOnWriteArrayList支持读多写少的并发情况。</p>
+<h2 id="Set不安全"><a href="#Set不安全" class="headerlink" title="Set不安全"></a>Set不安全</h2><p><strong>和LIst同理：</strong></p>
+<p>因为HashSet源码中的add方法没有加锁而CopyOnWriteArraySet加了Lock锁，所以会一个ConcurrentModificationException    的异常。</p>
+<p><strong>解决方案：</strong></p>
+<ol>
+<li>List<String> list &#x3D; Collections.synchronizedList(new HashSet&lt;&gt; ()); </li>
+<li>List<String> list &#x3D; new CopyOnWriteArraySet&lt;&gt;();</li>
+</ol>
+<p><strong>举例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadSet</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Set&lt;String&gt; set=<span class="keyword">new</span> <span class="title class_">CopyOnWriteArraySet</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">130</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt;&#123;</span><br><span class="line">                set.add(UUID.randomUUID().toString().substring(<span class="number">0</span>,<span class="number">8</span>));</span><br><span class="line">                System.out.println(set);</span><br><span class="line">            &#125;,String.valueOf(i)).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Map不安全"><a href="#Map不安全" class="headerlink" title="Map不安全"></a>Map不安全</h2><p><strong>与前者相似：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadMap</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Map&lt;String,String&gt; map=<span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">190</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt;&#123;</span><br><span class="line">                map.put(Thread.currentThread().getName(),UUID.randomUUID().toString().substring(<span class="number">0</span>,<span class="number">8</span>));</span><br><span class="line">                System.out.println(map);</span><br><span class="line">            &#125;,String.valueOf(i)).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这三个类中源码里面用到了lock或者synchronized。</p>
 
       
     </div>
@@ -318,7 +314,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -386,7 +382,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -435,12 +431,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">90k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:21</span>
+    <span title="Reading time total">1:18</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
