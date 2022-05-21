@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/%E5%A4%B4%E5%83%8F.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/%E5%A4%B4%E5%83%8F.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/%E5%A4%B4%E5%83%8F.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="线程池优势 线程池做的工作主要是：控制运行的线程数量，处理过程中将任务放入队列，然后在线程创建后启动这 些任务，如果线程数量超过了最大数量，超出数量的线程排队等候，等其他线程执行完毕，再从队列中 取出任务来执行。 它的主要特点为：线程复用，控制最大并发数，管理线程。 第一：降低资源消耗，通过重复利用已创建的线程降低线程创建和销毁造成的消耗。 第二：提高响应速度。当任务到达时，任务可以不需要等待线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java线程池">
+<meta property="og:url" content="http://example.com/2021/10/23/java%E7%BA%BF%E7%A8%8B%E6%B1%A0/index.html">
+<meta property="og:site_name" content="Zht&#x2F;Blog">
+<meta property="og:description" content="线程池优势 线程池做的工作主要是：控制运行的线程数量，处理过程中将任务放入队列，然后在线程创建后启动这 些任务，如果线程数量超过了最大数量，超出数量的线程排队等候，等其他线程执行完毕，再从队列中 取出任务来执行。 它的主要特点为：线程复用，控制最大并发数，管理线程。 第一：降低资源消耗，通过重复利用已创建的线程降低线程创建和销毁造成的消耗。 第二：提高响应速度。当任务到达时，任务可以不需要等待线程">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s4.ax1x.com/2022/01/09/7FvepV.png">
+<meta property="article:published_time" content="2021-10-23T01:53:25.000Z">
+<meta property="article:modified_time" content="2022-04-25T01:56:28.155Z">
+<meta property="article:author" content="Zht">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s4.ax1x.com/2022/01/09/7FvepV.png">
+
+<link rel="canonical" href="http://example.com/2021/10/23/java%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>java线程池 | Zht/Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zht/Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/23/java%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
+      <meta itemprop="name" content="Zht">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zht/Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java线程池
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-23 09:53:25" itemprop="dateCreated datePublished" datetime="2021-10-23T09:53:25+08:00">2021-10-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-25 09:56:28" itemprop="dateModified" datetime="2022-04-25T09:56:28+08:00">2022-04-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>5.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>线程池优势</strong></p>
+<p>线程池做的工作主要是：控制运行的线程数量，处理过程中将任务放入队列，然后在线程创建后启动这</p>
+<p>些任务，如果线程数量超过了最大数量，超出数量的线程排队等候，等其他线程执行完毕，再从队列中</p>
+<p>取出任务来执行。</p>
+<p>它的主要<strong>特点</strong>为：线程复用，控制最大并发数，管理线程。</p>
+<p><strong>第一</strong>：降低资源消耗，通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</p>
+<p><strong>第二</strong>：提高响应速度。当任务到达时，任务可以不需要等待线程创建就能立即执行。</p>
+<p><strong>第三</strong>：提高线程的可管理性，线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系</p>
+<p>​             统的稳定性，使用线程池可以进行统一分配，调优和监控。</p>
+<h2 id="线程池的三大方法"><a href="#线程池的三大方法" class="headerlink" title="线程池的三大方法"></a>线程池的三大方法</h2><p><strong>Executors.newFixedThreadPool(int)</strong>      </p>
+<p>执行长期任务性能好，创建一个线程池，一池有N个固定的线程，有固定线程数的线程。</p>
+<p>举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">ExecutorService</span> <span class="variable">executorService</span> <span class="operator">=</span> Executors.newFixedThreadPool(<span class="number">5</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">        executorService.execute(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">&quot; 办理业务&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">3</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">4</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">2</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">4</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">4</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">4</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">3</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">2</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">5</span> 办理业务</span><br></pre></td></tr></table></figure>
+
+<p><strong>Executors.newSingleThreadExecutor()</strong>  </p>
+<p>只有一个线程</p>
+<p>举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    ExecutorService executorService = Executors.newSingleThreadExecutor();</span><br><span class="line">    for (int i = 0; i &lt;= 10; i++) &#123;</span><br><span class="line">        executorService.execute(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+&quot; 办理业务&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br></pre></td></tr></table></figure>
+
+<p><strong>Executors.newCachedThreadPool()</strong>  </p>
+<p>执行很多短期异步任务，线程池根据需要创建新线程，但在先构建的线程可用时将重用他们。可扩容，遇强则强</p>
+<p>举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">ExecutorService</span> <span class="variable">executorService</span> <span class="operator">=</span> Executors.newCachedThreadPool();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">        executorService.execute(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">&quot; 办理业务&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">2</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">5</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">6</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">9</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">10</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">3</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">4</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">8</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">11</span> 办理业务</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">7</span> 办理业务</span><br></pre></td></tr></table></figure>
+
+<h2 id="ThreadPoolExecutor"><a href="#ThreadPoolExecutor" class="headerlink" title="ThreadPoolExecutor"></a>ThreadPoolExecutor</h2><p><strong>工作原理</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/7FvepV"><img src="https://s4.ax1x.com/2022/01/09/7FvepV.png" alt="7FvepV.png"></a></p>
+<p>在这三种方法的源码中，都调用了以下方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">ThreadPoolExecutor</span><span class="params">(<span class="type">int</span> corePoolSize,</span></span><br><span class="line"><span class="params">                          <span class="type">int</span> maximumPoolSize,</span></span><br><span class="line"><span class="params">                          <span class="type">long</span> keepAliveTime,</span></span><br><span class="line"><span class="params">                          TimeUnit unit,</span></span><br><span class="line"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span><br><span class="line"><span class="params">                          ThreadFactory threadFactory,</span></span><br><span class="line"><span class="params">                          RejectedExecutionHandler handler)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (corePoolSize &lt; <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt;= <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">        keepAliveTime &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>();</span><br><span class="line">    <span class="keyword">if</span> (workQueue == <span class="literal">null</span> || threadFactory == <span class="literal">null</span> || handler == <span class="literal">null</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">    <span class="built_in">this</span>.acc = System.getSecurityManager() == <span class="literal">null</span> ?</span><br><span class="line">            <span class="literal">null</span> :</span><br><span class="line">            AccessController.getContext();</span><br><span class="line">    <span class="built_in">this</span>.corePoolSize = corePoolSize;</span><br><span class="line">    <span class="built_in">this</span>.maximumPoolSize = maximumPoolSize;</span><br><span class="line">    <span class="built_in">this</span>.workQueue = workQueue;</span><br><span class="line">    <span class="built_in">this</span>.keepAliveTime = unit.toNanos(keepAliveTime);</span><br><span class="line">    <span class="built_in">this</span>.threadFactory = threadFactory;</span><br><span class="line">    <span class="built_in">this</span>.handler = handler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>7大参数理解：</strong></p>
+<p><strong>corePollSize ：</strong>核心线程数。在创建了线程池后，线程中没有任何线程，等到有任务到来时才创建线程去执行任务。默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当中。</p>
+<p><strong>maximumPoolSize ：</strong>最大线程数。表明线程中最多能够创建的线程数量，此值必须大于等于1。 </p>
+<p><strong>keepAliveTime ：</strong>空闲的线程保留的时间。</p>
+<p><strong>TimeUnit</strong> ：空闲线程的保留时间单位。</p>
+<ol>
+<li>TimeUnit.DAYS; &#x2F;&#x2F;天 </li>
+<li>TimeUnit.HOURS; &#x2F;&#x2F;小时 </li>
+<li>TimeUnit.MINUTES; &#x2F;&#x2F;分钟 </li>
+<li>TimeUnit.SECONDS; &#x2F;&#x2F;秒 </li>
+<li>TimeUnit.MILLISECONDS; &#x2F;&#x2F;毫秒 </li>
+<li>TimeUnit.MICROSECONDS; &#x2F;&#x2F;微妙 </li>
+<li>TimeUnit.NANOSECONDS; &#x2F;&#x2F;纳秒</li>
+</ol>
+<p><strong>BlockingQueue&lt; Runnable&gt;</strong> ：阻塞队列，存储等待执行的任务。参数有ArrayBlockingQueue、LinkedBlockingQueue、SynchronousQueue可选。</p>
+<p><strong>ThreadFactory</strong> ：线程工厂，用来创建线程，一般默认即可</p>
+<p><strong>RejectedExecutionHandler</strong> ：队列已满，而且任务量大于最大线程的异常处理策略。有以下取值</p>
+<ol>
+<li>ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。 </li>
+<li>ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。 </li>
+<li>ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务 （重复此过程） </li>
+<li>ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务</li>
+</ol>
+<p><strong>四种拒绝策略：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RejectedExecutionHandler rejected = null;</span><br><span class="line">rejected = new ThreadPoolExecutor.AbortPolicy();//默认，队列满了丢任务，抛出异常</span><br><span class="line">rejected = new ThreadPoolExecutor.DiscardPolicy();//队列满了丢任务，不抛出异常【如 果允许任务丢失这是最好的】</span><br><span class="line">rejected = new ThreadPoolExecutor.DiscardOldestPolicy();//将最早进入队列的任务 删，之后再尝试加入队列</span><br><span class="line">rejected = new ThreadPoolExecutor.CallerRunsPolicy();//如果添加到线程池失败，那么 主线程会自己去执行该任务，回退</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="comment">//获取CPU的内核数</span></span><br><span class="line">    System.out.println(Runtime.getRuntime().availableProcessors());</span><br><span class="line">    <span class="type">ThreadPoolExecutor</span> <span class="variable">threadPoolExecutor</span></span><br><span class="line">            <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>(</span><br><span class="line">            <span class="number">2</span>,</span><br><span class="line">            <span class="number">5</span>,<span class="comment">//最大线程数量</span></span><br><span class="line">            <span class="number">2L</span>,</span><br><span class="line">            TimeUnit.SECONDS,</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">LinkedBlockingDeque</span>&lt;&gt;(<span class="number">3</span>),<span class="comment">//队列中等待的线程</span></span><br><span class="line">            Executors.defaultThreadFactory(),</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>.AbortPolicy()<span class="comment">//大于最大线程数了拒绝，抛出异常</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        threadPoolExecutor.execute(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">&quot;在上厕所&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span></span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span>在上厕所</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span>在上厕所</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span>在上厕所</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span>在上厕所</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">1</span>在上厕所</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">4</span>在上厕所</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">2</span>在上厕所</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">3</span>在上厕所</span><br><span class="line">pool-<span class="number">1</span>-thread-<span class="number">5</span>在上厕所</span><br><span class="line">Exception in thread <span class="string">&quot;main&quot;</span> java.util.concurrent.RejectedExecutionException: Task com.zht.Thread_create$<span class="number">1</span>@330bedb4 rejected from java.util.concurrent.ThreadPoolExecutor@2503dbd3[Running, <span class="type">pool</span> <span class="variable">size</span> <span class="operator">=</span> <span class="number">5</span>, <span class="type">active</span> <span class="variable">threads</span> <span class="operator">=</span> <span class="number">0</span>, <span class="type">queued</span> <span class="variable">tasks</span> <span class="operator">=</span> <span class="number">0</span>, <span class="type">completed</span> <span class="variable">tasks</span> <span class="operator">=</span> <span class="number">9</span>]</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:<span class="number">2063</span>)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:<span class="number">830</span>)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:<span class="number">1379</span>)</span><br><span class="line">	at com.zht.Thread_create.main(Thread_create.java:<span class="number">27</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/22/Linux%E9%83%A8%E7%BD%B2Web%E5%BA%94%E7%94%A8/" rel="prev" title="Linux部署Web应用">
+      <i class="fa fa-chevron-left"></i> Linux部署Web应用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/01/%E5%8F%8D%E5%B0%84/" rel="next" title="Java反射">
+      Java反射 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%B8%89%E5%A4%A7%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">线程池的三大方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadPoolExecutor"><span class="nav-number">2.</span> <span class="nav-text">ThreadPoolExecutor</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zht"
+      src="/images/%E5%A4%B4%E5%83%8F.png">
+  <p class="site-author-name" itemprop="name">Zht</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zht</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">90k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">1:21</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
