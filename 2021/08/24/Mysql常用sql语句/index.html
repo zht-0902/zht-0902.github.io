@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Mysql常用sql语句   结构化查询语句分类      DDL（数据定义语言）定义和管理数据对象，如数据库，数据表等 CREATE、DROP、ALTER    DML（数据操作语言）用于操作数据库对象中所包含的数据 INSERT、UPDATE、DELETE    DQL（数据查询语言）用于查询数据库数据 SELECT    DCL（数据控制语言）用于管理数据库的语言，包括管理权限及数据更改 G">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://example.com/2021/08/24/Mysql%E5%B8%B8%E7%94%A8sql%E8%AF%AD%E5%8F%A5/index.html">
 <meta property="og:site_name" content="Zht&#x2F;Blog">
 <meta property="og:description" content="Mysql常用sql语句   结构化查询语句分类      DDL（数据定义语言）定义和管理数据对象，如数据库，数据表等 CREATE、DROP、ALTER    DML（数据操作语言）用于操作数据库对象中所包含的数据 INSERT、UPDATE、DELETE    DQL（数据查询语言）用于查询数据库数据 SELECT    DCL（数据控制语言）用于管理数据库的语言，包括管理权限及数据更改 G">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-24T01:53:25.000Z">
 <meta property="article:modified_time" content="2022-01-05T04:33:11.117Z">
 <meta property="article:author" content="Zht">
@@ -41,7 +41,7 @@
     sidebar: "",
     isHome : false,
     isPost : true,
-    lang   : 'en'
+    lang   : 'zh-CN'
   };
 </script>
 
@@ -85,7 +85,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -115,31 +115,31 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
       <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
       </li>
   </ul>
@@ -155,7 +155,7 @@
   </span>
   <div class="search-input-container">
     <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
+           placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
@@ -175,10 +175,6 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
     <main class="main">
@@ -192,7 +188,7 @@
     
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/24/Mysql%E5%B8%B8%E7%94%A8sql%E8%AF%AD%E5%8F%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -214,41 +210,41 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">发表于</span>
 
-              <time title="Created: 2021-08-24 09:53:25" itemprop="dateCreated datePublished" datetime="2021-08-24T09:53:25+08:00">2021-08-24</time>
+              <time title="创建时间：2021-08-24 09:53:25" itemprop="dateCreated datePublished" datetime="2021-08-24T09:53:25+08:00">2021-08-24</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-05 12:33:11" itemprop="dateModified" datetime="2022-01-05T12:33:11+08:00">2022-01-05</time>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 12:33:11" itemprop="dateModified" datetime="2022-01-05T12:33:11+08:00">2022-01-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
                 </span>
             </span>
 
           <br>
-            <span class="post-meta-item" title="Symbols count in article">
+            <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">本文字数：</span>
               <span>6k</span>
             </span>
-            <span class="post-meta-item" title="Reading time">
+            <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>5 mins.</span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -527,16 +523,15 @@
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          Table of Contents
+          文章目录
         </li>
         <li class="sidebar-nav-overview">
-          Overview
+          站点概览
         </li>
       </ul>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql%E5%B8%B8%E7%94%A8sql%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">Mysql常用sql语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">连接查询：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHERE%E6%9D%A1%E4%BB%B6%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">WHERE条件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">MYSQL函数：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8Mysql%E8%AF%AD%E5%8F%A5%E4%B8%BE%E4%BE%8B%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">常用Mysql语句举例：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%E3%80%81select-from-ren"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">1、select * from ren</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%E3%80%81select-from-ren-where-p-id-x3D-%E2%80%99p001%E2%80%99"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">2、select * from ren where p_id&#x3D;’p001’</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3%E3%80%81select-p-name-p-age-from-ren"><span class="nav-number">5.0.0.3.</span> <span class="nav-text">3、select p_name,p_age from ren</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4%E3%80%81select-from-ren-where-p-age-gt-20"><span class="nav-number">5.0.0.4.</span> <span class="nav-text">4、select * from ren where p_age&gt;20</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5%E3%80%81select-from-ren-where-p-age-gt-20-or-p-age-lt-40"><span class="nav-number">5.0.0.5.</span> <span class="nav-text">5、select * from ren where p_age&gt;20 or p_age&lt;40</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6%E3%80%81select-from-ren-where-p-id-x3D-select-p-leader-from-ren-where-p-name-x3D-%E2%80%99%E5%91%A8%E8%8A%B7%E8%8B%A5%E2%80%99"><span class="nav-number">5.0.0.6.</span> <span class="nav-text">6、select * from ren where p_id&#x3D;(select p_leader from ren where p_name&#x3D;’周芷若’)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7%E3%80%81select-from-ren-where-p-name-like-%E2%80%98-%E7%8E%8B-%E2%80%99"><span class="nav-number">5.0.0.7.</span> <span class="nav-text">7、select * from ren where p_name like ‘%王%’</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8%E3%80%81select-from-ren-where-p-menpai-in-%E2%80%98%E6%98%8E%E6%95%99%E2%80%99-%E2%80%99%E5%B3%A8%E7%9C%89%E2%80%99"><span class="nav-number">5.0.0.8.</span> <span class="nav-text">8、select * from ren where p_menpai in(‘明教’,’峨眉’)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9%E3%80%81select-from-ren-where-p-age-between-20-and-70"><span class="nav-number">5.0.0.9.</span> <span class="nav-text">9、select * from ren where p_age between 20 and 70</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10%E3%80%81select-from-ren-order-by-p-age-asc"><span class="nav-number">5.0.0.10.</span> <span class="nav-text">10、select * from ren order by p_age asc</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11%E3%80%81select-from-ren-where-p-leader-is-null"><span class="nav-number">5.0.0.11.</span> <span class="nav-text">11、select * from ren where p_leader is null</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12%E3%80%81select-from-ren-limit-9-3"><span class="nav-number">5.0.0.12.</span> <span class="nav-text">12、select * from ren limit 9,3</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13%E3%80%81select-distinct-p-menpai-from-ren-where-p-menpai-x3D-%E2%80%99%E6%98%8E%E6%95%99%E2%80%99"><span class="nav-number">5.0.0.13.</span> <span class="nav-text">13、select distinct(p_menpai) from ren where p_menpai&#x3D;’明教’</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#14%E3%80%81select-max-p-age-from-ren"><span class="nav-number">5.0.0.14.</span> <span class="nav-text">14、select max(p_age) from ren</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#15%E3%80%81select-min-p-age-from-ren"><span class="nav-number">5.0.0.15.</span> <span class="nav-text">15、select min(p_age) from ren</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#16%E3%80%81select-avg-p-age-from-ren"><span class="nav-number">5.0.0.16.</span> <span class="nav-text">16、select avg(p_age) from ren</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#17%E3%80%81select-sum-p-age-from-ren"><span class="nav-number">5.0.0.17.</span> <span class="nav-text">17、select sum(p_age) from ren</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#18%E3%80%81select-count-from-ren"><span class="nav-number">5.0.0.18.</span> <span class="nav-text">18、select count(*) from ren</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#18%E3%80%81select-from-ren-group-by-p-menpai"><span class="nav-number">5.0.0.19.</span> <span class="nav-text">18、select * from ren group by p_menpai</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#19%E3%80%81select-avg-p-age-p-menpai-from-ren-group-by-p-menpai-having-avg-p-age-gt-30"><span class="nav-number">5.0.0.20.</span> <span class="nav-text">19、select avg(p_age),p_menpai from ren group by p_menpai having avg(p_age)&gt;30</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#20%E3%80%81select-p-name-as-name-from-ren"><span class="nav-number">5.0.0.21.</span> <span class="nav-text">20、select p_name as name from ren</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#21%E3%80%81select-from-ren-wei-where-ren-p-wei-x3D-wei-w-name"><span class="nav-number">5.0.0.22.</span> <span class="nav-text">21、select * from ren,wei where ren.p_wei&#x3D;wei.w_name</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#22%E3%80%81select-from-ren-left-join-wei-on-ren-p-wei-x3D-wei-w-name"><span class="nav-number">5.0.0.23.</span> <span class="nav-text">22、select * from ren left join wei on ren.p_wei&#x3D;wei.w_name</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#23%E3%80%81select-from-ren-right-join-wei-on-ren-p-wei-x3D-wei-w-name"><span class="nav-number">5.0.0.24.</span> <span class="nav-text">23、select * from ren right join wei on ren.p_wei&#x3D;wei.w_name</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#24%E3%80%81select-from-ren-inner-join-wei-on-ren-p-wei-x3D-wei-w-name"><span class="nav-number">5.0.0.25.</span> <span class="nav-text">24、select * from ren inner join wei on ren.p_wei&#x3D;wei.w_name</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#25%E3%80%81insert-into-ren-p-id-p-name-p-sex-p-age-values-%E2%80%98p012%E2%80%99-%E2%80%99%E9%87%91%E6%AF%9B%E7%8B%AE%E7%8E%8B%E2%80%99-%E2%80%99%E7%94%B7%E2%80%99-23"><span class="nav-number">5.0.0.26.</span> <span class="nav-text">25、insert into ren (p_id,p_name,p_sex,p_age) values (‘p012’,’金毛狮王’,’男’,23)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#26%E3%80%81update-ren-set-p-leader-x3D-%E2%80%99p002%E2%80%99-p-menpai-x3D-%E2%80%99%E6%98%8E%E6%95%99%E2%80%99-where-p-id-x3D-%E2%80%99p011%E2%80%99"><span class="nav-number">5.0.0.27.</span> <span class="nav-text">26、update ren set p_leader&#x3D;’p002’,p_menpai&#x3D;’明教’ where p_id&#x3D;’p011’</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#27%E3%80%81delete-from-ren-where-p-id-x3D-%E2%80%99p011%E2%80%99"><span class="nav-number">5.0.0.28.</span> <span class="nav-text">27、delete from ren where p_id&#x3D;’p011’</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -553,20 +548,20 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">33</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
         <span class="site-state-item-count">9</span>
-        <span class="site-state-item-name">categories</span></a>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
         <span class="site-state-item-count">5</span>
-        <span class="site-state-item-name">tags</span></a>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -574,6 +569,10 @@
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -601,12 +600,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">90k</span>
+    <span title="站点总字数">90k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:22</span>
+    <span title="站点阅读时长">1:22</span>
 </div>
 
         
