@@ -52,25 +52,6 @@
       </tags>
   </entry>
   <entry>
-    <title>IO流简单使用</title>
-    <url>/2021/06/29/IO%E6%B5%81%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h3 id="一-FileOutputStream-FileInputStream字节流文件读写"><a href="#一-FileOutputStream-FileInputStream字节流文件读写" class="headerlink" title="一.FileOutputStream FileInputStream字节流文件读写"></a>一.FileOutputStream FileInputStream字节流文件读写</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="comment">//从内存中读取写到硬盘</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">//从硬盘中读取写到内存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileInputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>  &#123;</span><br><span class="line">        <span class="comment">//创建一个File对象 而不是一个文件</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\a.txt&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;文件不存在!&quot;</span>);</span><br><span class="line">               <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">byte</span> [] b=<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            inputStream = <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">            <span class="comment">//第一个参数可以为File，也可以为string地址,因为内部源码当string不为空new File(),第二个参数为追加,默认为false,表示覆盖</span></span><br><span class="line">            outputStream = <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\b.txt&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">            <span class="comment">//边读边写</span></span><br><span class="line">            <span class="keyword">while</span> (inputStream.read(b) != -<span class="number">1</span>) &#123;</span><br><span class="line">                outputStream.write(b);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//一定要记得关闭,释放流资源</span></span><br><span class="line">                outputStream.close();</span><br><span class="line">                inputStream.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="二-FileWriter-FileReader字符流文本文件读写"><a href="#二-FileWriter-FileReader字符流文本文件读写" class="headerlink" title="二.FileWriter FileReader字符流文本文件读写"></a>二.FileWriter FileReader字符流文本文件读写</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test1</span> &#123;</span><br><span class="line">    <span class="comment">//从内存中读取写到硬盘</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileWriter</span> <span class="variable">fileWriter</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">//从硬盘中读取写到内存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileReader</span> <span class="variable">fileReader</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//创建一个File对象 而不是一个文件</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\a.txt&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;文件不存在!&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">char</span>[] b = <span class="keyword">new</span> <span class="title class_">char</span>[<span class="number">1024</span>];</span><br><span class="line">            fileReader = <span class="keyword">new</span> <span class="title class_">FileReader</span>(file);</span><br><span class="line">            <span class="comment">//第二个参数为追加</span></span><br><span class="line">            fileWriter = <span class="keyword">new</span> <span class="title class_">FileWriter</span>(<span class="string">&quot;D:\\c.txt&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">            <span class="comment">//边读边写</span></span><br><span class="line">            <span class="keyword">while</span> (fileReader.read(b) != -<span class="number">1</span>) &#123;</span><br><span class="line">                fileWriter.write(b);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//一定要记得关闭,释放流资源</span></span><br><span class="line">                fileWriter.close();</span><br><span class="line">                fileReader.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="三-使用字节流复制图片"><a href="#三-使用字节流复制图片" class="headerlink" title="三.使用字节流复制图片"></a>三.使用字节流复制图片</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test2</span> &#123;</span><br><span class="line">    <span class="comment">//从内存中读取写到硬盘</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">//从硬盘中读取写到内存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileInputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>  &#123;</span><br><span class="line">        <span class="comment">//创建一个File对象 而不是一个文件</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;E:\\壁纸\\头像.png&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;文件不存在!&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">byte</span> [] b=<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            inputStream = <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">            <span class="comment">//参数可以为File，也可以为string地址,因为内部源码当string不为空new File()</span></span><br><span class="line">            outputStream = <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\壁纸\\头像.png&quot;</span>);</span><br><span class="line">            <span class="comment">//边读边写,read(byte[]b,int off,int len)函数来读-确保两张图片大小一致，且效率还高</span></span><br><span class="line">            <span class="type">int</span> num=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>((num=inputStream.read(b,<span class="number">10</span>,<span class="number">1000</span>))!=-<span class="number">1</span>)&#123;</span><br><span class="line">                outputStream.write(b,<span class="number">10</span>,num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//一定要记得关闭,释放流资源</span></span><br><span class="line">                outputStream.close();</span><br><span class="line">                inputStream.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="四-使用缓冲流复制图片"><a href="#四-使用缓冲流复制图片" class="headerlink" title="四.使用缓冲流复制图片"></a>四.使用缓冲流复制图片</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test4</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">BufferedInputStream</span> <span class="variable">bufferedInputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">BufferedOutputStream</span> <span class="variable">bufferedOutputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileInputStream</span> <span class="variable">fileInputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileOutputStream</span> <span class="variable">fileOutputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;E:\\壁纸\\头像.png&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;文件不存在!&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            fileInputStream = <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">            fileOutputStream = <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\壁纸\\头像.png&quot;</span>);</span><br><span class="line">            <span class="type">byte</span>[] b = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            bufferedInputStream = <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(fileInputStream);</span><br><span class="line">            bufferedOutputStream = <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(fileOutputStream);</span><br><span class="line">            <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((num = bufferedInputStream.read(b, <span class="number">10</span>, <span class="number">1000</span>)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                bufferedOutputStream.write(b, <span class="number">10</span>, num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                bufferedOutputStream.flush();</span><br><span class="line">                <span class="comment">//一定要记得关闭,释放流资源,关闭顺序不能错a依赖b,先关闭a</span></span><br><span class="line">                bufferedInputStream.close();</span><br><span class="line">                bufferedOutputStream.close();</span><br><span class="line">                fileInputStream.close();</span><br><span class="line">                fileOutputStream.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在结束的时候，调用flush和close方法，将缓冲区的数据都清理出来，，写入磁盘，否则可能无数据；</span></span><br><span class="line"><span class="comment">//1.BufferedOutputStream在close()时会自动flush </span></span><br><span class="line"><span class="comment">//2.BufferedOutputStream在不调用close()的情况下，缓冲区不满，又需要把缓冲区的内容写入到文件或通过网络发送到别的机器时，才需要调用flush.</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>JAVA</category>
-      </categories>
-      <tags>
-        <tag>JAVA</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>AOP</title>
     <url>/2021/10/01/AOP/</url>
     <content><![CDATA[<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><p><strong>AOP（Aspect Oriented Programming）</strong>意为：<strong>面向切面编程</strong>，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种衍生范型。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。</p>
@@ -170,6 +151,25 @@
       <categories>
         <category>Spring</category>
       </categories>
+  </entry>
+  <entry>
+    <title>IO流简单使用</title>
+    <url>/2021/06/29/IO%E6%B5%81%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h3 id="一-FileOutputStream-FileInputStream字节流文件读写"><a href="#一-FileOutputStream-FileInputStream字节流文件读写" class="headerlink" title="一.FileOutputStream FileInputStream字节流文件读写"></a>一.FileOutputStream FileInputStream字节流文件读写</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="comment">//从内存中读取写到硬盘</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">//从硬盘中读取写到内存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileInputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>  &#123;</span><br><span class="line">        <span class="comment">//创建一个File对象 而不是一个文件</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\a.txt&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;文件不存在!&quot;</span>);</span><br><span class="line">               <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">byte</span> [] b=<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            inputStream = <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">            <span class="comment">//第一个参数可以为File，也可以为string地址,因为内部源码当string不为空new File(),第二个参数为追加,默认为false,表示覆盖</span></span><br><span class="line">            outputStream = <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\b.txt&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">            <span class="comment">//边读边写</span></span><br><span class="line">            <span class="keyword">while</span> (inputStream.read(b) != -<span class="number">1</span>) &#123;</span><br><span class="line">                outputStream.write(b);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//一定要记得关闭,释放流资源</span></span><br><span class="line">                outputStream.close();</span><br><span class="line">                inputStream.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="二-FileWriter-FileReader字符流文本文件读写"><a href="#二-FileWriter-FileReader字符流文本文件读写" class="headerlink" title="二.FileWriter FileReader字符流文本文件读写"></a>二.FileWriter FileReader字符流文本文件读写</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test1</span> &#123;</span><br><span class="line">    <span class="comment">//从内存中读取写到硬盘</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileWriter</span> <span class="variable">fileWriter</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">//从硬盘中读取写到内存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileReader</span> <span class="variable">fileReader</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//创建一个File对象 而不是一个文件</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\a.txt&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;文件不存在!&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">char</span>[] b = <span class="keyword">new</span> <span class="title class_">char</span>[<span class="number">1024</span>];</span><br><span class="line">            fileReader = <span class="keyword">new</span> <span class="title class_">FileReader</span>(file);</span><br><span class="line">            <span class="comment">//第二个参数为追加</span></span><br><span class="line">            fileWriter = <span class="keyword">new</span> <span class="title class_">FileWriter</span>(<span class="string">&quot;D:\\c.txt&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">            <span class="comment">//边读边写</span></span><br><span class="line">            <span class="keyword">while</span> (fileReader.read(b) != -<span class="number">1</span>) &#123;</span><br><span class="line">                fileWriter.write(b);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//一定要记得关闭,释放流资源</span></span><br><span class="line">                fileWriter.close();</span><br><span class="line">                fileReader.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="三-使用字节流复制图片"><a href="#三-使用字节流复制图片" class="headerlink" title="三.使用字节流复制图片"></a>三.使用字节流复制图片</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test2</span> &#123;</span><br><span class="line">    <span class="comment">//从内存中读取写到硬盘</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">//从硬盘中读取写到内存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileInputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>  &#123;</span><br><span class="line">        <span class="comment">//创建一个File对象 而不是一个文件</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;E:\\壁纸\\头像.png&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;文件不存在!&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">byte</span> [] b=<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            inputStream = <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">            <span class="comment">//参数可以为File，也可以为string地址,因为内部源码当string不为空new File()</span></span><br><span class="line">            outputStream = <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\壁纸\\头像.png&quot;</span>);</span><br><span class="line">            <span class="comment">//边读边写,read(byte[]b,int off,int len)函数来读-确保两张图片大小一致，且效率还高</span></span><br><span class="line">            <span class="type">int</span> num=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>((num=inputStream.read(b,<span class="number">10</span>,<span class="number">1000</span>))!=-<span class="number">1</span>)&#123;</span><br><span class="line">                outputStream.write(b,<span class="number">10</span>,num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//一定要记得关闭,释放流资源</span></span><br><span class="line">                outputStream.close();</span><br><span class="line">                inputStream.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="四-使用缓冲流复制图片"><a href="#四-使用缓冲流复制图片" class="headerlink" title="四.使用缓冲流复制图片"></a>四.使用缓冲流复制图片</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test4</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">BufferedInputStream</span> <span class="variable">bufferedInputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">BufferedOutputStream</span> <span class="variable">bufferedOutputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileInputStream</span> <span class="variable">fileInputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileOutputStream</span> <span class="variable">fileOutputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;E:\\壁纸\\头像.png&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;文件不存在!&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            fileInputStream = <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">            fileOutputStream = <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\壁纸\\头像.png&quot;</span>);</span><br><span class="line">            <span class="type">byte</span>[] b = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            bufferedInputStream = <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(fileInputStream);</span><br><span class="line">            bufferedOutputStream = <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(fileOutputStream);</span><br><span class="line">            <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((num = bufferedInputStream.read(b, <span class="number">10</span>, <span class="number">1000</span>)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                bufferedOutputStream.write(b, <span class="number">10</span>, num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                bufferedOutputStream.flush();</span><br><span class="line">                <span class="comment">//一定要记得关闭,释放流资源,关闭顺序不能错a依赖b,先关闭a</span></span><br><span class="line">                bufferedInputStream.close();</span><br><span class="line">                bufferedOutputStream.close();</span><br><span class="line">                fileInputStream.close();</span><br><span class="line">                fileOutputStream.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在结束的时候，调用flush和close方法，将缓冲区的数据都清理出来，，写入磁盘，否则可能无数据；</span></span><br><span class="line"><span class="comment">//1.BufferedOutputStream在close()时会自动flush </span></span><br><span class="line"><span class="comment">//2.BufferedOutputStream在不调用close()的情况下，缓冲区不满，又需要把缓冲区的内容写入到文件或通过网络发送到别的机器时，才需要调用flush.</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>JAVA</tag>
+      </tags>
   </entry>
   <entry>
     <title>HashMap集合</title>
@@ -334,71 +334,6 @@
 </tr>
 </tbody></table>
 ]]></content>
-      <categories>
-        <category>JAVA</category>
-      </categories>
-      <tags>
-        <tag>集合</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HashSet集合</title>
-    <url>/2021/09/07/Java%20HashSet/</url>
-    <content><![CDATA[<h1 id="Java-HashSet"><a href="#Java-HashSet" class="headerlink" title="Java HashSet"></a>Java HashSet</h1><p>HashSet 基于 HashMap 来实现的，是一个不允许有重复元素的集合。</p>
-<p>HashSet 允许有 null 值。</p>
-<p>HashSet 是无序的，即不会记录插入的顺序。</p>
-<p>HashSet 不是线程安全的， 如果多个线程尝试同时修改 HashSet，则最终结果是不确定的。 您必须在多线程访问时显式同步对 HashSet 的并发访问。</p>
-<p>HashSet 实现了 Set 接口。</p>
-<p><img src="https://www.runoob.com/wp-content/uploads/2020/07/java-hashset-hierarchy.png" alt="img"></p>
-<p>HashSet 中的元素实际上是对象，一些常见的基本类型可以使用它的包装类。</p>
-<p>基本类型对应的包装类表如下：</p>
-<table>
-<thead>
-<tr>
-<th align="left">基本类型</th>
-<th align="left">引用类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">boolean</td>
-<td align="left">Boolean</td>
-</tr>
-<tr>
-<td align="left">byte</td>
-<td align="left">Byte</td>
-</tr>
-<tr>
-<td align="left">short</td>
-<td align="left">Short</td>
-</tr>
-<tr>
-<td align="left">int</td>
-<td align="left">Integer</td>
-</tr>
-<tr>
-<td align="left">long</td>
-<td align="left">Long</td>
-</tr>
-<tr>
-<td align="left">float</td>
-<td align="left">Float</td>
-</tr>
-<tr>
-<td align="left">double</td>
-<td align="left">Double</td>
-</tr>
-<tr>
-<td align="left">char</td>
-<td align="left">Character</td>
-</tr>
-</tbody></table>
-<p>HashSet 类位于 java.util 包中，使用前需要引入它，语法格式如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashSet; <span class="comment">// 引入 HashSet 类</span></span><br></pre></td></tr></table></figure>
-
-<p>以下实例我们创建一个 HashSet 对象 sites，用于保存字符串元素：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HashSet&lt;String&gt; sites = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HashSet&lt;String&gt; set=<span class="keyword">new</span> <span class="title class_">HashSet</span>();</span><br><span class="line">       <span class="comment">//添加</span></span><br><span class="line">       set.add(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">       set.add(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">       set.add(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">       <span class="comment">//遍历</span></span><br><span class="line">       <span class="keyword">for</span> (String i :set) &#123;</span><br><span class="line">           System.out.println(i);</span><br><span class="line">       &#125;</span><br><span class="line">       Iterator&lt;String&gt; iterator = set.iterator();</span><br><span class="line">       <span class="keyword">while</span> (iterator.hasNext())&#123;</span><br><span class="line">           System.out.println(iterator.next());</span><br><span class="line">       &#125;</span><br><span class="line">       set.remove(<span class="number">1</span>);<span class="comment">//移除某个函数</span></span><br><span class="line">       set.clear();<span class="comment">//清空集合元素</span></span><br><span class="line">       System.out.println(set.size());</span><br><span class="line">       <span class="type">boolean</span> flag= set.contains(<span class="string">&quot;2&quot;</span>); <span class="comment">//是否包含</span></span><br><span class="line">       System.out.println(flag);</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>JAVA</category>
       </categories>
@@ -589,6 +524,123 @@
       </tags>
   </entry>
   <entry>
+    <title>HashSet集合</title>
+    <url>/2021/09/07/Java%20HashSet/</url>
+    <content><![CDATA[<h1 id="Java-HashSet"><a href="#Java-HashSet" class="headerlink" title="Java HashSet"></a>Java HashSet</h1><p>HashSet 基于 HashMap 来实现的，是一个不允许有重复元素的集合。</p>
+<p>HashSet 允许有 null 值。</p>
+<p>HashSet 是无序的，即不会记录插入的顺序。</p>
+<p>HashSet 不是线程安全的， 如果多个线程尝试同时修改 HashSet，则最终结果是不确定的。 您必须在多线程访问时显式同步对 HashSet 的并发访问。</p>
+<p>HashSet 实现了 Set 接口。</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2020/07/java-hashset-hierarchy.png" alt="img"></p>
+<p>HashSet 中的元素实际上是对象，一些常见的基本类型可以使用它的包装类。</p>
+<p>基本类型对应的包装类表如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">基本类型</th>
+<th align="left">引用类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">boolean</td>
+<td align="left">Boolean</td>
+</tr>
+<tr>
+<td align="left">byte</td>
+<td align="left">Byte</td>
+</tr>
+<tr>
+<td align="left">short</td>
+<td align="left">Short</td>
+</tr>
+<tr>
+<td align="left">int</td>
+<td align="left">Integer</td>
+</tr>
+<tr>
+<td align="left">long</td>
+<td align="left">Long</td>
+</tr>
+<tr>
+<td align="left">float</td>
+<td align="left">Float</td>
+</tr>
+<tr>
+<td align="left">double</td>
+<td align="left">Double</td>
+</tr>
+<tr>
+<td align="left">char</td>
+<td align="left">Character</td>
+</tr>
+</tbody></table>
+<p>HashSet 类位于 java.util 包中，使用前需要引入它，语法格式如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashSet; <span class="comment">// 引入 HashSet 类</span></span><br></pre></td></tr></table></figure>
+
+<p>以下实例我们创建一个 HashSet 对象 sites，用于保存字符串元素：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HashSet&lt;String&gt; sites = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HashSet&lt;String&gt; set=<span class="keyword">new</span> <span class="title class_">HashSet</span>();</span><br><span class="line">       <span class="comment">//添加</span></span><br><span class="line">       set.add(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">       set.add(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">       set.add(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">       <span class="comment">//遍历</span></span><br><span class="line">       <span class="keyword">for</span> (String i :set) &#123;</span><br><span class="line">           System.out.println(i);</span><br><span class="line">       &#125;</span><br><span class="line">       Iterator&lt;String&gt; iterator = set.iterator();</span><br><span class="line">       <span class="keyword">while</span> (iterator.hasNext())&#123;</span><br><span class="line">           System.out.println(iterator.next());</span><br><span class="line">       &#125;</span><br><span class="line">       set.remove(<span class="number">1</span>);<span class="comment">//移除某个函数</span></span><br><span class="line">       set.clear();<span class="comment">//清空集合元素</span></span><br><span class="line">       System.out.println(set.size());</span><br><span class="line">       <span class="type">boolean</span> flag= set.contains(<span class="string">&quot;2&quot;</span>); <span class="comment">//是否包含</span></span><br><span class="line">       System.out.println(flag);</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>集合</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux部署Web应用</title>
+    <url>/2021/10/22/Linux%E9%83%A8%E7%BD%B2Web%E5%BA%94%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="Linux部署Web应用"><a href="#Linux部署Web应用" class="headerlink" title="Linux部署Web应用"></a>Linux部署Web应用</h2><h2 id="一：安装JDK"><a href="#一：安装JDK" class="headerlink" title="一：安装JDK"></a>一：安装JDK</h2><p>1.卸载之前的jdk，openjdk</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum remove *openjdk（卸载之前的jdk）</span><br><span class="line"></span><br><span class="line">java -verion （查看jdk版本）</span><br></pre></td></tr></table></figure>
+
+<p>2.安装自己的jdk</p>
+<p>先进入到usr目录下，再新建java文件夹，再到java文件夹中通过rz命令上传jdk文件，在解压</p>
+<p>命令步骤：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /usr </span><br><span class="line">mkdir java </span><br><span class="line">cd java  </span><br><span class="line">输入rz再选择文件直接上传</span><br><span class="line">tar -xvf  tar包名 （解压）</span><br></pre></td></tr></table></figure>
+
+<p>3.配置文件</p>
+<p>输入<strong>vim  &#x2F;etc&#x2F;profile</strong></p>
+<p>在文件的末尾插入如下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_181</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib</span><br><span class="line">export JAVA_HOME PATH CLASSPATH</span><br></pre></td></tr></table></figure>
+
+<p>配置完成后直接<strong>esc</strong>然后<strong>：wq</strong>保存并退出</p>
+<p>然后执行命令：source &#x2F;etc&#x2F;profile（让配置文件生效）</p>
+<p>4.查看jdk版本</p>
+<p>java -version</p>
+<h2 id="二：安装Tomcat"><a href="#二：安装Tomcat" class="headerlink" title="二：安装Tomcat"></a>二：安装Tomcat</h2><p>1.同样的步骤在usr下新建tomcat文件夹，然后上传解压：</p>
+<p>命令步骤：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /usr</span><br><span class="line">mkdir tomcat</span><br><span class="line">rz （选择tomcat文件直接上传）</span><br><span class="line">tar -xvf tomcat.tar文件</span><br></pre></td></tr></table></figure>
+
+<p>2.配置文件</p>
+<p>vim &#x2F;etc&#x2F;profile</p>
+<p>将刚才的java配置文件与其合并</p>
+<p>新配置文件如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_181</span><br><span class="line">export CATALINA_HOME=/usr/tomcat/apache-tomcat-7.0.56</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$CATALINA_HOME/lib</span><br><span class="line">export JAVA_HOME PATH CLASSPATH CATALINA_HOME</span><br></pre></td></tr></table></figure>
+
+<p>3.进入 apache-tomcat-7.0.56中的bin目录</p>
+<p>startup.sh命令启动</p>
+<p>shutdown.sh 命令关闭</p>
+<p>在访问tomcat时，首先关闭防火墙或者放行端口</p>
+<p>systemctl stop firewalld 关闭防火墙</p>
+<p>输入IP地址：8080即可访问</p>
+<h2 id="三：安装mysql"><a href="#三：安装mysql" class="headerlink" title="三：安装mysql"></a>三：安装mysql</h2><p>在这里安装的是的mariadb，与mysql语法差不多一模一样</p>
+<p>安装地址教程：<a href="https://blog.51cto.com/u_13866901/2177779">https://blog.51cto.com/u_13866901/2177779</a></p>
+<p>安装完成后：</p>
+<ol>
+<li>在usr目录下新建sqlscript，并且将sql脚本文件rz上传进来</li>
+<li>输入mysql -uroot -p 命令登录并且会提示你输入密码，密码输入成功后就可以输入sql了</li>
+<li>create dadabase  数据库名</li>
+<li>use 数据库名</li>
+<li>source  &#x2F;sql脚本所在位置</li>
+</ol>
+<h2 id="四：启动web项目"><a href="#四：启动web项目" class="headerlink" title="四：启动web项目"></a>四：启动web项目</h2><p>上述步骤完成后，进入到tomcat的webapps下，将web项目先打包成.war文件，然后通过rz命令上传到bin目录下，然后启动tomcat就可以访问了！</p>
+]]></content>
+      <categories>
+        <category>javaweb</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Mysql修改密码几种方式</title>
     <url>/2021/06/28/Mysql%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="一-使用set-password命令"><a href="#一-使用set-password命令" class="headerlink" title="一.使用set password命令"></a>一.使用set password命令</h2><p>1.进入到mysql得bin目录下面，在地址栏输入cmd回车进入终端；</p>
@@ -612,47 +664,6 @@
       <tags>
         <tag>Mysql</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Redis事务</title>
-    <url>/2021/11/07/Redis%E4%BA%8B%E5%8A%A1/</url>
-    <content><![CDATA[<h1 id="Redis事务"><a href="#Redis事务" class="headerlink" title="Redis事务"></a>Redis事务</h1><p><strong>概念</strong></p>
-<p>Redis 事务的本质是一组命令的集合。事务支持一次执行多个命令，一个事务中所有命令都会被序列</p>
-<p>化。在事务执行过程，会按照顺序串行化执行队列中的命令，其他客户端提交的命令请求不会插入到事</p>
-<p>务执行命令序列中。redis事务就是一次性、顺序性、排他性的执行一个队列中的一系列命令。</p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>批量操作在发送 EXEC 命令前被放入队列缓存，并不会被实际执行！</li>
-<li>Redis中，单条命令是原子性执行的，但事务不保证原子性，且没有回滚。事务中任意命令执行失败，其余的命令仍会被执行。</li>
-</ul>
-<p><strong>相关命令：</strong></p>
-<ol>
-<li>watch key1 key2 … 监视一或多个key,如果在事务执行之前，被监视的key被其他命令改动，则 事务被打断 （ 类似乐观锁 ） </li>
-<li>multi 标记一个事务块的开始（ queued ） </li>
-<li>exec 执行所有事务块的命令 （ 一旦执行exec后，之前加的监控锁都会被取消掉 ） </li>
-<li>discard  在执行exec命令之前，取消事务，放弃事务块中的所有命令，如果不取消事务再次执行 multi 会报错（”ERR MULTI calls can not be nested”）</li>
-<li>unwatch  取消watch对所有key的监控</li>
-</ol>
-<p><strong>简单操作：</strong></p>
-<p><a href="https://imgtu.com/i/7pugAO"><img src="https://s4.ax1x.com/2022/01/07/7pugAO.png" alt="7pugAO.png"></a></p>
-<p><strong>补充：</strong></p>
-<ul>
-<li>若事务队列中存在命令性错误（类似于java编译性错误），则执行EXEC命令时，所有命令都不会执行</li>
-<li>若事务队列中存在语法性错误（类似于java的1&#x2F;0的运行时异常），执行EXEC命令时，其他正确命令被执行，错误命令抛出异常。</li>
-</ul>
-<p><strong>watch</strong>：</p>
-<ol>
-<li><p>使用watch监听某个key时，如果在执行exec命令前被改动了，那么exec执行后事务执行回滚操作。</p>
-</li>
-<li><p>一但执行 EXEC 开启事务的执行后，无论事务使用执行成功， WARCH 对变量的监控都将被取消。故当事务执行失败后，需重新执行WATCH命令对变量进行监控，并开启新的事务进行操作。</p>
-</li>
-<li><p>watch指令类似于乐观锁，在事务提交时，如果watch监控的多个KEY中任何KEY的值已经被其他客户端更改，则使用EXEC执行事务时，事务队列将不会被执行，同时返回Nullmulti-bulk应答以通知调用者事务执行失败。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Redis</category>
-      </categories>
   </entry>
   <entry>
     <title>Mysql常用sql语句</title>
@@ -859,55 +870,44 @@
       </categories>
   </entry>
   <entry>
-    <title>Linux部署Web应用</title>
-    <url>/2021/10/22/Linux%E9%83%A8%E7%BD%B2Web%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="Linux部署Web应用"><a href="#Linux部署Web应用" class="headerlink" title="Linux部署Web应用"></a>Linux部署Web应用</h2><h2 id="一：安装JDK"><a href="#一：安装JDK" class="headerlink" title="一：安装JDK"></a>一：安装JDK</h2><p>1.卸载之前的jdk，openjdk</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum remove *openjdk（卸载之前的jdk）</span><br><span class="line"></span><br><span class="line">java -verion （查看jdk版本）</span><br></pre></td></tr></table></figure>
-
-<p>2.安装自己的jdk</p>
-<p>先进入到usr目录下，再新建java文件夹，再到java文件夹中通过rz命令上传jdk文件，在解压</p>
-<p>命令步骤：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /usr </span><br><span class="line">mkdir java </span><br><span class="line">cd java  </span><br><span class="line">输入rz再选择文件直接上传</span><br><span class="line">tar -xvf  tar包名 （解压）</span><br></pre></td></tr></table></figure>
-
-<p>3.配置文件</p>
-<p>输入<strong>vim  &#x2F;etc&#x2F;profile</strong></p>
-<p>在文件的末尾插入如下配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_181</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib</span><br><span class="line">export JAVA_HOME PATH CLASSPATH</span><br></pre></td></tr></table></figure>
-
-<p>配置完成后直接<strong>esc</strong>然后<strong>：wq</strong>保存并退出</p>
-<p>然后执行命令：source &#x2F;etc&#x2F;profile（让配置文件生效）</p>
-<p>4.查看jdk版本</p>
-<p>java -version</p>
-<h2 id="二：安装Tomcat"><a href="#二：安装Tomcat" class="headerlink" title="二：安装Tomcat"></a>二：安装Tomcat</h2><p>1.同样的步骤在usr下新建tomcat文件夹，然后上传解压：</p>
-<p>命令步骤：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /usr</span><br><span class="line">mkdir tomcat</span><br><span class="line">rz （选择tomcat文件直接上传）</span><br><span class="line">tar -xvf tomcat.tar文件</span><br></pre></td></tr></table></figure>
-
-<p>2.配置文件</p>
-<p>vim &#x2F;etc&#x2F;profile</p>
-<p>将刚才的java配置文件与其合并</p>
-<p>新配置文件如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_181</span><br><span class="line">export CATALINA_HOME=/usr/tomcat/apache-tomcat-7.0.56</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$CATALINA_HOME/lib</span><br><span class="line">export JAVA_HOME PATH CLASSPATH CATALINA_HOME</span><br></pre></td></tr></table></figure>
-
-<p>3.进入 apache-tomcat-7.0.56中的bin目录</p>
-<p>startup.sh命令启动</p>
-<p>shutdown.sh 命令关闭</p>
-<p>在访问tomcat时，首先关闭防火墙或者放行端口</p>
-<p>systemctl stop firewalld 关闭防火墙</p>
-<p>输入IP地址：8080即可访问</p>
-<h2 id="三：安装mysql"><a href="#三：安装mysql" class="headerlink" title="三：安装mysql"></a>三：安装mysql</h2><p>在这里安装的是的mariadb，与mysql语法差不多一模一样</p>
-<p>安装地址教程：<a href="https://blog.51cto.com/u_13866901/2177779">https://blog.51cto.com/u_13866901/2177779</a></p>
-<p>安装完成后：</p>
+    <title>Redis事务</title>
+    <url>/2021/11/07/Redis%E4%BA%8B%E5%8A%A1/</url>
+    <content><![CDATA[<h1 id="Redis事务"><a href="#Redis事务" class="headerlink" title="Redis事务"></a>Redis事务</h1><p><strong>概念</strong></p>
+<p>Redis 事务的本质是一组命令的集合。事务支持一次执行多个命令，一个事务中所有命令都会被序列</p>
+<p>化。在事务执行过程，会按照顺序串行化执行队列中的命令，其他客户端提交的命令请求不会插入到事</p>
+<p>务执行命令序列中。redis事务就是一次性、顺序性、排他性的执行一个队列中的一系列命令。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>批量操作在发送 EXEC 命令前被放入队列缓存，并不会被实际执行！</li>
+<li>Redis中，单条命令是原子性执行的，但事务不保证原子性，且没有回滚。事务中任意命令执行失败，其余的命令仍会被执行。</li>
+</ul>
+<p><strong>相关命令：</strong></p>
 <ol>
-<li>在usr目录下新建sqlscript，并且将sql脚本文件rz上传进来</li>
-<li>输入mysql -uroot -p 命令登录并且会提示你输入密码，密码输入成功后就可以输入sql了</li>
-<li>create dadabase  数据库名</li>
-<li>use 数据库名</li>
-<li>source  &#x2F;sql脚本所在位置</li>
+<li>watch key1 key2 … 监视一或多个key,如果在事务执行之前，被监视的key被其他命令改动，则 事务被打断 （ 类似乐观锁 ） </li>
+<li>multi 标记一个事务块的开始（ queued ） </li>
+<li>exec 执行所有事务块的命令 （ 一旦执行exec后，之前加的监控锁都会被取消掉 ） </li>
+<li>discard  在执行exec命令之前，取消事务，放弃事务块中的所有命令，如果不取消事务再次执行 multi 会报错（”ERR MULTI calls can not be nested”）</li>
+<li>unwatch  取消watch对所有key的监控</li>
 </ol>
-<h2 id="四：启动web项目"><a href="#四：启动web项目" class="headerlink" title="四：启动web项目"></a>四：启动web项目</h2><p>上述步骤完成后，进入到tomcat的webapps下，将web项目先打包成.war文件，然后通过rz命令上传到bin目录下，然后启动tomcat就可以访问了！</p>
+<p><strong>简单操作：</strong></p>
+<p><a href="https://imgtu.com/i/7pugAO"><img src="https://s4.ax1x.com/2022/01/07/7pugAO.png" alt="7pugAO.png"></a></p>
+<p><strong>补充：</strong></p>
+<ul>
+<li>若事务队列中存在命令性错误（类似于java编译性错误），则执行EXEC命令时，所有命令都不会执行</li>
+<li>若事务队列中存在语法性错误（类似于java的1&#x2F;0的运行时异常），执行EXEC命令时，其他正确命令被执行，错误命令抛出异常。</li>
+</ul>
+<p><strong>watch</strong>：</p>
+<ol>
+<li><p>使用watch监听某个key时，如果在执行exec命令前被改动了，那么exec执行后事务执行回滚操作。</p>
+</li>
+<li><p>一但执行 EXEC 开启事务的执行后，无论事务使用执行成功， WARCH 对变量的监控都将被取消。故当事务执行失败后，需重新执行WATCH命令对变量进行监控，并开启新的事务进行操作。</p>
+</li>
+<li><p>watch指令类似于乐观锁，在事务提交时，如果watch监控的多个KEY中任何KEY的值已经被其他客户端更改，则使用EXEC执行事务时，事务队列将不会被执行，同时返回Nullmulti-bulk应答以通知调用者事务执行失败。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
-        <category>javaweb</category>
+        <category>Redis</category>
       </categories>
   </entry>
   <entry>
@@ -991,42 +991,6 @@
 ]]></content>
       <categories>
         <category>Redis</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SimpleDateFormat</title>
-    <url>/2021/09/20/SimpleDateFormat%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h3 id="SimpleDateFormat的使用"><a href="#SimpleDateFormat的使用" class="headerlink" title="SimpleDateFormat的使用"></a>SimpleDateFormat的使用</h3><p>代码如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Date date=<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">SimpleDateFormat sdf=<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-dd-mm hh:mm:ss&quot;</span>, Locale.CHINA);</span><br><span class="line">System.out.println(sdf.format(date));</span><br></pre></td></tr></table></figure>
-
-<p>运行结果如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">2021-13-45 10-45-12</span><br></pre></td></tr></table></figure>
-
-<p>注意：SimpleDateFormat的第二个参数确认当前是哪个地区的时间，CHINA是中国时间，相应的星期也会显示中文。如果想显示英文，就要改为Locale.English，被认为走的是美国时间。</p>
-<p>说明：SimpleDateFormat支持的时间格式:</p>
-<ul>
-<li>G: 公元 时代，例如AD公元</li>
-<li>yy: 年的后2位</li>
-<li>yyyy: 完整年</li>
-<li>MM: 月，显示为1-12</li>
-<li>MMM: 月，显示为英文月份简写,如 Jan</li>
-<li>MMMM: 月，显示为英文月份全称，如 Janualy</li>
-<li>dd: 日，2位数表示，如02</li>
-<li>d: 日，1-2位显示，如 2</li>
-<li>EEE: 简写星期几，如Sun</li>
-<li>EEEE: 全写星期几，如Sunday</li>
-<li>aa: 上下午，AM&#x2F;PM</li>
-<li>H: 时，24小时制，0-23</li>
-<li>K：时，12小时制，0-11</li>
-<li>m: 分，1-2位</li>
-<li>mm: 分，2位</li>
-<li>s: 秒，1-2位</li>
-<li>ss: 秒，2位</li>
-<li>S: 毫秒</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JAVA</category>
       </categories>
   </entry>
   <entry>
@@ -1251,6 +1215,42 @@
       </tags>
   </entry>
   <entry>
+    <title>SimpleDateFormat</title>
+    <url>/2021/09/20/SimpleDateFormat%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h3 id="SimpleDateFormat的使用"><a href="#SimpleDateFormat的使用" class="headerlink" title="SimpleDateFormat的使用"></a>SimpleDateFormat的使用</h3><p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Date date=<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">SimpleDateFormat sdf=<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-dd-mm hh:mm:ss&quot;</span>, Locale.CHINA);</span><br><span class="line">System.out.println(sdf.format(date));</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">2021-13-45 10-45-12</span><br></pre></td></tr></table></figure>
+
+<p>注意：SimpleDateFormat的第二个参数确认当前是哪个地区的时间，CHINA是中国时间，相应的星期也会显示中文。如果想显示英文，就要改为Locale.English，被认为走的是美国时间。</p>
+<p>说明：SimpleDateFormat支持的时间格式:</p>
+<ul>
+<li>G: 公元 时代，例如AD公元</li>
+<li>yy: 年的后2位</li>
+<li>yyyy: 完整年</li>
+<li>MM: 月，显示为1-12</li>
+<li>MMM: 月，显示为英文月份简写,如 Jan</li>
+<li>MMMM: 月，显示为英文月份全称，如 Janualy</li>
+<li>dd: 日，2位数表示，如02</li>
+<li>d: 日，1-2位显示，如 2</li>
+<li>EEE: 简写星期几，如Sun</li>
+<li>EEEE: 全写星期几，如Sunday</li>
+<li>aa: 上下午，AM&#x2F;PM</li>
+<li>H: 时，24小时制，0-23</li>
+<li>K：时，12小时制，0-11</li>
+<li>m: 分，1-2位</li>
+<li>mm: 分，2位</li>
+<li>s: 秒，1-2位</li>
+<li>ss: 秒，2位</li>
+<li>S: 毫秒</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+  </entry>
+  <entry>
     <title>SpringBoot初始化操作的几种方式</title>
     <url>/2022/04/21/SpringBoot%E5%88%9D%E5%A7%8B%E5%8C%96%E6%93%8D%E4%BD%9C%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="1-实现CommandLineRunner，并重写run方法"><a href="#1-实现CommandLineRunner，并重写run方法" class="headerlink" title="1.实现CommandLineRunner，并重写run方法"></a>1.实现<strong>CommandLineRunner</strong>，并重写<strong>run</strong>方法</h2><p> SpringBoot在项目启动后会遍历所有实现CommandLineRunner的实体类并执行run方法，多个实现类可以并存并且根据order注解排序顺序执行。 </p>
@@ -1293,6 +1293,90 @@
       <categories>
         <category>Redis</category>
       </categories>
+  </entry>
+  <entry>
+    <title>SpringBoot移除内置Tomcat</title>
+    <url>/2022/04/20/SpringBoot%E7%A7%BB%E9%99%A4%E5%86%85%E7%BD%AETomcat/</url>
+    <content><![CDATA[<p>1.在pom文件中移除tomcat:</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--移除内部tomcat--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.引入<strong>javax.servlet.api</strong>依赖:</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>完整<strong>pom.xml</strong>文件如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>SpringBootStarterUse<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--    指定打包方式 （jar/war）--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>war<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zht<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hello-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-REALEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--引入javax.servlet-api依赖--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--移除内部tomcat--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- jar/war包名称 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>$&#123;project.name&#125;<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 主启动类清单 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>com.xx.SpringBootStarterApplication<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>repackage<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>3.修改SpringBoot启动类:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Starter</span>  <span class="keyword">extends</span> <span class="title class_">SpringBootServletInitializer</span> &#123;</span><br><span class="line">    <span class="comment">//不使用内置Tomcat启动 需要继承 SpringBootServletInitializer类 重写configure方法 引入javax.servlet.api依赖</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> SpringApplicationBuilder <span class="title function_">configure</span><span class="params">(SpringApplicationBuilder builder)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> builder.sources(Starter.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(Starter.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.完成上述操作后执行依次执行 <strong>mvn clean</strong> 、<strong>mvn package</strong> </p>
+<p>maven有<strong>package</strong>、<strong>install</strong>、<strong>deploy</strong>三种打包方式</p>
+<p><strong>package</strong>命令完成了项目编译、单元测试、打包功能，但没有把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库和远程maven私服仓库</p>
+<p><strong>install</strong>命令完成了项目编译、单元测试、打包功能，同时把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库，但没有布署到远程maven私服仓库</p>
+<p><strong>deploy</strong>命令完成了项目编译、单元测试、打包功能，同时把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库和远程maven私服仓库</p>
+<p>5.打包完成后 直接把<strong>war</strong>包放在tomcat <strong>webapps</strong>文件夹下运行。（打包后的文件在项目的target文件下）</p>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SpringBoot自定义Starter</title>
+    <url>/2022/04/21/SpringBoot%E8%87%AA%E5%AE%9A%E4%B9%89Starter/</url>
+    <content><![CDATA[<p>1.创建一个Maven项目，在pom.xml文件中添如下依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zht<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hello-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-REALEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--spring-boot-autoconfigure此jar包中包含大量核心注解，包含条件注解等。--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-autoconfigure<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--maven打包插件--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">skip</span>&gt;</span>true<span class="tag">&lt;/<span class="name">skip</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.创建AutoService属性类，用来在yml等配置文件中读取属性，如果没有配置，即是用默认的属性，如name&#x3D;”zht”</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//自动配置属性，以my为前缀</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;my&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AutoProperties</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name=<span class="string">&quot;zht&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> String sex=<span class="string">&quot;男&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age=<span class="number">21</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getSex</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSex</span><span class="params">(String sex)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.sex = sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.创建要配置的类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//可以在这里做业务方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AutoService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String sex;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getSex</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSex</span><span class="params">(String sex)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.sex = sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="built_in">this</span>.getName()+<span class="string">&quot;在吃饭呢&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">       <span class="keyword">public</span>  <span class="keyword">void</span> <span class="title function_">drink</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="built_in">this</span>.getName()+<span class="string">&quot;在喝水呢&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.创建自动配置类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(AutoService.class)</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(AutoProperties.class)</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(prefix = &quot;my&quot;, value = &quot;enabled&quot;, matchIfMissing = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AutoServiceAutoConfigraution</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    AutoProperties autoProperties;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="comment">//当没有AutoService这个类时注入</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean(AutoService.class)</span></span><br><span class="line">    <span class="keyword">public</span> AutoService <span class="title function_">autoService</span><span class="params">()</span>&#123;</span><br><span class="line">        AutoService autoService=<span class="keyword">new</span> <span class="title class_">AutoService</span>();</span><br><span class="line">        autoService.setName(autoProperties.getName());</span><br><span class="line">        autoService.setSex(autoProperties.getSex());</span><br><span class="line">        autoService.setAge(autoProperties.getAge());</span><br><span class="line">        <span class="keyword">return</span>  autoService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>@Configuration：表明此类是一个配置类，将变为一个bean被spring进行管理。<br>@EnableConfigurationProperties：启用属性配置，将读取AutoProperties里面的属性。<br>@ConditionalOnClass：当类路径下面有AutoService此类时，自动配置。<br>@ConditionalOnProperty：判断指定的属性是否具备指定的值。<br>@ConditionalOnMissingBean：当容器中没有指定bean是，创建此bean</p>
+<p>5.在resources目录下创建META-INF文件夹，再在下面创建spring.factories文件，里面写入如下值（如果有多个用，分割）：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\</span><br><span class="line">  com.zht.properties.AutoServiceAutoConfigraution</span><br></pre></td></tr></table></figure>
+
+<p>6.上述完成后，执行mvn clean install ，这样在自己的maven仓库就可以找到了</p>
+<p>7.新建一个SpringBoot项目，在pom文件中引入以下依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zht<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hello-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-REALEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>8.新建一个controller类,在controller类中使用这个starter</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StarterController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AutoService autoService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/getInfo&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        autoService.eat();</span><br><span class="line">        autoService.drink();</span><br><span class="line">        <span class="keyword">return</span> autoService.getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>9.启动后访问看输出，然后还可以在yml文件中添加自己的配置属性</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">my:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">cj</span></span><br></pre></td></tr></table></figure>
+
+<p>这样返回和输出的值就变了。</p>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>String和StringBuffer、StringBuilder的区别是什么？</title>
+    <url>/2021/09/10/String%E5%92%8CStringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<h2 id="String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的-？"><a href="#String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的-？" class="headerlink" title="String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的 ？"></a><strong>String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的</strong> ？</h2><p><strong>可变性</strong> </p>
+<p>String类中使用字符数组保存字符串，private final char value[]，所以string对象是不可变的。StringBuilder与 StringBuffer都继承自AbstractStringBuilder类，在AbstractStringBuilder中也是使用字符数组保存字符串，char[]  value，这两种对象都是可变的。 </p>
+<p><strong>线程安全性</strong> </p>
+<p>String中的对象是不可变的，也就可以理解为常量，线程安全。AbstractStringBuilder是StringBuilder与StringBuffer的公共父类，定义了一些字符串的基本操作，如expandCapacity、append、insert、indexOf等公共方法。StringBuffer对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder并没有对方法进行加同步锁，所以是非线程安全的。 </p>
+<p><strong>性能</strong></p>
+<p>每次对String 类型进行改变的时候，都会生成一个新的String对象，然后将指针指向新的String 对象。StringBuffer每次都会对StringBuffer对象本身进行操作，而不是生成新的对象并改变对象引用。</p>
+<p>相同情况下使用StirngBuilder 相比使用StringBuffer 仅能获得10%~15% 左右的性能提升，但却要冒多线程不安全的风险。 </p>
+<p><strong>对于三者使用的总结</strong> </p>
+<p>如果要操作少量的数据用 &#x3D; String </p>
+<p>单线程操作字符串缓冲区下操作大量数据 &#x3D; StringBuilder </p>
+<p>多线程操作字符串缓冲区下操作大量数据 &#x3D; StringBuffer </p>
+<p>​    </p>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>JAVA基础</tag>
+      </tags>
   </entry>
   <entry>
     <title>Java StringBuffer &amp; StringBuilder 类</title>
@@ -1483,32 +1567,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SpringBoot移除内置Tomcat</title>
-    <url>/2022/04/20/SpringBoot%E7%A7%BB%E9%99%A4%E5%86%85%E7%BD%AETomcat/</url>
-    <content><![CDATA[<p>1.在pom文件中移除tomcat:</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--移除内部tomcat--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>2.引入<strong>javax.servlet.api</strong>依赖:</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>完整<strong>pom.xml</strong>文件如下：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>SpringBootStarterUse<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--    指定打包方式 （jar/war）--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>war<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zht<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hello-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-REALEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--引入javax.servlet-api依赖--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--移除内部tomcat--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- jar/war包名称 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>$&#123;project.name&#125;<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 主启动类清单 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>com.xx.SpringBootStarterApplication<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>repackage<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>3.修改SpringBoot启动类:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Starter</span>  <span class="keyword">extends</span> <span class="title class_">SpringBootServletInitializer</span> &#123;</span><br><span class="line">    <span class="comment">//不使用内置Tomcat启动 需要继承 SpringBootServletInitializer类 重写configure方法 引入javax.servlet.api依赖</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> SpringApplicationBuilder <span class="title function_">configure</span><span class="params">(SpringApplicationBuilder builder)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> builder.sources(Starter.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(Starter.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>4.完成上述操作后执行依次执行 <strong>mvn clean</strong> 、<strong>mvn package</strong> </p>
-<p>maven有<strong>package</strong>、<strong>install</strong>、<strong>deploy</strong>三种打包方式</p>
-<p><strong>package</strong>命令完成了项目编译、单元测试、打包功能，但没有把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库和远程maven私服仓库</p>
-<p><strong>install</strong>命令完成了项目编译、单元测试、打包功能，同时把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库，但没有布署到远程maven私服仓库</p>
-<p><strong>deploy</strong>命令完成了项目编译、单元测试、打包功能，同时把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库和远程maven私服仓库</p>
-<p>5.打包完成后 直接把<strong>war</strong>包放在tomcat <strong>webapps</strong>文件夹下运行。（打包后的文件在项目的target文件下）</p>
-]]></content>
-      <categories>
-        <category>SpringBoot</category>
-      </categories>
-  </entry>
-  <entry>
     <title>String类</title>
     <url>/2021/09/05/String%E7%B1%BB/</url>
     <content><![CDATA[<h1 id="一、java-String类"><a href="#一、java-String类" class="headerlink" title="一、java String类"></a>一、java String类</h1><p>​    字符串广泛应用 在 Java 编程中，在 Java 中字符串属于对象，Java 提供了 String 类来创建和操作字符串。</p>
@@ -1695,93 +1753,6 @@
       </tags>
   </entry>
   <entry>
-    <title>String和StringBuffer、StringBuilder的区别是什么？</title>
-    <url>/2021/09/10/String%E5%92%8CStringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<h2 id="String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的-？"><a href="#String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的-？" class="headerlink" title="String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的 ？"></a><strong>String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的</strong> ？</h2><p><strong>可变性</strong> </p>
-<p>String类中使用字符数组保存字符串，private final char value[]，所以string对象是不可变的。StringBuilder与 StringBuffer都继承自AbstractStringBuilder类，在AbstractStringBuilder中也是使用字符数组保存字符串，char[]  value，这两种对象都是可变的。 </p>
-<p><strong>线程安全性</strong> </p>
-<p>String中的对象是不可变的，也就可以理解为常量，线程安全。AbstractStringBuilder是StringBuilder与StringBuffer的公共父类，定义了一些字符串的基本操作，如expandCapacity、append、insert、indexOf等公共方法。StringBuffer对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder并没有对方法进行加同步锁，所以是非线程安全的。 </p>
-<p><strong>性能</strong></p>
-<p>每次对String 类型进行改变的时候，都会生成一个新的String对象，然后将指针指向新的String 对象。StringBuffer每次都会对StringBuffer对象本身进行操作，而不是生成新的对象并改变对象引用。</p>
-<p>相同情况下使用StirngBuilder 相比使用StringBuffer 仅能获得10%~15% 左右的性能提升，但却要冒多线程不安全的风险。 </p>
-<p><strong>对于三者使用的总结</strong> </p>
-<p>如果要操作少量的数据用 &#x3D; String </p>
-<p>单线程操作字符串缓冲区下操作大量数据 &#x3D; StringBuilder </p>
-<p>多线程操作字符串缓冲区下操作大量数据 &#x3D; StringBuffer </p>
-<p>​    </p>
-]]></content>
-      <categories>
-        <category>JAVA</category>
-      </categories>
-      <tags>
-        <tag>JAVA基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringBoot自定义Starter</title>
-    <url>/2022/04/21/SpringBoot%E8%87%AA%E5%AE%9A%E4%B9%89Starter/</url>
-    <content><![CDATA[<p>1.创建一个Maven项目，在pom.xml文件中添如下依赖</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zht<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hello-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-REALEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--spring-boot-autoconfigure此jar包中包含大量核心注解，包含条件注解等。--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-autoconfigure<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--maven打包插件--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">skip</span>&gt;</span>true<span class="tag">&lt;/<span class="name">skip</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>2.创建AutoService属性类，用来在yml等配置文件中读取属性，如果没有配置，即是用默认的属性，如name&#x3D;”zht”</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//自动配置属性，以my为前缀</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;my&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AutoProperties</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name=<span class="string">&quot;zht&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> String sex=<span class="string">&quot;男&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age=<span class="number">21</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getSex</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSex</span><span class="params">(String sex)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.sex = sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>3.创建要配置的类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//可以在这里做业务方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AutoService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String sex;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getSex</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSex</span><span class="params">(String sex)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.sex = sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="built_in">this</span>.getName()+<span class="string">&quot;在吃饭呢&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">       <span class="keyword">public</span>  <span class="keyword">void</span> <span class="title function_">drink</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="built_in">this</span>.getName()+<span class="string">&quot;在喝水呢&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>4.创建自动配置类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(AutoService.class)</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(AutoProperties.class)</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(prefix = &quot;my&quot;, value = &quot;enabled&quot;, matchIfMissing = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AutoServiceAutoConfigraution</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    AutoProperties autoProperties;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="comment">//当没有AutoService这个类时注入</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean(AutoService.class)</span></span><br><span class="line">    <span class="keyword">public</span> AutoService <span class="title function_">autoService</span><span class="params">()</span>&#123;</span><br><span class="line">        AutoService autoService=<span class="keyword">new</span> <span class="title class_">AutoService</span>();</span><br><span class="line">        autoService.setName(autoProperties.getName());</span><br><span class="line">        autoService.setSex(autoProperties.getSex());</span><br><span class="line">        autoService.setAge(autoProperties.getAge());</span><br><span class="line">        <span class="keyword">return</span>  autoService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>@Configuration：表明此类是一个配置类，将变为一个bean被spring进行管理。<br>@EnableConfigurationProperties：启用属性配置，将读取AutoProperties里面的属性。<br>@ConditionalOnClass：当类路径下面有AutoService此类时，自动配置。<br>@ConditionalOnProperty：判断指定的属性是否具备指定的值。<br>@ConditionalOnMissingBean：当容器中没有指定bean是，创建此bean</p>
-<p>5.在resources目录下创建META-INF文件夹，再在下面创建spring.factories文件，里面写入如下值（如果有多个用，分割）：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\</span><br><span class="line">  com.zht.properties.AutoServiceAutoConfigraution</span><br></pre></td></tr></table></figure>
-
-<p>6.上述完成后，执行mvn clean install ，这样在自己的maven仓库就可以找到了</p>
-<p>7.新建一个SpringBoot项目，在pom文件中引入以下依赖</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zht<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hello-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-REALEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>8.新建一个controller类,在controller类中使用这个starter</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StarterController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AutoService autoService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/getInfo&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        autoService.eat();</span><br><span class="line">        autoService.drink();</span><br><span class="line">        <span class="keyword">return</span> autoService.getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>9.启动后访问看输出，然后还可以在yml文件中添加自己的配置属性</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">my:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">cj</span></span><br></pre></td></tr></table></figure>
-
-<p>这样返回和输出的值就变了。</p>
-]]></content>
-      <categories>
-        <category>SpringBoot</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>java拦截器</title>
-    <url>/2022/02/21/java%E6%8B%A6%E6%88%AA%E5%99%A8/</url>
-    <content><![CDATA[<h2 id="java拦截器"><a href="#java拦截器" class="headerlink" title="java拦截器"></a>java拦截器</h2><p><strong>概念：</strong>java里的拦截器是动态拦截Action调用的对象，它提供了一种机制可以使开发者在一个Action执行的前后执行一段代码，也可以在一个Action执行前阻止其执行，同时也提供了一种可以提取Action中可重用部分代码的方式。</p>
-<p><strong>作用域：</strong>动态拦截Action调用的对象（也就是我们的controller层）</p>
-<ul>
-<li><p>写一个实现了<strong>WebMvcConfigurer</strong>接口的配置类</p>
-</li>
-<li><p>重写其中的addCorsMappings()方法【配置跨域信息】和addInterceptors()方法【配置拦截器信息，如拦截路径和开放路径等】</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterceptorConfiguration</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        <span class="comment">//注册Interceptor拦截器(Interceptor这个类是我们自己写的拦截器类)</span></span><br><span class="line">        <span class="type">InterceptorRegistration</span> <span class="variable">registration</span> <span class="operator">=</span> registry.addInterceptor(<span class="keyword">new</span> <span class="title class_">Interceptor</span>());</span><br><span class="line">        <span class="comment">//addPathPatterns()方法添加需要拦截的路径</span></span><br><span class="line">        registration.addPathPatterns(<span class="string">&quot;/**&quot;</span>);                      <span class="comment">//所有路径都被拦截</span></span><br><span class="line">        <span class="comment">//excludePathPatterns()方法添加不拦截的路径</span></span><br><span class="line">        registration.excludePathPatterns(                         <span class="comment">//添加不拦截路径</span></span><br><span class="line">            <span class="string">&quot;/demo/loginPage&quot;</span>,               <span class="comment">//登录页面的地址【不拦截】</span></span><br><span class="line">                <span class="string">&quot;/**/*.html&quot;</span>,                 <span class="comment">//html静态资源</span></span><br><span class="line">                <span class="string">&quot;/**/*.js&quot;</span>,                  <span class="comment">//js静态资源</span></span><br><span class="line">                <span class="string">&quot;/**/*.css&quot;</span>) ;             <span class="comment">//css静态资源</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> &#123;</span><br><span class="line">        registry.addMapping(<span class="string">&quot;/**&quot;</span>)<span class="comment">//指哪些接口URL需要增加跨域设置</span></span><br><span class="line">                .allowedOrigins(<span class="string">&quot;*&quot;</span>)<span class="comment">//指的是前端哪些域名被允许跨域</span></span><br><span class="line">                .allowCredentials(<span class="literal">true</span>)<span class="comment">//需要带cookie等凭证时，设置为true，就会把cookie的相关信息带上</span></span><br><span class="line">                .allowedMethods(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;HEAD&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>, <span class="string">&quot;OPTIONS&quot;</span>)<span class="comment">//指的是允许哪些方法</span></span><br><span class="line">                .maxAge(<span class="number">3600</span>);<span class="comment">//cookie的失效时间，单位为秒（s），若设置为-1，则关闭浏览器就失效</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li><p>写一个实现<strong>HandlerInterceptor</strong>接口的自定义拦截器 </p>
-<p>preHandle：在业务处理器处理请求之前被调用。预处理，可以进行编码、安全控制、权限校验等处理；<br>postHandle：在业务处理器处理请求执行完成后，生成视图之前执行。后处理（调用了Service并返回							ModelAndView，但未进行页面渲染），有机会修改ModelAndView；<br>afterCompletion：在DispatcherServlet完全处理完请求后被调用，可用于清理资源等。返回处理（已										经渲染了页面）；</p>
-</li>
-<li><p>4、重写其中的preHandle()方法，方法内容为拦截到请求后的处理</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Interceptor</span>  <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//在这里可以通过request获取前台带来的用户信息或者token并且进行验证</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;判断条件&quot;</span>)&#123;</span><br><span class="line">            <span class="comment">//判断成功 return true</span></span><br><span class="line">            <span class="keyword">return</span>  <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            response.sendRedirect(request.getContextPath()+<span class="string">&quot;loginPage&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>  <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        HandlerInterceptor.<span class="built_in">super</span>.postHandle(request, response, handler, modelAndView);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        HandlerInterceptor.<span class="built_in">super</span>.afterCompletion(request, response, handler, ex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>JAVA</category>
-      </categories>
-  </entry>
-  <entry>
     <title>java线程池</title>
     <url>/2021/10/23/java%E7%BA%BF%E7%A8%8B%E6%B1%A0/</url>
     <content><![CDATA[<p><strong>线程池优势</strong></p>
@@ -1859,6 +1830,35 @@
 ]]></content>
       <categories>
         <category>多线程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>java拦截器</title>
+    <url>/2022/02/21/java%E6%8B%A6%E6%88%AA%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="java拦截器"><a href="#java拦截器" class="headerlink" title="java拦截器"></a>java拦截器</h2><p><strong>概念：</strong>java里的拦截器是动态拦截Action调用的对象，它提供了一种机制可以使开发者在一个Action执行的前后执行一段代码，也可以在一个Action执行前阻止其执行，同时也提供了一种可以提取Action中可重用部分代码的方式。</p>
+<p><strong>作用域：</strong>动态拦截Action调用的对象（也就是我们的controller层）</p>
+<ul>
+<li><p>写一个实现了<strong>WebMvcConfigurer</strong>接口的配置类</p>
+</li>
+<li><p>重写其中的addCorsMappings()方法【配置跨域信息】和addInterceptors()方法【配置拦截器信息，如拦截路径和开放路径等】</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterceptorConfiguration</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        <span class="comment">//注册Interceptor拦截器(Interceptor这个类是我们自己写的拦截器类)</span></span><br><span class="line">        <span class="type">InterceptorRegistration</span> <span class="variable">registration</span> <span class="operator">=</span> registry.addInterceptor(<span class="keyword">new</span> <span class="title class_">Interceptor</span>());</span><br><span class="line">        <span class="comment">//addPathPatterns()方法添加需要拦截的路径</span></span><br><span class="line">        registration.addPathPatterns(<span class="string">&quot;/**&quot;</span>);                      <span class="comment">//所有路径都被拦截</span></span><br><span class="line">        <span class="comment">//excludePathPatterns()方法添加不拦截的路径</span></span><br><span class="line">        registration.excludePathPatterns(                         <span class="comment">//添加不拦截路径</span></span><br><span class="line">            <span class="string">&quot;/demo/loginPage&quot;</span>,               <span class="comment">//登录页面的地址【不拦截】</span></span><br><span class="line">                <span class="string">&quot;/**/*.html&quot;</span>,                 <span class="comment">//html静态资源</span></span><br><span class="line">                <span class="string">&quot;/**/*.js&quot;</span>,                  <span class="comment">//js静态资源</span></span><br><span class="line">                <span class="string">&quot;/**/*.css&quot;</span>) ;             <span class="comment">//css静态资源</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> &#123;</span><br><span class="line">        registry.addMapping(<span class="string">&quot;/**&quot;</span>)<span class="comment">//指哪些接口URL需要增加跨域设置</span></span><br><span class="line">                .allowedOrigins(<span class="string">&quot;*&quot;</span>)<span class="comment">//指的是前端哪些域名被允许跨域</span></span><br><span class="line">                .allowCredentials(<span class="literal">true</span>)<span class="comment">//需要带cookie等凭证时，设置为true，就会把cookie的相关信息带上</span></span><br><span class="line">                .allowedMethods(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;HEAD&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>, <span class="string">&quot;OPTIONS&quot;</span>)<span class="comment">//指的是允许哪些方法</span></span><br><span class="line">                .maxAge(<span class="number">3600</span>);<span class="comment">//cookie的失效时间，单位为秒（s），若设置为-1，则关闭浏览器就失效</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>写一个实现<strong>HandlerInterceptor</strong>接口的自定义拦截器 </p>
+<p>preHandle：在业务处理器处理请求之前被调用。预处理，可以进行编码、安全控制、权限校验等处理；<br>postHandle：在业务处理器处理请求执行完成后，生成视图之前执行。后处理（调用了Service并返回							ModelAndView，但未进行页面渲染），有机会修改ModelAndView；<br>afterCompletion：在DispatcherServlet完全处理完请求后被调用，可用于清理资源等。返回处理（已										经渲染了页面）；</p>
+</li>
+<li><p>4、重写其中的preHandle()方法，方法内容为拦截到请求后的处理</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Interceptor</span>  <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//在这里可以通过request获取前台带来的用户信息或者token并且进行验证</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;判断条件&quot;</span>)&#123;</span><br><span class="line">            <span class="comment">//判断成功 return true</span></span><br><span class="line">            <span class="keyword">return</span>  <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            response.sendRedirect(request.getContextPath()+<span class="string">&quot;loginPage&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>  <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        HandlerInterceptor.<span class="built_in">super</span>.postHandle(request, response, handler, modelAndView);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        HandlerInterceptor.<span class="built_in">super</span>.afterCompletion(request, response, handler, ex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JAVA</category>
       </categories>
   </entry>
   <entry>
@@ -1991,62 +1991,6 @@
       </categories>
   </entry>
   <entry>
-    <title>故乡的小诗</title>
-    <url>/2021/09/15/%E6%95%85%E4%B9%A1%E7%9A%84%E5%B0%8F%E8%AF%97/</url>
-    <content><![CDATA[<h3 id="《故乡的小诗》————-做个梦给你"><a href="#《故乡的小诗》————-做个梦给你" class="headerlink" title="《故乡的小诗》———— 做个梦给你"></a>《故乡的小诗》———— 做个梦给你</h3> <br/>
-
-<p>桂花树在早秋的日子里</p>
-<p>等了一整个清晨</p>
-<p>像酝酿着萌芽的梦想一般</p>
-<p>轻轻地、静静地、慢慢地钻出土来</p>
- <br/>
-
-
-<p>我在院子里</p>
-<p>看一树的花开</p>
-<p>看斑驳的墙角</p>
-<p>青砖白瓦纸似的翻了边</p>
-<p>展露出灰白的石墙</p>
- <br/>
-
-<p>树影交错掉落 横在泥土地上</p>
-<p>树缝间的点点阳光 若隐若现</p>
-<p>描摹而出的明暗倩影</p>
-<p>铺在水泥小道上</p>
- <br/>
-
-<p>墙尾的自行车</p>
-<p>已很难被人记起</p>
-<p>车轮早已瘪了下去</p>
-<p>锈迹斑斑</p>
-<p>仿佛记留着它走过的长街巷尾</p>
-<p>踩过的青石巷</p>
-<p>载过的稚童幼女</p>
-<p>欢声、笑语、沉默</p>
-<p>都还停留在不停滚动的车轮上</p>
-<p>岁月把车座打磨得光亮</p>
-<p>厚厚的灰尘也难掩它的光泽</p>
-<p>曾经的我们也坐在自行车后座上</p>
-<p>感受着耳边的风声呼呼</p>
-<p>观赏着天边的晚霞静默</p>
-<p>落日滚圆滚圆的</p>
-<p>快乐与悲伤</p>
-<p>都一并被收进旧时光的大口袋里</p>
-<p>点点滴滴的积攒着</p>
- <br/>
-
-<p>时过经年 </p>
-<p>静默着静默着</p>
-<p>无需告诉太阳和月亮</p>
-<p>只留星星照看他们</p>
-<p>陪着他们永不枯萎</p>
-<p><a href="https://imgtu.com/i/4nokKH"><img src="https://z3.ax1x.com/2021/09/16/4nokKH.jpg" alt="4nokKH.jpg"></a></p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Java反射</title>
     <url>/2021/11/01/%E5%8F%8D%E5%B0%84/</url>
     <content><![CDATA[<h1 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h1><p>Reflflection（反射）是Java被视为动态语言的关键，反射机制允许程序在执行期借助于Reflflection API取得任何类的内部信息，并能直接操作任意对象的内部属性及方法。加载完类之后，在堆内存的方法区中就产生了一个Class类型的对象（一个类只有一个Class对象），这个对象就包含了完整的类的结构信息。我们可以通过这个对象看到类的结构。</p>
@@ -2111,27 +2055,76 @@
       </categories>
   </entry>
   <entry>
-    <title>配置JDK</title>
-    <url>/2021/06/28/%E9%85%8D%E7%BD%AEJDK/</url>
-    <content><![CDATA[<ol>
-<li><p>此电脑–高级系统设置–系统属性–高级–环境变量</p>
-</li>
-<li><p>在系统变量下点击新建,变量名为JAVA_HOME，变量值为C:\Program Files\Java\jdk1.8.0_152（这个为你安装jdk的路径，我的是这个，你们自己的时情况而定），如图所示：<img src="https://i.loli.net/2021/06/29/Feo7g2VfEwQK8yi.png"></p>
-</li>
-<li><p>和JAVA_HOME一样，新建一个名为“CLASSPATH”的环境变量，变量值为 .;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar（同上，找到自己电脑所对应的即可），如图所示：<img src="https://i.loli.net/2021/06/29/XfoeqjNnUySQwYP.png"></p>
-</li>
-<li><p>设置Path环境变量，该变量已经存在，所以在列表中选择Path，点击下方的“编辑”按钮，在弹出的窗口中添加如下信息：%JAVA_HOME%\bin，然后点击“确认”按钮即可。如图所示：<img src="https://i.loli.net/2021/06/29/v19YRktTaiGodW7.png"></p>
-</li>
-<li><p>在配置好环境变量后，可以进入cmd中检查Java是否安装正确，检查的命令为 java -version，如图所示：<img src="https://i.loli.net/2021/06/29/fZ5R6EM1uBzb9cH.png"></p>
-<p>如果能正确的输出Java的版本和JVM版本信息，则说明Java安装正确。</p>
-</li>
-</ol>
+    <title>故乡的小诗</title>
+    <url>/2021/09/15/%E6%95%85%E4%B9%A1%E7%9A%84%E5%B0%8F%E8%AF%97/</url>
+    <content><![CDATA[<h3 id="《故乡的小诗》————-做个梦给你"><a href="#《故乡的小诗》————-做个梦给你" class="headerlink" title="《故乡的小诗》———— 做个梦给你"></a>《故乡的小诗》———— 做个梦给你</h3> <br/>
+
+<p>桂花树在早秋的日子里</p>
+<p>等了一整个清晨</p>
+<p>像酝酿着萌芽的梦想一般</p>
+<p>轻轻地、静静地、慢慢地钻出土来</p>
+ <br/>
+
+
+<p>我在院子里</p>
+<p>看一树的花开</p>
+<p>看斑驳的墙角</p>
+<p>青砖白瓦纸似的翻了边</p>
+<p>展露出灰白的石墙</p>
+ <br/>
+
+<p>树影交错掉落 横在泥土地上</p>
+<p>树缝间的点点阳光 若隐若现</p>
+<p>描摹而出的明暗倩影</p>
+<p>铺在水泥小道上</p>
+ <br/>
+
+<p>墙尾的自行车</p>
+<p>已很难被人记起</p>
+<p>车轮早已瘪了下去</p>
+<p>锈迹斑斑</p>
+<p>仿佛记留着它走过的长街巷尾</p>
+<p>踩过的青石巷</p>
+<p>载过的稚童幼女</p>
+<p>欢声、笑语、沉默</p>
+<p>都还停留在不停滚动的车轮上</p>
+<p>岁月把车座打磨得光亮</p>
+<p>厚厚的灰尘也难掩它的光泽</p>
+<p>曾经的我们也坐在自行车后座上</p>
+<p>感受着耳边的风声呼呼</p>
+<p>观赏着天边的晚霞静默</p>
+<p>落日滚圆滚圆的</p>
+<p>快乐与悲伤</p>
+<p>都一并被收进旧时光的大口袋里</p>
+<p>点点滴滴的积攒着</p>
+ <br/>
+
+<p>时过经年 </p>
+<p>静默着静默着</p>
+<p>无需告诉太阳和月亮</p>
+<p>只留星星照看他们</p>
+<p>陪着他们永不枯萎</p>
+<p><a href="https://imgtu.com/i/4nokKH"><img src="https://z3.ax1x.com/2021/09/16/4nokKH.jpg" alt="4nokKH.jpg"></a></p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>文件上传和下载的简单使用</title>
+    <url>/2021/07/02/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%92%8C%E4%B8%8B%E8%BD%BD(SpringBoot)/</url>
+    <content><![CDATA[<h3 id="一-导入依赖"><a href="#一-导入依赖" class="headerlink" title="一.导入依赖"></a>一.导入依赖</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-fileupload<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-fileupload<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-io<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-io<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二-编写后端代码"><a href="#二-编写后端代码" class="headerlink" title="二.编写后端代码"></a>二.编写后端代码</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//上传单个文件</span></span><br><span class="line">   <span class="meta">@RequestMapping(value = &quot;upload&quot;)</span></span><br><span class="line">   <span class="meta">@ResponseBody</span></span><br><span class="line">   <span class="keyword">public</span> String <span class="title function_">upload</span><span class="params">(<span class="meta">@RequestParam(&quot;test&quot;)</span> MultipartFile file)</span> &#123;</span><br><span class="line">       <span class="keyword">if</span> (file.isEmpty()) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">&quot;文件为空&quot;</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 获取文件名</span></span><br><span class="line">       <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> file.getOriginalFilename();</span><br><span class="line">       System.out.println(<span class="string">&quot;上传的文件名为：&quot;</span> + fileName);</span><br><span class="line">       <span class="comment">// 获取文件的后缀名</span></span><br><span class="line">       <span class="type">String</span> <span class="variable">suffixName</span> <span class="operator">=</span> fileName.substring(fileName.lastIndexOf(<span class="string">&quot;.&quot;</span>));</span><br><span class="line">       System.out.println(<span class="string">&quot;上传的后缀名为：&quot;</span> + suffixName);</span><br><span class="line">       <span class="comment">// 文件上传后的路径</span></span><br><span class="line">       <span class="type">String</span> <span class="variable">filePath</span> <span class="operator">=</span> <span class="string">&quot;E://test//&quot;</span>;</span><br><span class="line">       <span class="comment">// 解决中文问题，liunx下中文路径，图片显示问题</span></span><br><span class="line">       <span class="comment">// fileName = UUID.randomUUID() + suffixName;</span></span><br><span class="line">       <span class="type">File</span> <span class="variable">dest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(filePath + fileName);</span><br><span class="line">       <span class="comment">// 检测是否存在目录</span></span><br><span class="line">       <span class="keyword">if</span> (!dest.getParentFile().exists()) &#123;</span><br><span class="line">           dest.getParentFile().mkdirs();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           file.transferTo(dest);</span><br><span class="line">           <span class="keyword">return</span> <span class="string">&quot;上传成功&quot;</span>;</span><br><span class="line">       &#125; <span class="keyword">catch</span> (IllegalStateException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">&quot;上传失败&quot;</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//多文件上传</span></span><br><span class="line">   <span class="meta">@RequestMapping(value = &quot;/batch/upload&quot;, method = RequestMethod.POST)</span></span><br><span class="line">   <span class="meta">@ResponseBody</span></span><br><span class="line">   <span class="keyword">public</span> String <span class="title function_">handleFileUpload</span><span class="params">(HttpServletRequest request)</span> &#123;</span><br><span class="line">       List&lt;MultipartFile&gt; files = ((MultipartHttpServletRequest) request).getFiles(<span class="string">&quot;file&quot;</span>);</span><br><span class="line">       <span class="type">MultipartFile</span> <span class="variable">file</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">       <span class="type">BufferedOutputStream</span> <span class="variable">stream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; files.size(); ++i) &#123;</span><br><span class="line">           file = files.get(i);</span><br><span class="line">           <span class="keyword">if</span> (!file.isEmpty()) &#123;</span><br><span class="line">               <span class="keyword">try</span> &#123;</span><br><span class="line">                   <span class="type">byte</span>[] bytes = file.getBytes();</span><br><span class="line">                   <span class="type">File</span> <span class="variable">file1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:/test/&quot;</span> + file.getOriginalFilename());</span><br><span class="line">                   <span class="keyword">if</span> (!file1.getParentFile().exists()) &#123;</span><br><span class="line">                       file1.getParentFile().mkdirs();</span><br><span class="line">                   &#125;</span><br><span class="line">                   stream = <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(file1));</span><br><span class="line">                   stream.write(bytes);</span><br><span class="line">                   stream.close();</span><br><span class="line">               &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                   stream = <span class="literal">null</span>;</span><br><span class="line">                   <span class="keyword">return</span> <span class="string">&quot;第 &quot;</span> + i + <span class="string">&quot;个文件上传失败，因为&quot;</span></span><br><span class="line">                           + e.getMessage();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="string">&quot;第 &quot;</span> + i</span><br><span class="line">                       + <span class="string">&quot;个文件为空&quot;</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">&quot;上传成功&quot;</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//文件下载</span></span><br><span class="line">   <span class="meta">@RequestMapping(value = &quot;downloadFile&quot;)</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">download</span><span class="params">(HttpServletResponse response, HttpServletRequest request)</span> &#123;</span><br><span class="line">       <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;E:/test/头像.png&quot;</span>);</span><br><span class="line">       <span class="keyword">if</span> (file.exists()) &#123;</span><br><span class="line">           <span class="type">FileInputStream</span> <span class="variable">fileInputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">           <span class="type">ServletOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">               <span class="comment">//设置文件名</span></span><br><span class="line">               response.setHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment; filename=&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(file.getName().getBytes(<span class="string">&quot;UTF-8&quot;</span>), <span class="string">&quot;ISO_8859_1&quot;</span>));</span><br><span class="line">               <span class="comment">//img/jpeg</span></span><br><span class="line">               <span class="comment">//response.setContentType(&quot;img/png&quot;);</span></span><br><span class="line">               response.setContentType(<span class="string">&quot;application/x-msdownload&quot;</span>);</span><br><span class="line">               response.setContentLength((<span class="type">int</span>) file.length());</span><br><span class="line">               fileInputStream = <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">               outputStream = response.getOutputStream();</span><br><span class="line">               <span class="type">byte</span>[] bytes = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">               <span class="keyword">while</span> (fileInputStream.read(bytes) != -<span class="number">1</span>) &#123;</span><br><span class="line">                   outputStream.write(bytes);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">               <span class="keyword">try</span> &#123;</span><br><span class="line">                   <span class="keyword">if</span> (fileInputStream != <span class="literal">null</span>) &#123;</span><br><span class="line">                       fileInputStream.close();</span><br><span class="line">                   &#125;</span><br><span class="line">                   outputStream.flush();</span><br><span class="line">                   outputStream.close();</span><br><span class="line">               &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                   e.printStackTrace();</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-编写前端代码index-html"><a href="#3-编写前端代码index-html" class="headerlink" title="3.编写前端代码index.html"></a>3.编写前端代码index.html</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Getting Started: Serving Web Content<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html; charset=UTF-8&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/upload&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line">    文件：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;test&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/downloadFile&quot;</span>&gt;</span>下载test<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>多文件上传<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span> <span class="attr">action</span>=<span class="string">&quot;/batch/upload&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>文件1：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>文件2：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;上传&quot;</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>JAVA</category>
       </categories>
       <tags>
-        <tag>配置</tag>
+        <tag>JAVA</tag>
       </tags>
   </entry>
   <entry>
@@ -2169,5 +2162,29 @@
       <categories>
         <category>多线程</category>
       </categories>
+  </entry>
+  <entry>
+    <title>配置JDK</title>
+    <url>/2021/06/28/%E9%85%8D%E7%BD%AEJDK/</url>
+    <content><![CDATA[<ol>
+<li><p>此电脑–高级系统设置–系统属性–高级–环境变量</p>
+</li>
+<li><p>在系统变量下点击新建,变量名为JAVA_HOME，变量值为C:\Program Files\Java\jdk1.8.0_152（这个为你安装jdk的路径，我的是这个，你们自己的时情况而定），如图所示：<img src="https://i.loli.net/2021/06/29/Feo7g2VfEwQK8yi.png"></p>
+</li>
+<li><p>和JAVA_HOME一样，新建一个名为“CLASSPATH”的环境变量，变量值为 .;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar（同上，找到自己电脑所对应的即可），如图所示：<img src="https://i.loli.net/2021/06/29/XfoeqjNnUySQwYP.png"></p>
+</li>
+<li><p>设置Path环境变量，该变量已经存在，所以在列表中选择Path，点击下方的“编辑”按钮，在弹出的窗口中添加如下信息：%JAVA_HOME%\bin，然后点击“确认”按钮即可。如图所示：<img src="https://i.loli.net/2021/06/29/v19YRktTaiGodW7.png"></p>
+</li>
+<li><p>在配置好环境变量后，可以进入cmd中检查Java是否安装正确，检查的命令为 java -version，如图所示：<img src="https://i.loli.net/2021/06/29/fZ5R6EM1uBzb9cH.png"></p>
+<p>如果能正确的输出Java的版本和JVM版本信息，则说明Java安装正确。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>配置</tag>
+      </tags>
   </entry>
 </search>
