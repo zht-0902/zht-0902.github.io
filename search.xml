@@ -3,7 +3,7 @@
   <entry>
     <title>（集合）多线程</title>
     <url>/2021/10/21/(%E9%9B%86%E5%90%88)%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<h2 id="List不安全"><a href="#List不安全" class="headerlink" title="List不安全"></a>List不安全</h2><p><strong>单线程下：</strong></p>
+    <content><![CDATA[<p><strong>单线程下：</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadList</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;String&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            list.add(<span class="string">&quot;a+&quot;</span>+i);</span><br><span class="line">        &#125;</span><br><span class="line">        list.forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>多线程下：</strong></p>
@@ -48,8 +48,59 @@
         <category>JAVA</category>
       </categories>
       <tags>
-        <tag>JAVA基础</tag>
+        <tag>多线程</tag>
+        <tag>JAVA</tag>
+        <tag>集合</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>IOC</title>
+    <url>/2021/10/01/IOC/</url>
+    <content><![CDATA[<h2 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h2><p>**控制反转即IoC (Inversion of Control)**，它把传统上由程序代码直接操控的对 象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反 转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。 Spring IOC 负责创建对象，管理对象（通过依赖注入（DI），装配对象，配置对象，并且管理这些对象的整个生命周期。</p>
+<p><strong>作用</strong>：</p>
+<ul>
+<li>管理对象的创建和依赖关系的维护。</li>
+<li>解耦，由容器去维护具体的对象</li>
+<li>托管了类的产生过程，比如我们需要在类的产生过程中做一些处理， 最直接的例子就是代理，如果有容器程序可以把这部分处理交给容器，应 用程序则无需去关心类是如何完成代理的</li>
+</ul>
+<p><strong>支持哪些功能：</strong></p>
+<ul>
+<li>依赖注入 </li>
+<li>依赖检查 </li>
+<li>自动装配 </li>
+<li>支持集合 </li>
+<li>指定初始化方法和销毁方法 </li>
+<li>支持回调某些方法（但是需要实现 Spring 接口，略有侵入）</li>
+</ul>
+<p><strong>注入方式</strong>：</p>
+<p><strong>构造器注入</strong>：</p>
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">    <span class="keyword">private</span>  String name;</span><br><span class="line">    <span class="keyword">private</span>  <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">People</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">People</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>无参方式：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--set注入--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;people&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.zht.pojo.People&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;zht&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有参方式：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;people&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.zht.pojo.People&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--通过下标--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">&quot;0&quot;</span> <span class="attr">value</span>=<span class="string">&quot;zht&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--通过参数名字--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--  通过参数类型</span></span><br><span class="line"><span class="comment">    &lt;constructor-arg type=&quot;java.lang.String&quot; value=&quot;zht&quot;&gt;&lt;/constructor-arg&gt;</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>测试以及测试结果：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext-dao.xml&quot;</span>);</span><br><span class="line">    <span class="type">People</span> <span class="variable">people</span> <span class="operator">=</span> (People) applicationContext.getBean(<span class="string">&quot;people&quot;</span>);</span><br><span class="line">    System.out.println(people.getName());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">zht</span><br></pre></td></tr></table></figure>
+
+<p><strong>set注入：</strong></p>
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Address</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String adr;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Address</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getAdr</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> adr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAdr</span><span class="params">(String adr)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.adr = adr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Address&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;adr=&#x27;&quot;</span> + adr + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">    <span class="keyword">private</span>  String name;</span><br><span class="line">    <span class="keyword">private</span>  <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> Address address;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String,String&gt; card;</span><br><span class="line">    <span class="keyword">private</span> Set&lt;String&gt; games;</span><br><span class="line">    <span class="keyword">private</span>  String[] books;</span><br><span class="line">    <span class="keyword">private</span> Properties info;</span><br><span class="line">    <span class="keyword">private</span>  String wife;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;People&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, age=&quot;</span> + age +</span><br><span class="line">                <span class="string">&quot;, address=&quot;</span> + address +</span><br><span class="line">                <span class="string">&quot;, card=&quot;</span> + card +</span><br><span class="line">                <span class="string">&quot;, games=&quot;</span> + games +</span><br><span class="line">                <span class="string">&quot;, books=&quot;</span> + Arrays.toString(books) +</span><br><span class="line">                <span class="string">&quot;, info=&quot;</span> + info +</span><br><span class="line">                <span class="string">&quot;, wife=&#x27;&quot;</span> + wife + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWife</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> wife;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWife</span><span class="params">(String wife)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.wife = wife;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Address <span class="title function_">getAddress</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAddress</span><span class="params">(Address address)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.address = address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Map&lt;String, String&gt; <span class="title function_">getCard</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> card;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCard</span><span class="params">(Map&lt;String, String&gt; card)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.card = card;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Set&lt;String&gt; <span class="title function_">getGames</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> games;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setGames</span><span class="params">(Set&lt;String&gt; games)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.games = games;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String[] getBooks() &#123;</span><br><span class="line">        <span class="keyword">return</span> books;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBooks</span><span class="params">(String[] books)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.books = books;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Properties <span class="title function_">getInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setInfo</span><span class="params">(Properties info)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.info = info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">People</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;address&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.zht.pojo.Address&quot;</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;adr&quot;</span> <span class="attr">value</span>=<span class="string">&quot;常德&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;people&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.zht.pojo.People&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--常量注入--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;zht&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--bean注入--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;address&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;address&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--数组注入--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;books&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>西游记<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>金瓶梅<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--set注入，和list标签不一样，不允许重复值--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;games&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>穿越火线<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>英雄联盟<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--map注入·--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;card&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;邮政&quot;</span> <span class="attr">value</span>=<span class="string">&quot;15623&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">entry</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--Properties注入--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;info&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;学号&quot;</span>&gt;</span>156852<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;班级&quot;</span>&gt;</span>19330<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--空注入--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;wife&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">null</span>/&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>测试以及结果：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext-dao.xml&quot;</span>);</span><br><span class="line">    <span class="type">People</span> <span class="variable">people</span> <span class="operator">=</span> (People) applicationContext.getBean(<span class="string">&quot;people&quot;</span>);</span><br><span class="line">    System.out.println(people);</span><br><span class="line">&#125;</span><br><span class="line">结果：</span><br><span class="line">People&#123;name=<span class="string">&#x27;zht&#x27;</span>, age=<span class="number">20</span>, address=Address&#123;adr=<span class="string">&#x27;常德&#x27;</span>&#125;, card=&#123;邮政=<span class="number">15623</span>&#125;, games=[穿越火线, 英雄联盟], books=[西游记, 金瓶梅], info=&#123;学号=<span class="number">156852</span>, 班级=<span class="number">19330</span>&#125;, wife=<span class="string">&#x27;null&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Spring</category>
+      </categories>
   </entry>
   <entry>
     <title>AOP</title>
@@ -104,55 +155,6 @@
       </categories>
   </entry>
   <entry>
-    <title>IOC</title>
-    <url>/2021/10/01/IOC/</url>
-    <content><![CDATA[<h2 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h2><p>**控制反转即IoC (Inversion of Control)**，它把传统上由程序代码直接操控的对 象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反 转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。 Spring IOC 负责创建对象，管理对象（通过依赖注入（DI），装配对象，配置对象，并且管理这些对象的整个生命周期。</p>
-<p><strong>作用</strong>：</p>
-<ul>
-<li>管理对象的创建和依赖关系的维护。</li>
-<li>解耦，由容器去维护具体的对象</li>
-<li>托管了类的产生过程，比如我们需要在类的产生过程中做一些处理， 最直接的例子就是代理，如果有容器程序可以把这部分处理交给容器，应 用程序则无需去关心类是如何完成代理的</li>
-</ul>
-<p><strong>支持哪些功能：</strong></p>
-<ul>
-<li>依赖注入 </li>
-<li>依赖检查 </li>
-<li>自动装配 </li>
-<li>支持集合 </li>
-<li>指定初始化方法和销毁方法 </li>
-<li>支持回调某些方法（但是需要实现 Spring 接口，略有侵入）</li>
-</ul>
-<p><strong>注入方式</strong>：</p>
-<p><strong>构造器注入</strong>：</p>
-<p>测试：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">    <span class="keyword">private</span>  String name;</span><br><span class="line">    <span class="keyword">private</span>  <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">People</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">People</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>无参方式：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--set注入--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;people&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.zht.pojo.People&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;zht&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>有参方式：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;people&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.zht.pojo.People&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--通过下标--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">&quot;0&quot;</span> <span class="attr">value</span>=<span class="string">&quot;zht&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--通过参数名字--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--  通过参数类型</span></span><br><span class="line"><span class="comment">    &lt;constructor-arg type=&quot;java.lang.String&quot; value=&quot;zht&quot;&gt;&lt;/constructor-arg&gt;</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>测试以及测试结果：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext-dao.xml&quot;</span>);</span><br><span class="line">    <span class="type">People</span> <span class="variable">people</span> <span class="operator">=</span> (People) applicationContext.getBean(<span class="string">&quot;people&quot;</span>);</span><br><span class="line">    System.out.println(people.getName());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">zht</span><br></pre></td></tr></table></figure>
-
-<p><strong>set注入：</strong></p>
-<p>测试：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Address</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String adr;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Address</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getAdr</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> adr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAdr</span><span class="params">(String adr)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.adr = adr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Address&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;adr=&#x27;&quot;</span> + adr + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">    <span class="keyword">private</span>  String name;</span><br><span class="line">    <span class="keyword">private</span>  <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> Address address;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String,String&gt; card;</span><br><span class="line">    <span class="keyword">private</span> Set&lt;String&gt; games;</span><br><span class="line">    <span class="keyword">private</span>  String[] books;</span><br><span class="line">    <span class="keyword">private</span> Properties info;</span><br><span class="line">    <span class="keyword">private</span>  String wife;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;People&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, age=&quot;</span> + age +</span><br><span class="line">                <span class="string">&quot;, address=&quot;</span> + address +</span><br><span class="line">                <span class="string">&quot;, card=&quot;</span> + card +</span><br><span class="line">                <span class="string">&quot;, games=&quot;</span> + games +</span><br><span class="line">                <span class="string">&quot;, books=&quot;</span> + Arrays.toString(books) +</span><br><span class="line">                <span class="string">&quot;, info=&quot;</span> + info +</span><br><span class="line">                <span class="string">&quot;, wife=&#x27;&quot;</span> + wife + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWife</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> wife;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWife</span><span class="params">(String wife)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.wife = wife;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Address <span class="title function_">getAddress</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAddress</span><span class="params">(Address address)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.address = address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Map&lt;String, String&gt; <span class="title function_">getCard</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> card;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCard</span><span class="params">(Map&lt;String, String&gt; card)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.card = card;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Set&lt;String&gt; <span class="title function_">getGames</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> games;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setGames</span><span class="params">(Set&lt;String&gt; games)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.games = games;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String[] getBooks() &#123;</span><br><span class="line">        <span class="keyword">return</span> books;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBooks</span><span class="params">(String[] books)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.books = books;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Properties <span class="title function_">getInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setInfo</span><span class="params">(Properties info)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.info = info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">People</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;address&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.zht.pojo.Address&quot;</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;adr&quot;</span> <span class="attr">value</span>=<span class="string">&quot;常德&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;people&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.zht.pojo.People&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--常量注入--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;zht&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--bean注入--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;address&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;address&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--数组注入--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;books&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>西游记<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>金瓶梅<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--set注入，和list标签不一样，不允许重复值--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;games&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>穿越火线<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>英雄联盟<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--map注入·--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;card&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;邮政&quot;</span> <span class="attr">value</span>=<span class="string">&quot;15623&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">entry</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--Properties注入--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;info&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;学号&quot;</span>&gt;</span>156852<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;班级&quot;</span>&gt;</span>19330<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--空注入--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;wife&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">null</span>/&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>测试以及结果：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext-dao.xml&quot;</span>);</span><br><span class="line">    <span class="type">People</span> <span class="variable">people</span> <span class="operator">=</span> (People) applicationContext.getBean(<span class="string">&quot;people&quot;</span>);</span><br><span class="line">    System.out.println(people);</span><br><span class="line">&#125;</span><br><span class="line">结果：</span><br><span class="line">People&#123;name=<span class="string">&#x27;zht&#x27;</span>, age=<span class="number">20</span>, address=Address&#123;adr=<span class="string">&#x27;常德&#x27;</span>&#125;, card=&#123;邮政=<span class="number">15623</span>&#125;, games=[穿越火线, 英雄联盟], books=[西游记, 金瓶梅], info=&#123;学号=<span class="number">156852</span>, 班级=<span class="number">19330</span>&#125;, wife=<span class="string">&#x27;null&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Spring</category>
-      </categories>
-  </entry>
-  <entry>
     <title>IO流简单使用</title>
     <url>/2021/06/29/IO%E6%B5%81%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<h3 id="一-FileOutputStream-FileInputStream字节流文件读写"><a href="#一-FileOutputStream-FileInputStream字节流文件读写" class="headerlink" title="一.FileOutputStream FileInputStream字节流文件读写"></a>一.FileOutputStream FileInputStream字节流文件读写</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="comment">//从内存中读取写到硬盘</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">//从硬盘中读取写到内存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileInputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>  &#123;</span><br><span class="line">        <span class="comment">//创建一个File对象 而不是一个文件</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\a.txt&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;文件不存在!&quot;</span>);</span><br><span class="line">               <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">byte</span> [] b=<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            inputStream = <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">            <span class="comment">//第一个参数可以为File，也可以为string地址,因为内部源码当string不为空new File(),第二个参数为追加,默认为false,表示覆盖</span></span><br><span class="line">            outputStream = <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\b.txt&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">            <span class="comment">//边读边写</span></span><br><span class="line">            <span class="keyword">while</span> (inputStream.read(b) != -<span class="number">1</span>) &#123;</span><br><span class="line">                outputStream.write(b);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//一定要记得关闭,释放流资源</span></span><br><span class="line">                outputStream.close();</span><br><span class="line">                inputStream.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -163,182 +165,15 @@
 
 <h3 id="四-使用缓冲流复制图片"><a href="#四-使用缓冲流复制图片" class="headerlink" title="四.使用缓冲流复制图片"></a>四.使用缓冲流复制图片</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test4</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">BufferedInputStream</span> <span class="variable">bufferedInputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">BufferedOutputStream</span> <span class="variable">bufferedOutputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileInputStream</span> <span class="variable">fileInputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">FileOutputStream</span> <span class="variable">fileOutputStream</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;E:\\壁纸\\头像.png&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;文件不存在!&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            fileInputStream = <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">            fileOutputStream = <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\壁纸\\头像.png&quot;</span>);</span><br><span class="line">            <span class="type">byte</span>[] b = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            bufferedInputStream = <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(fileInputStream);</span><br><span class="line">            bufferedOutputStream = <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(fileOutputStream);</span><br><span class="line">            <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((num = bufferedInputStream.read(b, <span class="number">10</span>, <span class="number">1000</span>)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                bufferedOutputStream.write(b, <span class="number">10</span>, num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                bufferedOutputStream.flush();</span><br><span class="line">                <span class="comment">//一定要记得关闭,释放流资源,关闭顺序不能错a依赖b,先关闭a</span></span><br><span class="line">                bufferedInputStream.close();</span><br><span class="line">                bufferedOutputStream.close();</span><br><span class="line">                fileInputStream.close();</span><br><span class="line">                fileOutputStream.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在结束的时候，调用flush和close方法，将缓冲区的数据都清理出来，，写入磁盘，否则可能无数据；</span></span><br><span class="line"><span class="comment">//1.BufferedOutputStream在close()时会自动flush </span></span><br><span class="line"><span class="comment">//2.BufferedOutputStream在不调用close()的情况下，缓冲区不满，又需要把缓冲区的内容写入到文件或通过网络发送到别的机器时，才需要调用flush.</span></span><br></pre></td></tr></table></figure>
 
+<p>推荐文章：</p>
+<p><a href="https://blog.csdn.net/qq_44543508/article/details/102831084">https://blog.csdn.net/qq_44543508/article/details/102831084</a></p>
+<p><a href="https://blog.csdn.net/mu_wind/article/details/108674284">https://blog.csdn.net/mu_wind/article/details/108674284</a></p>
 ]]></content>
       <categories>
         <category>JAVA</category>
       </categories>
       <tags>
         <tag>JAVA</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HashMap集合</title>
-    <url>/2021/09/06/Java%20HashMap/</url>
-    <content><![CDATA[<h1 id="Java-HashMap"><a href="#Java-HashMap" class="headerlink" title="Java HashMap"></a>Java HashMap</h1><p>HashMap 是一个散列表，它存储的内容是键值对(key-value)映射。</p>
-<p>HashMap 实现了 Map 接口，根据键的 HashCode 值存储数据，具有很快的访问速度，最多允许一条记录的键为 null，不支持线程同步。</p>
-<p>HashMap 是无序的，即不会记录插入的顺序。</p>
-<p>HashMap 继承于AbstractMap，实现了 Map、Cloneable、java.io.Serializable 接口。</p>
-<p><img src="https://www.runoob.com/wp-content/uploads/2020/07/WV9wXLl.png" alt="img"></p>
-<p>HashMap 的 key 与 value 类型可以相同也可以不同，可以是字符串（String）类型的 key 和 value，也可以是整型（Integer）的 key 和字符串（String）类型的 value。</p>
-<p>HashMap 中的元素实际上是对象，一些常见的基本类型可以使用它的包装类。</p>
-<p>基本类型对应的包装类表如下：</p>
-<table>
-<thead>
-<tr>
-<th align="left">基本类型</th>
-<th align="left">引用类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">boolean</td>
-<td align="left">Boolean</td>
-</tr>
-<tr>
-<td align="left">byte</td>
-<td align="left">Byte</td>
-</tr>
-<tr>
-<td align="left">short</td>
-<td align="left">Short</td>
-</tr>
-<tr>
-<td align="left">int</td>
-<td align="left">Integer</td>
-</tr>
-<tr>
-<td align="left">long</td>
-<td align="left">Long</td>
-</tr>
-<tr>
-<td align="left">float</td>
-<td align="left">Float</td>
-</tr>
-<tr>
-<td align="left">double</td>
-<td align="left">Double</td>
-</tr>
-<tr>
-<td align="left">char</td>
-<td align="left">Character</td>
-</tr>
-</tbody></table>
-<p>HashMap 类位于 java.util 包中，使用前需要引入它，语法格式如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashMap; <span class="comment">// 引入 HashMap 类</span></span><br></pre></td></tr></table></figure>
-
-<p>以下实例我们创建一个 HashMap 对象 Sites， 整型（Integer）的 key 和字符串（String）类型的 value：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;Integer, String&gt; Sites = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;Integer, String&gt;();</span><br></pre></td></tr></table></figure>
-
-<h3 id="迭代-HashMap"><a href="#迭代-HashMap" class="headerlink" title="迭代 HashMap"></a>迭代 HashMap</h3><p>可以使用 for-each 来迭代 HashMap 中的元素。</p>
-<p>如果你只想获取 key，可以使用 keySet() 方法，然后可以通过 get(key) 获取对应的 value，如果你只想获取 value，可以使用 values() 方法。</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入 HashMap 类    </span></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RunoobTest</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="comment">// 创建 HashMap 对象 Sites</span></span><br><span class="line">    HashMap&lt;Integer, String&gt; Sites = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;Integer, String&gt;();</span><br><span class="line">    <span class="comment">// 添加键值对</span></span><br><span class="line">    Sites.put(<span class="number">1</span>, <span class="string">&quot;zht&quot;</span>);</span><br><span class="line">    Sites.put(<span class="number">2</span>, <span class="string">&quot;cj&quot;</span>);</span><br><span class="line">    Sites.put(<span class="number">3</span>, <span class="string">&quot;zhtt&quot;</span>);</span><br><span class="line">    Sites.put(<span class="number">4</span>, <span class="string">&quot;cjjj&quot;</span>);</span><br><span class="line">    <span class="comment">// 输出 key 和 value</span></span><br><span class="line">    <span class="keyword">for</span> (Integer i : Sites.keySet()) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;key: &quot;</span> + i + <span class="string">&quot; value: &quot;</span> + Sites.get(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回所有 value 值</span></span><br><span class="line">    <span class="keyword">for</span>(String value: Sites.values()) &#123;</span><br><span class="line">     <span class="comment">// 输出每一个value</span></span><br><span class="line">     System.out.print(value + <span class="string">&quot;, &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>执行以上代码，输出结果如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">key: <span class="number">1</span> value: zht</span><br><span class="line">key: <span class="number">2</span> value: cj</span><br><span class="line">key: <span class="number">3</span> value: zhtt</span><br><span class="line">key: <span class="number">4</span> value: cjjj</span><br><span class="line">zht, cj, zhtt, cjjj,</span><br></pre></td></tr></table></figure>
-
-<h2 id="Java-HashMap-方法"><a href="#Java-HashMap-方法" class="headerlink" title="Java HashMap 方法"></a>Java HashMap 方法</h2><p>hashmap</p>
-<p>Java HashMap 常用方法列表如下：</p>
-<table>
-<thead>
-<tr>
-<th align="left">方法</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">clear()</td>
-<td align="left">删除 hashMap 中的所有键&#x2F;值对</td>
-</tr>
-<tr>
-<td align="left">clone()</td>
-<td align="left">复制一份 hashMap</td>
-</tr>
-<tr>
-<td align="left">isEmpty()</td>
-<td align="left">判断 hashMap 是否为空</td>
-</tr>
-<tr>
-<td align="left">size()</td>
-<td align="left">计算 hashMap 中键&#x2F;值对的数量</td>
-</tr>
-<tr>
-<td align="left">put()</td>
-<td align="left">将键&#x2F;值对添加到 hashMap 中</td>
-</tr>
-<tr>
-<td align="left">putAll()</td>
-<td align="left">将所有键&#x2F;值对添加到 hashMap 中</td>
-</tr>
-<tr>
-<td align="left">putIfAbsent()</td>
-<td align="left">如果 hashMap 中不存在指定的键，则将指定的键&#x2F;值对插入到 hashMap 中。</td>
-</tr>
-<tr>
-<td align="left">remove()</td>
-<td align="left">删除 hashMap 中指定键 key 的映射关系</td>
-</tr>
-<tr>
-<td align="left">containsKey()</td>
-<td align="left">检查 hashMap 中是否存在指定的 key 对应的映射关系。</td>
-</tr>
-<tr>
-<td align="left">containsValue()</td>
-<td align="left">检查 hashMap 中是否存在指定的 value 对应的映射关系。</td>
-</tr>
-<tr>
-<td align="left">replace()</td>
-<td align="left">替换 hashMap 中是指定的 key 对应的 value。</td>
-</tr>
-<tr>
-<td align="left">replaceAll()</td>
-<td align="left">将 hashMap 中的所有映射关系替换成给定的函数所执行的结果。</td>
-</tr>
-<tr>
-<td align="left">get()</td>
-<td align="left">获取指定 key 对应对 value</td>
-</tr>
-<tr>
-<td align="left">getOrDefault()</td>
-<td align="left">获取指定 key 对应对 value，如果找不到 key ，则返回设置的默认值</td>
-</tr>
-<tr>
-<td align="left">forEach()</td>
-<td align="left">对 hashMap 中的每个映射执行指定的操作。</td>
-</tr>
-<tr>
-<td align="left">entrySet()</td>
-<td align="left">返回 hashMap 中所有映射项的集合集合视图。</td>
-</tr>
-<tr>
-<td align="left">keySet()</td>
-<td align="left">返回 hashMap 中所有 key 组成的集合视图。</td>
-</tr>
-<tr>
-<td align="left">values()</td>
-<td align="left">返回 hashMap 中存在的所有 value 值。</td>
-</tr>
-<tr>
-<td align="left">merge()</td>
-<td align="left">添加键值对到 hashMap 中</td>
-</tr>
-<tr>
-<td align="left">compute()</td>
-<td align="left">对 hashMap 中指定 key 的值进行重新计算</td>
-</tr>
-<tr>
-<td align="left">computeIfAbsent()</td>
-<td align="left">对 hashMap 中指定 key 的值进行重新计算，如果不存在这个 key，则添加到 hasMap 中</td>
-</tr>
-<tr>
-<td align="left">computeIfPresent()</td>
-<td align="left">对 hashMap 中指定 key 的值进行重新计算，前提是该 key 存在于 hashMap 中。</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>JAVA</category>
-      </categories>
-      <tags>
-        <tag>集合</tag>
       </tags>
   </entry>
   <entry>
@@ -581,6 +416,176 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HashSet&lt;String&gt; sites = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
 
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HashSet&lt;String&gt; set=<span class="keyword">new</span> <span class="title class_">HashSet</span>();</span><br><span class="line">       <span class="comment">//添加</span></span><br><span class="line">       set.add(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">       set.add(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">       set.add(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">       <span class="comment">//遍历</span></span><br><span class="line">       <span class="keyword">for</span> (String i :set) &#123;</span><br><span class="line">           System.out.println(i);</span><br><span class="line">       &#125;</span><br><span class="line">       Iterator&lt;String&gt; iterator = set.iterator();</span><br><span class="line">       <span class="keyword">while</span> (iterator.hasNext())&#123;</span><br><span class="line">           System.out.println(iterator.next());</span><br><span class="line">       &#125;</span><br><span class="line">       set.remove(<span class="number">1</span>);<span class="comment">//移除某个函数</span></span><br><span class="line">       set.clear();<span class="comment">//清空集合元素</span></span><br><span class="line">       System.out.println(set.size());</span><br><span class="line">       <span class="type">boolean</span> flag= set.contains(<span class="string">&quot;2&quot;</span>); <span class="comment">//是否包含</span></span><br><span class="line">       System.out.println(flag);</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>集合</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HashMap集合</title>
+    <url>/2021/09/06/Java%20HashMap/</url>
+    <content><![CDATA[<h1 id="Java-HashMap"><a href="#Java-HashMap" class="headerlink" title="Java HashMap"></a>Java HashMap</h1><p>HashMap 是一个散列表，它存储的内容是键值对(key-value)映射。</p>
+<p>HashMap 实现了 Map 接口，根据键的 HashCode 值存储数据，具有很快的访问速度，最多允许一条记录的键为 null，不支持线程同步。</p>
+<p>HashMap 是无序的，即不会记录插入的顺序。</p>
+<p>HashMap 继承于AbstractMap，实现了 Map、Cloneable、java.io.Serializable 接口。</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2020/07/WV9wXLl.png" alt="img"></p>
+<p>HashMap 的 key 与 value 类型可以相同也可以不同，可以是字符串（String）类型的 key 和 value，也可以是整型（Integer）的 key 和字符串（String）类型的 value。</p>
+<p>HashMap 中的元素实际上是对象，一些常见的基本类型可以使用它的包装类。</p>
+<p>基本类型对应的包装类表如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">基本类型</th>
+<th align="left">引用类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">boolean</td>
+<td align="left">Boolean</td>
+</tr>
+<tr>
+<td align="left">byte</td>
+<td align="left">Byte</td>
+</tr>
+<tr>
+<td align="left">short</td>
+<td align="left">Short</td>
+</tr>
+<tr>
+<td align="left">int</td>
+<td align="left">Integer</td>
+</tr>
+<tr>
+<td align="left">long</td>
+<td align="left">Long</td>
+</tr>
+<tr>
+<td align="left">float</td>
+<td align="left">Float</td>
+</tr>
+<tr>
+<td align="left">double</td>
+<td align="left">Double</td>
+</tr>
+<tr>
+<td align="left">char</td>
+<td align="left">Character</td>
+</tr>
+</tbody></table>
+<p>HashMap 类位于 java.util 包中，使用前需要引入它，语法格式如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashMap; <span class="comment">// 引入 HashMap 类</span></span><br></pre></td></tr></table></figure>
+
+<p>以下实例我们创建一个 HashMap 对象 Sites， 整型（Integer）的 key 和字符串（String）类型的 value：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;Integer, String&gt; Sites = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;Integer, String&gt;();</span><br></pre></td></tr></table></figure>
+
+<h3 id="迭代-HashMap"><a href="#迭代-HashMap" class="headerlink" title="迭代 HashMap"></a>迭代 HashMap</h3><p>可以使用 for-each 来迭代 HashMap 中的元素。</p>
+<p>如果你只想获取 key，可以使用 keySet() 方法，然后可以通过 get(key) 获取对应的 value，如果你只想获取 value，可以使用 values() 方法。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入 HashMap 类    </span></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RunoobTest</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="comment">// 创建 HashMap 对象 Sites</span></span><br><span class="line">    HashMap&lt;Integer, String&gt; Sites = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;Integer, String&gt;();</span><br><span class="line">    <span class="comment">// 添加键值对</span></span><br><span class="line">    Sites.put(<span class="number">1</span>, <span class="string">&quot;zht&quot;</span>);</span><br><span class="line">    Sites.put(<span class="number">2</span>, <span class="string">&quot;cj&quot;</span>);</span><br><span class="line">    Sites.put(<span class="number">3</span>, <span class="string">&quot;zhtt&quot;</span>);</span><br><span class="line">    Sites.put(<span class="number">4</span>, <span class="string">&quot;cjjj&quot;</span>);</span><br><span class="line">    <span class="comment">// 输出 key 和 value</span></span><br><span class="line">    <span class="keyword">for</span> (Integer i : Sites.keySet()) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;key: &quot;</span> + i + <span class="string">&quot; value: &quot;</span> + Sites.get(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回所有 value 值</span></span><br><span class="line">    <span class="keyword">for</span>(String value: Sites.values()) &#123;</span><br><span class="line">     <span class="comment">// 输出每一个value</span></span><br><span class="line">     System.out.print(value + <span class="string">&quot;, &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行以上代码，输出结果如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">key: <span class="number">1</span> value: zht</span><br><span class="line">key: <span class="number">2</span> value: cj</span><br><span class="line">key: <span class="number">3</span> value: zhtt</span><br><span class="line">key: <span class="number">4</span> value: cjjj</span><br><span class="line">zht, cj, zhtt, cjjj,</span><br></pre></td></tr></table></figure>
+
+<h2 id="Java-HashMap-方法"><a href="#Java-HashMap-方法" class="headerlink" title="Java HashMap 方法"></a>Java HashMap 方法</h2><p>hashmap</p>
+<p>Java HashMap 常用方法列表如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">clear()</td>
+<td align="left">删除 hashMap 中的所有键&#x2F;值对</td>
+</tr>
+<tr>
+<td align="left">clone()</td>
+<td align="left">复制一份 hashMap</td>
+</tr>
+<tr>
+<td align="left">isEmpty()</td>
+<td align="left">判断 hashMap 是否为空</td>
+</tr>
+<tr>
+<td align="left">size()</td>
+<td align="left">计算 hashMap 中键&#x2F;值对的数量</td>
+</tr>
+<tr>
+<td align="left">put()</td>
+<td align="left">将键&#x2F;值对添加到 hashMap 中</td>
+</tr>
+<tr>
+<td align="left">putAll()</td>
+<td align="left">将所有键&#x2F;值对添加到 hashMap 中</td>
+</tr>
+<tr>
+<td align="left">putIfAbsent()</td>
+<td align="left">如果 hashMap 中不存在指定的键，则将指定的键&#x2F;值对插入到 hashMap 中。</td>
+</tr>
+<tr>
+<td align="left">remove()</td>
+<td align="left">删除 hashMap 中指定键 key 的映射关系</td>
+</tr>
+<tr>
+<td align="left">containsKey()</td>
+<td align="left">检查 hashMap 中是否存在指定的 key 对应的映射关系。</td>
+</tr>
+<tr>
+<td align="left">containsValue()</td>
+<td align="left">检查 hashMap 中是否存在指定的 value 对应的映射关系。</td>
+</tr>
+<tr>
+<td align="left">replace()</td>
+<td align="left">替换 hashMap 中是指定的 key 对应的 value。</td>
+</tr>
+<tr>
+<td align="left">replaceAll()</td>
+<td align="left">将 hashMap 中的所有映射关系替换成给定的函数所执行的结果。</td>
+</tr>
+<tr>
+<td align="left">get()</td>
+<td align="left">获取指定 key 对应对 value</td>
+</tr>
+<tr>
+<td align="left">getOrDefault()</td>
+<td align="left">获取指定 key 对应对 value，如果找不到 key ，则返回设置的默认值</td>
+</tr>
+<tr>
+<td align="left">forEach()</td>
+<td align="left">对 hashMap 中的每个映射执行指定的操作。</td>
+</tr>
+<tr>
+<td align="left">entrySet()</td>
+<td align="left">返回 hashMap 中所有映射项的集合集合视图。</td>
+</tr>
+<tr>
+<td align="left">keySet()</td>
+<td align="left">返回 hashMap 中所有 key 组成的集合视图。</td>
+</tr>
+<tr>
+<td align="left">values()</td>
+<td align="left">返回 hashMap 中存在的所有 value 值。</td>
+</tr>
+<tr>
+<td align="left">merge()</td>
+<td align="left">添加键值对到 hashMap 中</td>
+</tr>
+<tr>
+<td align="left">compute()</td>
+<td align="left">对 hashMap 中指定 key 的值进行重新计算</td>
+</tr>
+<tr>
+<td align="left">computeIfAbsent()</td>
+<td align="left">对 hashMap 中指定 key 的值进行重新计算，如果不存在这个 key，则添加到 hasMap 中</td>
+</tr>
+<tr>
+<td align="left">computeIfPresent()</td>
+<td align="left">对 hashMap 中指定 key 的值进行重新计算，前提是该 key 存在于 hashMap 中。</td>
+</tr>
+</tbody></table>
+]]></content>
       <categories>
         <category>JAVA</category>
       </categories>
@@ -911,89 +916,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Redis常用指令</title>
-    <url>/2021/11/06/Redis%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="Redis常用指令"><a href="#Redis常用指令" class="headerlink" title="Redis常用指令"></a>Redis常用指令</h1><p>select   Index(默认16个库,从0开始，默认为0)</p>
-<p>dbsize (查看当前库的key的数量)</p>
-<p>keys * （查看当前数据库具体的key）</p>
-<p>flushdb (清空当前库)</p>
-<p>flushall (清空全部的库)</p>
-<h2 id="1-字符串String"><a href="#1-字符串String" class="headerlink" title="1.字符串String"></a>1.字符串String</h2><p>set key1 value1（设置值）</p>
-<p>get key1 （获得key）</p>
-<p>del key1 （删除key）</p>
-<p>exists key1 （判断是否存在key）</p>
-<p>append key1 （对不存在的 key 进行 APPEND ，等同于 SET   key1  “hello” ，否则追加字符串）</p>
-<p>strlen key1 （获取字符串长度）</p>
-<p>incr  views （将views所对应的值+1）</p>
-<p>decr  views （将views所对应的值-1）</p>
-<p>incrby  views  2 （将views所对应的值+2）</p>
-<p>decrby views  2（将views所对应的值-2）</p>
-<p>getrange  key2 0 -1 （获取全部字符串）</p>
-<p>getrange  key2 0  2 （截取部分字符串）</p>
-<p>setrange  key2  1  2  （替换值）</p>
-<p>setex key3 60 expire （设置过期时间）</p>
-<p>ttl key3 （查看过期时间）</p>
-<p>setnx  mykey  “Redis” （如果不存在设置返回1，否则返回0）</p>
-<p>mget k1 k2 k3 （存在的就返回key的值，不存在的就返回nil）</p>
-<p>mset k1 v1 k2 v2 (同时设置多个键值对)</p>
-<p>msetnx   k1 v1  k3 v2 (如果都设置成功，返回1，如果所有给定 key 都设置失败(至少有一个 key 已存在)，那么返回 0 ，原子性操作)</p>
-<p>getset  k1 v2 (先返回v1的值再设置成v2)</p>
-<h2 id="2-列表List"><a href="#2-列表List" class="headerlink" title="2.列表List"></a>2.列表List</h2><p>lpush list1 value （从列表左边插入）</p>
-<p>rpush list1 value （从列表右边插入）</p>
-<p>lrange list1 0 -1 （返回全部值）</p>
-<p>lrange list1 0 1 （返回下标从0到1的值）</p>
-<p>lpop list1 （移除最左边并返回该值，不存在时返回nil）</p>
-<p>rpop list1 （移除最右边并返回该值，不存在时返回nil）</p>
-<p>lindex list  0  （按照索引下标获得元素（-1代表最后一个，0代表是第一个））</p>
-<p>llen list （返回列表的长度）</p>
-<p>lrem list  1  “zht” (根据参数 COUNT 的值，移除列表中与参数 VALUE 相等的元素。)</p>
-<p>ltirm list  1 2 ( 对一个列表进行修剪(trim)，就是说，让列表只保留指定区间内的元素，不在指定区间之内的元素都将被删除。)</p>
-<p>rpoplpush  mylist  myotherlist  “bar” (移除列表的最后一个元素，并将该元素添加到另一个列表并返回。)</p>
-<p>lset key index value (将列表 key 下标为 index 的元素的值设置为 value 。 )</p>
-<p>linsert key before&#x2F;after pivot value (用于在列表的元素前或者后插入元素。)</p>
-<h2 id="3-集合Set"><a href="#3-集合Set" class="headerlink" title="3.集合Set"></a>3.集合Set</h2><p>sadd myset value（将一个或多个成员元素加入到集合中，不能重复）</p>
-<p>smembers myset （返回集合中的所有的成员。）</p>
-<p>sismember myset value （命令判断成员元素是否是集合的成员。）</p>
-<p>scard myset （获取集合里面的元素个数）</p>
-<p>srem key value （用于移除集合中的一个或多个成员元素）</p>
-<p>srandmember key （命令用于返回集合中的一个随机元素。后面可以加数字，表示返回几个）</p>
-<p>spop key （用于移除集合中的指定 key 的一个或多个随机元素）</p>
-<p>smove myset myset2 “zht”   （ 将指定成员 member 元素从 source 集合移动到 destination 集合。）</p>
-<p>SDIFF key1 key2  （差集）</p>
-<p>SINTER key1 key2 # （交集）</p>
-<p>SUNION key1 key2 （并集）</p>
-<h2 id="4-哈希Hash（kv模式不变，但V是一个键值对）"><a href="#4-哈希Hash（kv模式不变，但V是一个键值对）" class="headerlink" title="4.哈希Hash（kv模式不变，但V是一个键值对）"></a>4.哈希Hash（kv模式不变，但V是一个键值对）</h2><p>hset  myhash k1 v1(命令用于为哈希表中的字段赋值)</p>
-<p>hget myhash k1 </p>
-<p>hmset   myhash k1 v1 k2 v2(同时将多个k-v对设置到哈希表中。会覆盖哈希表中已存在的字段)</p>
-<p>hmget myhash k1  k2</p>
-<p>hgetall myhash (用于返回哈希表中，所有的字段和值。)</p>
-<p>hdel  myhash k1 (用于删除哈希表 key 中的一个或多个指定字段)</p>
-<p>hlen  myhash (获取哈希表中字段的数量。)</p>
-<p>hexists myhash k1 (查看哈希表的指定字段是否存在。 )</p>
-<p>hkeys  myhash( 获取哈希表中的所有域)</p>
-<p>hvals myhash  (返回哈希表所有域的值)</p>
-<p>hincrby  myhash num  1 (为哈希表中的字段值加上指定增量值。)</p>
-<p>hsetnx  myhash k10  “zht” (为哈希表中不存在的的字段赋值 。)  </p>
-<h2 id="5-有序集合（在set基础上，加一个score值。之前set是k1-v1-v2-v3，现在zset是-k1-score1-v1-score2-v2）"><a href="#5-有序集合（在set基础上，加一个score值。之前set是k1-v1-v2-v3，现在zset是-k1-score1-v1-score2-v2）" class="headerlink" title="5.有序集合（在set基础上，加一个score值。之前set是k1 v1 v2 v3，现在zset是 k1 score1 v1 score2 v2）"></a>5.有序集合（在set基础上，加一个score值。之前set是k1 v1 v2 v3，现在zset是 k1 score1 v1 score2 v2）</h2><p>zadd myset 分数值  “zht”  （将一个或多个成员元素及其分数值加入到有序集当中。） </p>
-<p>zrange  myset 0 -1  （返回有序集中，指定区间内的成员 ，-1为全部）</p>
-<p>ZRANGEBYSCORE  myset -inf  +inf（显示整个有序集）</p>
-<p>ZRANGEBYSCORE myset -inf +inf withscores  （递增排序）</p>
-<p>ZRANGEBYSCORE myset 0 -1 withscores  （递剪排序）</p>
-<p>ZRANGEBYSCORE myset -inf 2500 WITHSCORES （显示小于2500的成员）</p>
-<p>zrem myset “zht” （移除有序集中的一个或多个成员 ）</p>
-<p>zcard myset  （命令用于计算集合中元素的数量。）</p>
-<p>zcount myset 1  3 （计算有序集合中指定分数区间的成员数量。）</p>
-<p> zrank  myset  “zht” （返回有序集中指定成员的排名。其中有序集成员按分数值递增(从小到大)顺序排列。 ）</p>
-<p>zrevrank  myset  “zht” （返回有序集中成员的排名。其中有序集成员按分数值递减(从大到小)排序。） </p>
-<h2 id="6-其他类型"><a href="#6-其他类型" class="headerlink" title="6.其他类型"></a>6.其他类型</h2><p>GEO地理位置</p>
-<p>HyperLogLog</p>
-<p>BitMap</p>
-]]></content>
-      <categories>
-        <category>Redis</category>
-      </categories>
-  </entry>
-  <entry>
     <title>SSM项目基本配置</title>
     <url>/2021/08/31/SSM%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>maven项目项目结构图：</p>
@@ -1215,6 +1137,89 @@
       </tags>
   </entry>
   <entry>
+    <title>Redis常用指令</title>
+    <url>/2021/11/06/Redis%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="Redis常用指令"><a href="#Redis常用指令" class="headerlink" title="Redis常用指令"></a>Redis常用指令</h1><p>select   Index(默认16个库,从0开始，默认为0)</p>
+<p>dbsize (查看当前库的key的数量)</p>
+<p>keys * （查看当前数据库具体的key）</p>
+<p>flushdb (清空当前库)</p>
+<p>flushall (清空全部的库)</p>
+<h2 id="1-字符串String"><a href="#1-字符串String" class="headerlink" title="1.字符串String"></a>1.字符串String</h2><p>set key1 value1（设置值）</p>
+<p>get key1 （获得key）</p>
+<p>del key1 （删除key）</p>
+<p>exists key1 （判断是否存在key）</p>
+<p>append key1 （对不存在的 key 进行 APPEND ，等同于 SET   key1  “hello” ，否则追加字符串）</p>
+<p>strlen key1 （获取字符串长度）</p>
+<p>incr  views （将views所对应的值+1）</p>
+<p>decr  views （将views所对应的值-1）</p>
+<p>incrby  views  2 （将views所对应的值+2）</p>
+<p>decrby views  2（将views所对应的值-2）</p>
+<p>getrange  key2 0 -1 （获取全部字符串）</p>
+<p>getrange  key2 0  2 （截取部分字符串）</p>
+<p>setrange  key2  1  2  （替换值）</p>
+<p>setex key3 60 expire （设置过期时间）</p>
+<p>ttl key3 （查看过期时间）</p>
+<p>setnx  mykey  “Redis” （如果不存在设置返回1，否则返回0）</p>
+<p>mget k1 k2 k3 （存在的就返回key的值，不存在的就返回nil）</p>
+<p>mset k1 v1 k2 v2 (同时设置多个键值对)</p>
+<p>msetnx   k1 v1  k3 v2 (如果都设置成功，返回1，如果所有给定 key 都设置失败(至少有一个 key 已存在)，那么返回 0 ，原子性操作)</p>
+<p>getset  k1 v2 (先返回v1的值再设置成v2)</p>
+<h2 id="2-列表List"><a href="#2-列表List" class="headerlink" title="2.列表List"></a>2.列表List</h2><p>lpush list1 value （从列表左边插入）</p>
+<p>rpush list1 value （从列表右边插入）</p>
+<p>lrange list1 0 -1 （返回全部值）</p>
+<p>lrange list1 0 1 （返回下标从0到1的值）</p>
+<p>lpop list1 （移除最左边并返回该值，不存在时返回nil）</p>
+<p>rpop list1 （移除最右边并返回该值，不存在时返回nil）</p>
+<p>lindex list  0  （按照索引下标获得元素（-1代表最后一个，0代表是第一个））</p>
+<p>llen list （返回列表的长度）</p>
+<p>lrem list  1  “zht” (根据参数 COUNT 的值，移除列表中与参数 VALUE 相等的元素。)</p>
+<p>ltirm list  1 2 ( 对一个列表进行修剪(trim)，就是说，让列表只保留指定区间内的元素，不在指定区间之内的元素都将被删除。)</p>
+<p>rpoplpush  mylist  myotherlist  “bar” (移除列表的最后一个元素，并将该元素添加到另一个列表并返回。)</p>
+<p>lset key index value (将列表 key 下标为 index 的元素的值设置为 value 。 )</p>
+<p>linsert key before&#x2F;after pivot value (用于在列表的元素前或者后插入元素。)</p>
+<h2 id="3-集合Set"><a href="#3-集合Set" class="headerlink" title="3.集合Set"></a>3.集合Set</h2><p>sadd myset value（将一个或多个成员元素加入到集合中，不能重复）</p>
+<p>smembers myset （返回集合中的所有的成员。）</p>
+<p>sismember myset value （命令判断成员元素是否是集合的成员。）</p>
+<p>scard myset （获取集合里面的元素个数）</p>
+<p>srem key value （用于移除集合中的一个或多个成员元素）</p>
+<p>srandmember key （命令用于返回集合中的一个随机元素。后面可以加数字，表示返回几个）</p>
+<p>spop key （用于移除集合中的指定 key 的一个或多个随机元素）</p>
+<p>smove myset myset2 “zht”   （ 将指定成员 member 元素从 source 集合移动到 destination 集合。）</p>
+<p>SDIFF key1 key2  （差集）</p>
+<p>SINTER key1 key2 # （交集）</p>
+<p>SUNION key1 key2 （并集）</p>
+<h2 id="4-哈希Hash（kv模式不变，但V是一个键值对）"><a href="#4-哈希Hash（kv模式不变，但V是一个键值对）" class="headerlink" title="4.哈希Hash（kv模式不变，但V是一个键值对）"></a>4.哈希Hash（kv模式不变，但V是一个键值对）</h2><p>hset  myhash k1 v1(命令用于为哈希表中的字段赋值)</p>
+<p>hget myhash k1 </p>
+<p>hmset   myhash k1 v1 k2 v2(同时将多个k-v对设置到哈希表中。会覆盖哈希表中已存在的字段)</p>
+<p>hmget myhash k1  k2</p>
+<p>hgetall myhash (用于返回哈希表中，所有的字段和值。)</p>
+<p>hdel  myhash k1 (用于删除哈希表 key 中的一个或多个指定字段)</p>
+<p>hlen  myhash (获取哈希表中字段的数量。)</p>
+<p>hexists myhash k1 (查看哈希表的指定字段是否存在。 )</p>
+<p>hkeys  myhash( 获取哈希表中的所有域)</p>
+<p>hvals myhash  (返回哈希表所有域的值)</p>
+<p>hincrby  myhash num  1 (为哈希表中的字段值加上指定增量值。)</p>
+<p>hsetnx  myhash k10  “zht” (为哈希表中不存在的的字段赋值 。)  </p>
+<h2 id="5-有序集合（在set基础上，加一个score值。之前set是k1-v1-v2-v3，现在zset是-k1-score1-v1-score2-v2）"><a href="#5-有序集合（在set基础上，加一个score值。之前set是k1-v1-v2-v3，现在zset是-k1-score1-v1-score2-v2）" class="headerlink" title="5.有序集合（在set基础上，加一个score值。之前set是k1 v1 v2 v3，现在zset是 k1 score1 v1 score2 v2）"></a>5.有序集合（在set基础上，加一个score值。之前set是k1 v1 v2 v3，现在zset是 k1 score1 v1 score2 v2）</h2><p>zadd myset 分数值  “zht”  （将一个或多个成员元素及其分数值加入到有序集当中。） </p>
+<p>zrange  myset 0 -1  （返回有序集中，指定区间内的成员 ，-1为全部）</p>
+<p>ZRANGEBYSCORE  myset -inf  +inf（显示整个有序集）</p>
+<p>ZRANGEBYSCORE myset -inf +inf withscores  （递增排序）</p>
+<p>ZRANGEBYSCORE myset 0 -1 withscores  （递剪排序）</p>
+<p>ZRANGEBYSCORE myset -inf 2500 WITHSCORES （显示小于2500的成员）</p>
+<p>zrem myset “zht” （移除有序集中的一个或多个成员 ）</p>
+<p>zcard myset  （命令用于计算集合中元素的数量。）</p>
+<p>zcount myset 1  3 （计算有序集合中指定分数区间的成员数量。）</p>
+<p> zrank  myset  “zht” （返回有序集中指定成员的排名。其中有序集成员按分数值递增(从小到大)顺序排列。 ）</p>
+<p>zrevrank  myset  “zht” （返回有序集中成员的排名。其中有序集成员按分数值递减(从大到小)排序。） </p>
+<h2 id="6-其他类型"><a href="#6-其他类型" class="headerlink" title="6.其他类型"></a>6.其他类型</h2><p>GEO地理位置</p>
+<p>HyperLogLog</p>
+<p>BitMap</p>
+]]></content>
+      <categories>
+        <category>Redis</category>
+      </categories>
+  </entry>
+  <entry>
     <title>SimpleDateFormat</title>
     <url>/2021/09/20/SimpleDateFormat%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<h3 id="SimpleDateFormat的使用"><a href="#SimpleDateFormat的使用" class="headerlink" title="SimpleDateFormat的使用"></a>SimpleDateFormat的使用</h3><p>代码如下：</p>
@@ -1261,10 +1266,13 @@
 
 <p><strong>CommandLineRunner</strong>和<strong>ApplicationRunner</strong>在接收命令行参数时  例如–spring.profile.active&#x3D;test，但ApplicatonRunner接口的方法参数ApplicationArguments（是个对象）比CommandLineRunner接口的方法参数（是个可以接收多个string的参数）功能更强大。ApplicatonRunner接口的方法参数ApplicationArguments既可以获取参数的字符串，也可以直接获取key；CommandLineRunner接口的方法参数只能获取参数的字符串。</p>
 <h2 id="3-使用-PostConstruct-注解"><a href="#3-使用-PostConstruct-注解" class="headerlink" title="3.使用 @PostConstruct 注解"></a>3.使用 <strong>@PostConstruct</strong> 注解</h2><p> 它会在所在类的构造函数执行之后执行，在init()方法执行之前执行。(<strong>@PreDestroy</strong>注解的方法会在这个类的destory()方法执行之后执行.） </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitData3</span> &#123;</span><br><span class="line">    InitData3() &#123;</span><br><span class="line">     System.out.println(<span class="string">&quot;在init方法执行前执行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;容器启动后执行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitData3</span> &#123;</span><br><span class="line">    InitData3() &#123;</span><br><span class="line">     System.out.println(<span class="string">&quot;在init方法执行前执行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">     System.out.println(<span class="string">&quot;static&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;容器启动后执行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="4-实现InitializingBean，并重写afterPropertiesSet方法"><a href="#4-实现InitializingBean，并重写afterPropertiesSet方法" class="headerlink" title="4.实现InitializingBean，并重写afterPropertiesSet方法"></a>4.实现<strong>InitializingBean</strong>，并重写<strong>afterPropertiesSet</strong>方法</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitData4</span> <span class="keyword">implements</span> <span class="title class_">InitializingBean</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;InitializingBean 开始了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="4-实现InitializingBean，并重写afterPropertiesSet方法（在3之后执行）"><a href="#4-实现InitializingBean，并重写afterPropertiesSet方法（在3之后执行）" class="headerlink" title="4.实现InitializingBean，并重写afterPropertiesSet方法（在3之后执行）"></a>4.实现<strong>InitializingBean</strong>，并重写<strong>afterPropertiesSet</strong>方法（在3之后执行）</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitData4</span> <span class="keyword">implements</span> <span class="title class_">InitializingBean</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;InitializingBean 开始了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<p>Spring应用启动过程中，肯定是要自动扫描有**@Component**注解的类，加载类并初始化对象进行自动注入。加载类时首先要执行static静态代码块中的代码，之后再初始化对象时会执行构造方法。</p>
+<p>在对象注入完成后，调用带有**@PostConstruct<strong>注解的方法。当容器启动成功后，再根据</strong>@Order<strong>注解的顺序调用</strong>CommandLineRunner<strong>和</strong>ApplicationRunner<strong>接口类中的</strong>run**方法。</p>
+<p>因此，加载顺序为<strong>static</strong>&gt;<strong>constructer</strong>&gt;<strong>@PostConstruct</strong>&gt;<strong>CommandLineRunner</strong>和<strong>ApplicationRunner</strong>.</p>
 ]]></content>
       <categories>
         <category>SpringBoot</category>
@@ -1375,7 +1383,7 @@
         <category>JAVA</category>
       </categories>
       <tags>
-        <tag>JAVA基础</tag>
+        <tag>JAVA</tag>
       </tags>
   </entry>
   <entry>
@@ -1563,7 +1571,7 @@
         <category>JAVA</category>
       </categories>
       <tags>
-        <tag>JAVA基础</tag>
+        <tag>JAVA</tag>
       </tags>
   </entry>
   <entry>
@@ -1749,7 +1757,7 @@
         <category>JAVA</category>
       </categories>
       <tags>
-        <tag>JAVA基础</tag>
+        <tag>JAVA</tag>
       </tags>
   </entry>
   <entry>
@@ -1862,6 +1870,58 @@
       </categories>
   </entry>
   <entry>
+    <title>js数组常用方法</title>
+    <url>/2021/08/29/js%E6%95%B0%E7%BB%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h4 id="1-pop方法，删除数组-索引值最大的元素-，返回值为被删除的那个元素，会影响原数组。"><a href="#1-pop方法，删除数组-索引值最大的元素-，返回值为被删除的那个元素，会影响原数组。" class="headerlink" title="1.pop方法，删除数组 索引值最大的元素 ，返回值为被删除的那个元素，会影响原数组。"></a>1.<strong>pop</strong>方法，删除数组 索引值最大的元素 ，返回值为被删除的那个元素，会<strong>影响原数组</strong>。</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">pop</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//4</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-push方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会影响原数组。"><a href="#2-push方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会影响原数组。" class="headerlink" title="2.push方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会影响原数组。"></a>2.<strong>push</strong>方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会<strong>影响原数组</strong>。</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">push</span>(<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//6</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,5,6]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-unshift方法，在数组前面插入一个或者多个元素，返回数组的新长度，会影响原数组。"><a href="#3-unshift方法，在数组前面插入一个或者多个元素，返回数组的新长度，会影响原数组。" class="headerlink" title="3.unshift方法，在数组前面插入一个或者多个元素，返回数组的新长度，会影响原数组。"></a>3.<strong>unshift</strong>方法，在数组前面插入一个或者多个元素，返回数组的新长度，会<strong>影响原数组</strong>。</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">unshift</span>(<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//6</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[5,6,1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-shift方法，删除数组第一个元素，返回被删除的那个元素，会影响原数组。"><a href="#4-shift方法，删除数组第一个元素，返回被删除的那个元素，会影响原数组。" class="headerlink" title="4.shift方法，删除数组第一个元素，返回被删除的那个元素，会影响原数组。"></a>4.<strong>shift</strong>方法，删除数组第一个元素，返回被删除的那个元素，会<strong>影响原数组</strong>。</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">shift</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[2,3,4]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-reverse方法，将数组内容倒序，返回新的数组，并且会影响原数组"><a href="#5-reverse方法，将数组内容倒序，返回新的数组，并且会影响原数组" class="headerlink" title="5.reverse方法，将数组内容倒序，返回新的数组，并且会影响原数组"></a>5.<strong>reverse</strong>方法，将数组内容倒序，返回新的数组，并且会<strong>影响原数组</strong></h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">reverse</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[4,3,2,1]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[4,3,2,1]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-join方法，将数组以join指定的字符连接成字符串，返回新数组，不会影响原数组。"><a href="#6-join方法，将数组以join指定的字符连接成字符串，返回新数组，不会影响原数组。" class="headerlink" title="6.join方法，将数组以join指定的字符连接成字符串，返回新数组，不会影响原数组。"></a>6.<strong>join</strong>方法，将数组以join指定的字符连接成字符串，返回新数组，<strong>不会影响原数组</strong>。</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">join</span>(<span class="string">&quot;-&quot;</span>);<span class="comment">//默认是，</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="number">1</span>-<span class="number">2</span>-<span class="number">3</span>-<span class="number">4</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-sort方法，-将数组进行排序-升序-返回新数组，影响原数组"><a href="#7-sort方法，-将数组进行排序-升序-返回新数组，影响原数组" class="headerlink" title="7.sort方法， 将数组进行排序(升序),返回新数组，影响原数组"></a>7.<strong>sort</strong>方法， 将数组进行排序(升序),返回新数组，<strong>影响原数组</strong></h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">sort</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[1,2,3,4]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="8-splice方法-在任意位置添加或删除元素-返回删除或被替换的值，如果没有被删除或替换则返回空数组-影响原数组"><a href="#8-splice方法-在任意位置添加或删除元素-返回删除或被替换的值，如果没有被删除或替换则返回空数组-影响原数组" class="headerlink" title="8.splice方法, 在任意位置添加或删除元素,返回删除或被替换的值，如果没有被删除或替换则返回空数组; ,影响原数组"></a>8.<strong>splice</strong>方法, 在任意位置添加或删除元素,返回删除或被替换的值，如果没有被删除或替换则返回空数组; ,<strong>影响原数组</strong></h4><p>1.只有一个参数时,  从当前位置删除到数组末尾 </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">splice</span>(<span class="number">1</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2,3,4]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1]</span></span><br></pre></td></tr></table></figure>
+
+<p>2.有两个参数时,第一个值为删除的位置，第二个值为删除的个数; </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">splice</span>(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,3,4]</span></span><br></pre></td></tr></table></figure>
+
+<p>3.有三个或者多个值时，第一个值为插入元素的位置，第二个值为替换的个数，后面的值都为插入的新元素； </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">splice</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2,3]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,6,7,8,4]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="9-slice方法"><a href="#9-slice方法" class="headerlink" title="9.slice方法"></a>9.<strong>slice</strong>方法</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">slice</span>(<span class="number">1</span>,<span class="number">2</span>);<span class="comment">//截取从索引1到索引2，但是不包括2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="10-map方法"><a href="#10-map方法" class="headerlink" title="10.map方法"></a>10.<strong>map</strong>方法</h4><p>参数1：当前索引值</p>
+<p>参数2：当前下标</p>
+<p>参数3：原数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">map</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item*<span class="number">2</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2,4,6,8,10]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,5]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[&#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;,&#123;<span class="attr">a</span>:<span class="number">3</span>,<span class="attr">b</span>:<span class="number">4</span>&#125;,&#123;<span class="attr">a</span>:<span class="number">5</span>,<span class="attr">b</span>:<span class="number">6</span>&#125;];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">map</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item.<span class="property">a</span>=item.<span class="property">a</span>*<span class="number">2</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[ 2, 6, 10 ]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[ &#123; a: 2, b: 2 &#125;, &#123; a: 6, b: 4 &#125;, &#123; a: 10, b: 6 &#125; ]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>当数组中元素是值类型，map不会改变原数组；当是引用类型，则可以改变原数组</strong> </p>
+<h4 id="11-indexOf方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1"><a href="#11-indexOf方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1" class="headerlink" title="11.indexOf方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1"></a>11.<strong>indexOf</strong>方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> index=arr.<span class="title function_">indexOf</span>(<span class="number">3</span>)<span class="comment">//没找到则返回-1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,3,5]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(index)<span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="12-find方法，找到第一个满足条件得值，没找到返回undifine"><a href="#12-find方法，找到第一个满足条件得值，没找到返回undifine" class="headerlink" title="12.find方法，找到第一个满足条件得值，没找到返回undifine"></a>12.<strong>find</strong>方法，找到第一个满足条件得值，没找到返回undifine</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> value=arr.<span class="title function_">find</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item&gt;<span class="number">3</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,3,5]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(value)<span class="comment">//4</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="13-forEach方法，数组遍历，没有return，即使有return，也会返回undifine。"><a href="#13-forEach方法，数组遍历，没有return，即使有return，也会返回undifine。" class="headerlink" title="13.forEach方法，数组遍历，没有return，即使有return，也会返回undifine。"></a>13.<strong>forEach</strong>方法，数组遍历，没有return，即使有return，也会返回undifine。</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> index=arr.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(item,index,arr)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> <span class="number">0</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">2</span> <span class="number">1</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">3</span> <span class="number">2</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">4</span> <span class="number">3</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">3</span> <span class="number">4</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">5</span> <span class="number">5</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br></pre></td></tr></table></figure>
+
+<h4 id="14-filter方法，过滤数组"><a href="#14-filter方法，过滤数组" class="headerlink" title="14.filter方法，过滤数组"></a>14.<strong>filter</strong>方法，过滤数组</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> index=arr.<span class="title function_">filter</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item&gt;<span class="number">1</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,3,5]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(index)<span class="comment">//[2,3,4,3,5]</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>org.apache.ibatis.binding.BindingException报错解决</title>
     <url>/2021/09/09/org.apache.ibatis.binding.BindingException%20Invalid%20bound%20statement%20(not%20found)/</url>
     <content><![CDATA[<p>错误信息：	<strong>org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.zht.dao.BookMapper.selAll</strong></p>
@@ -1928,20 +1988,6 @@
       </categories>
   </entry>
   <entry>
-    <title>前端通过后端response获取图片内容</title>
-    <url>/2022/03/06/%E5%89%8D%E7%AB%AF%E9%80%9A%E8%BF%87%E5%90%8E%E7%AB%AFresponse%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9/</url>
-    <content><![CDATA[<h2 id="前端通过JAVA后端response响应获取图片内容"><a href="#前端通过JAVA后端response响应获取图片内容" class="headerlink" title="前端通过JAVA后端response响应获取图片内容"></a>前端通过JAVA后端response响应获取图片内容</h2><p>前端内容：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;http://127.0.0.1:9091/tx?filename=tx.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>后端内容：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;tx&quot;,method = &#123;RequestMethod.GET&#125;)</span></span><br><span class="line">   <span class="meta">@ResponseBody</span></span><br><span class="line">   <span class="keyword">public</span> String <span class="title function_">getTx</span><span class="params">(HttpServletRequest request, HttpServletResponse response, HttpSession session)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">       String filename=request.getParameter(<span class="string">&quot;filename&quot;</span>);</span><br><span class="line">       String filepath=<span class="string">&quot;D:/img/&quot;</span>+filename;</span><br><span class="line">       <span class="comment">//创建文件对象</span></span><br><span class="line">       File file=<span class="keyword">new</span> <span class="title class_">File</span>(filepath);</span><br><span class="line">       <span class="keyword">if</span> (!file.exists())&#123;</span><br><span class="line">           <span class="comment">//后端抛出异常</span></span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;文件不存在&quot;</span>);</span><br><span class="line">       &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">           String name=file.getName();</span><br><span class="line">           String contentType=<span class="string">&quot;img/jpeg&quot;</span>;</span><br><span class="line">           response.setHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment; filename=&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(name.getBytes(<span class="string">&quot;UTF-8&quot;</span>), <span class="string">&quot;ISO_8859_1&quot;</span>));</span><br><span class="line">           <span class="keyword">if</span> (!name.endsWith(<span class="string">&quot;.jpg&quot;</span>)&amp;&amp;!name.endsWith(<span class="string">&quot;.jpeg&quot;</span>))&#123;</span><br><span class="line">               <span class="keyword">if</span> (name.endsWith(<span class="string">&quot;png&quot;</span>))&#123;</span><br><span class="line">                   contentType=<span class="string">&quot;img/png&quot;</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           ServletOutputStream out=response.getOutputStream();</span><br><span class="line">           response.setContentType(contentType);</span><br><span class="line">           response.setContentLength((<span class="type">int</span>) file.length());</span><br><span class="line">           <span class="type">byte</span>[] buff = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">           <span class="keyword">if</span> (file.exists()) &#123;</span><br><span class="line">               <span class="type">FileInputStream</span> <span class="variable">fs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">               <span class="keyword">while</span>(fs.read(buff) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                   out.write(buff);</span><br><span class="line">               &#125;</span><br><span class="line">               fs.close();</span><br><span class="line">           &#125;</span><br><span class="line">           out.flush();</span><br><span class="line">           out.close();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span>  <span class="literal">null</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>JAVA</category>
-      </categories>
-  </entry>
-  <entry>
     <title>单例模式</title>
     <url>/2021/10/20/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p> 单例模式（Singleton），也叫单子模式，是一种常用的软件设计模式。在应用这个模式时，单例对象的类必须保证只有一个实例存在。许多时候整个系统只需要拥有一个的全局对象，这样有利于我们协调系统整体的行为。比如在某个服务器程序中，该服务器的配置信息存放在一个文件中，这些配置数据由一个单例对象统一读取，然后服务进程中的其他对象再通过这个单例对象获取这些配置信息。这种方式简化了在复杂环境下的配置管理。 </p>
@@ -1991,6 +2037,20 @@
       </categories>
   </entry>
   <entry>
+    <title>前端通过后端response获取图片内容</title>
+    <url>/2022/03/06/%E5%89%8D%E7%AB%AF%E9%80%9A%E8%BF%87%E5%90%8E%E7%AB%AFresponse%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9/</url>
+    <content><![CDATA[<h2 id="前端通过JAVA后端response响应获取图片内容"><a href="#前端通过JAVA后端response响应获取图片内容" class="headerlink" title="前端通过JAVA后端response响应获取图片内容"></a>前端通过JAVA后端response响应获取图片内容</h2><p>前端内容：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;http://127.0.0.1:9091/tx?filename=tx.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>后端内容：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;tx&quot;,method = &#123;RequestMethod.GET&#125;)</span></span><br><span class="line">   <span class="meta">@ResponseBody</span></span><br><span class="line">   <span class="keyword">public</span> String <span class="title function_">getTx</span><span class="params">(HttpServletRequest request, HttpServletResponse response, HttpSession session)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">       String filename=request.getParameter(<span class="string">&quot;filename&quot;</span>);</span><br><span class="line">       String filepath=<span class="string">&quot;D:/img/&quot;</span>+filename;</span><br><span class="line">       <span class="comment">//创建文件对象</span></span><br><span class="line">       File file=<span class="keyword">new</span> <span class="title class_">File</span>(filepath);</span><br><span class="line">       <span class="keyword">if</span> (!file.exists())&#123;</span><br><span class="line">           <span class="comment">//后端抛出异常</span></span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;文件不存在&quot;</span>);</span><br><span class="line">       &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">           String name=file.getName();</span><br><span class="line">           String contentType=<span class="string">&quot;img/jpeg&quot;</span>;</span><br><span class="line">           response.setHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment; filename=&quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(name.getBytes(<span class="string">&quot;UTF-8&quot;</span>), <span class="string">&quot;ISO_8859_1&quot;</span>));</span><br><span class="line">           <span class="keyword">if</span> (!name.endsWith(<span class="string">&quot;.jpg&quot;</span>)&amp;&amp;!name.endsWith(<span class="string">&quot;.jpeg&quot;</span>))&#123;</span><br><span class="line">               <span class="keyword">if</span> (name.endsWith(<span class="string">&quot;png&quot;</span>))&#123;</span><br><span class="line">                   contentType=<span class="string">&quot;img/png&quot;</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           ServletOutputStream out=response.getOutputStream();</span><br><span class="line">           response.setContentType(contentType);</span><br><span class="line">           response.setContentLength((<span class="type">int</span>) file.length());</span><br><span class="line">           <span class="type">byte</span>[] buff = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">           <span class="keyword">if</span> (file.exists()) &#123;</span><br><span class="line">               <span class="type">FileInputStream</span> <span class="variable">fs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">               <span class="keyword">while</span>(fs.read(buff) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                   out.write(buff);</span><br><span class="line">               &#125;</span><br><span class="line">               fs.close();</span><br><span class="line">           &#125;</span><br><span class="line">           out.flush();</span><br><span class="line">           out.close();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span>  <span class="literal">null</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Java反射</title>
     <url>/2021/11/01/%E5%8F%8D%E5%B0%84/</url>
     <content><![CDATA[<h1 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h1><p>Reflflection（反射）是Java被视为动态语言的关键，反射机制允许程序在执行期借助于Reflflection API取得任何类的内部信息，并能直接操作任意对象的内部属性及方法。加载完类之后，在堆内存的方法区中就产生了一个Class类型的对象（一个类只有一个Class对象），这个对象就包含了完整的类的结构信息。我们可以通过这个对象看到类的结构。</p>
@@ -2026,7 +2086,9 @@
 <p>简单举例：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchFieldException &#123;</span><br><span class="line">    Student student=<span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">    <span class="type">Class</span> <span class="variable">studentClass</span> <span class="operator">=</span> student.getClass();</span><br><span class="line">    <span class="comment">//获取所有非私有方法包括父类</span></span><br><span class="line">    Method[] methods1 = studentClass.getMethods();</span><br><span class="line">    <span class="comment">//获取所有当前类中（this）中的所有方法</span></span><br><span class="line">    Method[] methods2 = studentClass.getDeclaredMethods();</span><br><span class="line">    <span class="comment">//获取所有当前类的非私有属性</span></span><br><span class="line">    Field[] fields = studentClass.getFields();</span><br><span class="line">    <span class="comment">//获取某一个属性</span></span><br><span class="line">    <span class="type">Field</span> <span class="variable">sex</span> <span class="operator">=</span> studentClass.getDeclaredField(<span class="string">&quot;sex&quot;</span>);</span><br><span class="line">    <span class="comment">//属性赋值</span></span><br><span class="line">    sex.set(student,<span class="string">&quot;男&quot;</span>);</span><br><span class="line">    System.out.println(sex.get(student));</span><br><span class="line">    <span class="comment">//获取某一个方法</span></span><br><span class="line">    <span class="type">Method</span> <span class="variable">methods</span> <span class="operator">=</span> studentClass.getDeclaredMethod(<span class="string">&quot;say&quot;</span>);</span><br><span class="line">                <span class="comment">//private修饰 暴露私有 不然会报错</span></span><br><span class="line">               methods.setAccessible(<span class="literal">true</span>);</span><br><span class="line">               <span class="comment">//调用方法</span></span><br><span class="line">               methods.invoke(studentClass.newInstance());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>多练…………………………..</p>
+<p>推荐文章：</p>
+<p><a href="https://blog.csdn.net/huangliniqng/article/details/88554510">https://blog.csdn.net/huangliniqng/article/details/88554510</a></p>
+<p><a href="https://blog.csdn.net/a745233700/article/details/82893076">https://blog.csdn.net/a745233700/article/details/82893076</a></p>
 ]]></content>
       <categories>
         <category>JAVA</category>
@@ -2121,10 +2183,11 @@
 
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
         <tag>JAVA</tag>
+        <tag>SpringBoot</tag>
       </tags>
   </entry>
   <entry>

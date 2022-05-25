@@ -179,7 +179,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/24/Mysql%E5%B8%B8%E7%94%A8sql%E8%AF%AD%E5%8F%A5/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/29/js%E6%95%B0%E7%BB%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
@@ -193,7 +193,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/08/24/Mysql%E5%B8%B8%E7%94%A8sql%E8%AF%AD%E5%8F%A5/" class="post-title-link" itemprop="url">Mysql常用sql语句</a>
+            <a href="/2021/08/29/js%E6%95%B0%E7%BB%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">js数组常用方法</a>
         </h2>
 
         <div class="post-meta">
@@ -203,14 +203,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-08-24 09:53:25" itemprop="dateCreated datePublished" datetime="2021-08-24T09:53:25+08:00">2021-08-24</time>
+              <time title="创建时间：2021-08-29 08:53:25" itemprop="dateCreated datePublished" datetime="2021-08-29T08:53:25+08:00">2021-08-29</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 12:33:11" itemprop="dateModified" datetime="2022-01-05T12:33:11+08:00">2022-01-05</time>
+                <time title="修改时间：2022-05-24 16:48:54" itemprop="dateModified" datetime="2022-05-24T16:48:54+08:00">2022-05-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,7 +218,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
                 </span>
             </span>
 
@@ -228,14 +228,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -247,202 +247,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Mysql常用sql语句"><a href="#Mysql常用sql语句" class="headerlink" title="Mysql常用sql语句"></a>Mysql常用sql语句</h2><table>
-<thead>
-<tr>
-<th align="left"><strong>结构化查询语句分类</strong></th>
-<th align="left"></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">DDL（数据定义语言）定义和管理数据对象，如数据库，数据表等</td>
-<td align="left">CREATE、DROP、ALTER</td>
-<td></td>
-</tr>
-<tr>
-<td align="left">DML（数据操作语言）用于操作数据库对象中所包含的数据</td>
-<td align="left">INSERT、UPDATE、DELETE</td>
-<td></td>
-</tr>
-<tr>
-<td align="left">DQL（数据查询语言）用于查询数据库数据</td>
-<td align="left">SELECT</td>
-<td></td>
-</tr>
-<tr>
-<td align="left">DCL（数据控制语言）用于管理数据库的语言，包括管理权限及数据更改</td>
-<td align="left">GRANT、commit、 rollback</td>
-<td></td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left"></td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>创建数据库</strong> : create database [if not exists] 数据库名</p>
-<p><strong>删除数据库</strong> : drop database [if exists] 数据库名</p>
-<p><strong>查看数据库</strong> : show databases</p>
-<p><strong>使用数据库</strong> : use 数据库名</p>
-<p><strong>修改表名</strong> : ALTER TABLE 旧表名 RENAME AS 新表名</p>
-<p><strong>添加字段</strong> : ALTER TABLE 表名 ADD字段名 列属性[属性]</p>
-<p><strong>修改字段</strong> :ALTER TABLE 表名 MODIFY 字段名 列类型[属性] </p>
-<p>​                    ALTER TABLE 表名 CHANGE 旧字段名 新字段名 列属性[属性]</p>
-<p><strong>删除字段</strong> : ALTER TABLE 表名 DROP 字段名</p>
-<p><strong>删除数据表</strong>：DROP TABLE [IF EXISTS] 表名 </p>
-<p><strong>添加数据</strong>：INSERT INTO 表名(字段1,字段2,字段3,…)VALUES(‘值1’,’值2’,’值3’) </p>
-<p><strong>修改数据</strong>：UPDATE 表名 SET column_name&#x3D;value [,column_name2&#x3D;value2,…] [WHERE 条件];</p>
-<p><strong>删除数据</strong>：DELETE FROM 表名 [WHERE condition]; （condition为筛选条件 , 如不指定则删除该表的所有列数据）</p>
-<p>​                      TRUNCATE [TABLE] table_name; （用于完全清空表数据 , 但表结构 , 索引 , 约束等不变）</p>
-<p>​                      与DELETE的区别：相同：都能删除数据 , 不删除表结构 , 但TRUNCATE速度更快</p>
-<p>​                                                            不相同：使用TRUNCATE TABLE 重新设置AUTO_INCREMENT计数器，不会对事务有影响</p>
-<p><strong>查询数据</strong>：</p>
-<p>​                                  <strong>语法</strong>：SELECT [ALL | DISTINCT] </p>
-<p>​                                  {* | table.* | [table.field1[as alias1][,table.field2[as alias2]][,…]]} </p>
-<p>​                                  FROM table_name [as table_alias] </p>
-<p>​                                  [left | right | inner join table_name2] – 联合查询 </p>
-<p>​                                  [WHERE …] – 指定结果需满足的条件 </p>
-<p>​                                  [GROUP BY …] – 指定结果按照哪几个字段来分组 </p>
-<p>​                                  [HAVING] – 过滤分组的记录必须满足的次要条件 </p>
-<p>​                                  [ORDER BY …] – 指定查询记录按一个或多个条件排序 </p>
-<p>​                                  [LIMIT {[offset,]row_count | row_countOFFSET offset}];– 指定查询的记录从哪条至哪条</p>
-<p>​                                  <strong>注意：一定要注意关键字顺序！ [ ] 括号代表可选的 , { }括号代表必选得）</strong></p>
-<p>​                     举例： SELECT studentno AS 学号,studentname AS 姓名 FROM student（AS为了起别名，可以省略）</p>
-<p>​                                   SELECT CONCAT(‘姓名:’,studentname) AS 新姓名 FROM student; （concat字符串拼接）</p>
-<p>​                                  SELECT DISTINCT studentno FROM result; (DISTINCT 去除重复项 , (默认是ALL) )</p>
-<h2 id="连接查询："><a href="#连接查询：" class="headerlink" title="连接查询："></a><strong>连接查询</strong>：</h2><table>
-<thead>
-<tr>
-<th>操作符名称</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>INNER  JOIN</td>
-<td>如果表中有至少一个匹配，则返回行(查询两个表中的结果集中的交集)</td>
-</tr>
-<tr>
-<td>LEFT  JOIN</td>
-<td>即使右表中没有匹配，也从左表中返回所有的行 (以左表作为基准,右边表来一一匹配,匹配不上的,返回左表的记录,右表以NULL填充)</td>
-</tr>
-<tr>
-<td>RIGHT JOIN</td>
-<td>即使左表中没有匹配，也从右表中返回所有的行(以右表作为基准,左边表来一一匹配,匹配不上的,返回右表的记录,左表以NULL填充)</td>
-</tr>
-</tbody></table>
-<p>  <strong>举例</strong>：SELECT s.studentno,studentname,subjectno,StudentResult </p>
-<p>​               FROM student s </p>
-<p>​               LEFT JOIN result r </p>
-<p>​               ON r.studentno &#x3D; s.studentno （几种连接使用相似，视情况而定）</p>
-<p><strong>子查询</strong>：(在查询语句中的WHERE条件子句中,又嵌套了另一个查询语句 嵌套查询可由多个子查询组成,求解的方式是由里及外; </p>
-<p>​                   子查询返回的结果一般都是集合,故而建议使用IN关键字)</p>
-<p>​                <strong>举例</strong>： SELECT r.studentno,studentname FROM student s </p>
-<p>​                              INNER JOIN result r ON s.StudentNo&#x3D;r.StudentNo</p>
-<p>​                              WHERE StudentResult&gt;&#x3D;80 AND subjectno&#x3D;( </p>
-<p>​                              SELECT subjectno FROM SUBJECT </p>
-<p>​                              WHERE subjectname &#x3D; ‘高等数学’ )</p>
-<h2 id="WHERE条件："><a href="#WHERE条件：" class="headerlink" title="WHERE条件："></a><strong>WHERE条件</strong>：</h2><table>
-<thead>
-<tr>
-<th><strong>操作符名称</strong></th>
-<th><strong>语法</strong></th>
-<th><strong>描述</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>AND 或 &amp;&amp;</td>
-<td>a AND b 或 a &amp;&amp; b</td>
-<td>逻辑与，同时为真结果才为真</td>
-</tr>
-<tr>
-<td>OR 或 ||</td>
-<td>a OR b 或 a||b</td>
-<td>逻辑或，只要一个为真，则结果为真</td>
-</tr>
-<tr>
-<td>NOT 或 ！</td>
-<td>NOT a 或 ！a</td>
-<td>逻辑非，若操作数为假，则结果为真！</td>
-</tr>
-</tbody></table>
-<h2 id="MYSQL函数："><a href="#MYSQL函数：" class="headerlink" title="MYSQL函数："></a><strong>MYSQL函数</strong>：</h2><p><strong>数值函数</strong> </p>
-<p>abs(x) – 绝对值 abs(-10.9) &#x3D; 10 </p>
-<p>format(x, d) – 格式化千分位数值 format(1234567.456, 2) &#x3D; 1,234,567.46 </p>
-<p>ceil(x) – 向上取整 ceil(10.1) &#x3D; 11 </p>
-<p>floor(x) – 向下取整 floor (10.1) &#x3D; 10 </p>
-<p>round(x) – 四舍五入去整 </p>
-<p>mod(m, n) – m%n m mod n 求余 10%3&#x3D;1 </p>
-<p>pi() – 获得圆周率 </p>
-<p>pow(m, n) – m^n </p>
-<p>sqrt(x) – 算术平方根 </p>
-<p>rand() – 随机数 </p>
-<p>truncate(x, d) – 截取d位小数 </p>
-<p><strong>时间日期函数</strong> </p>
-<p>now(), current_timestamp(); – 当前日期时间 </p>
-<p>current_date(); – 当前日期 </p>
-<p>current_time(); – 当前时间 </p>
-<p>date(‘yyyy-mm-dd hh:ii:ss’); – 获取日期部分 </p>
-<p>time(‘yyyy-mm-dd hh:ii:ss’); – 获取时间部分 </p>
-<p>date_format(‘yyyy-mm-dd hh:ii:ss’, ‘%d %y %a %d %m %b %j’); – 格式化时间 </p>
-<p>unix_timestamp(); – 获得unix时间戳 </p>
-<p>from_unixtime(); – 从时间戳获得时间 </p>
-<p><strong>字符串函数</strong> </p>
-<p>length(string) – string长度，字节 </p>
-<p>char_length(string) – string的字符个数 </p>
-<p>substring(str, position [,length]) – 从str的position开始,取length个字符 </p>
-<p>replace(str ,search_str ,replace_str) – 在str中用replace_str替换search_str </p>
-<p>instr(string ,substring) – 返回substring首次在string中出现的位置 </p>
-<p>concat(string [,…]) – 连接字串 </p>
-<p>charset(str) – 返回字串字符集 </p>
-<p>lcase(string) – 转换成小写 </p>
-<p>left(string, length) – 从string2中的左边起取length个字符 </p>
-<p>load_file(file_name) – 从文件读取内容 </p>
-<p>locate(substring, string [,start_position]) – 同instr,但可指定开始位置 </p>
-<p>lpad(string, length, pad) – 重复用pad加在string开头,直到字串长度为length </p>
-<p>ltrim(string) – 去除前端空格 </p>
-<p>repeat(string, count) – 重复count次 </p>
-<p>rpad(string, length, pad) –在str后用pad补充,直到长度为length </p>
-<p>rtrim(string) – 去除后端空格 </p>
-<p>strcmp(string1 ,string2) – 逐字符比较两字串大小 </p>
-<p><strong>聚合函数</strong></p>
-<p>count()  查询条数</p>
-<p>sum(); 求和</p>
-<p>max(); 最大值</p>
-<p>min(); 最小值</p>
-<p>avg(); 平均值</p>
-<p><strong>其他常用函数</strong> </p>
-<p>md5();  加密</p>
-<p>default(); </p>
-<h2 id="常用Mysql语句举例："><a href="#常用Mysql语句举例：" class="headerlink" title="常用Mysql语句举例："></a><strong>常用Mysql语句举例</strong>：</h2><h5 id="1、select-from-ren"><a href="#1、select-from-ren" class="headerlink" title="1、select * from ren"></a>1、select * from ren</h5><p>​		列表查询（全查） select：表示查询，*表示默认查询全部字段 from：表示要查询哪一个表 ren（表名）</p>
-<h5 id="2、select-from-ren-where-p-id-x3D-’p001’"><a href="#2、select-from-ren-where-p-id-x3D-’p001’" class="headerlink" title="2、select * from ren where p_id&#x3D;’p001’"></a>2、select * from ren where p_id&#x3D;’p001’</h5><p>​		条件查询：where关键字表示条件，后面跟具体的过滤条件<br>​			p_id&#x3D;’p001’字段值以单引号包裹，对于int类型字段做条件时，其值可以不用单引号包裹，也可以包裹</p>
-<h5 id="3、select-p-name-p-age-from-ren"><a href="#3、select-p-name-p-age-from-ren" class="headerlink" title="3、select p_name,p_age from ren"></a>3、select p_name,p_age from ren</h5><p>​		选择性查询（查询某一部分字段），将列表查询中的*替换为要查的字段，查询多个字段时，字段与字段之间用“，”间隔</p>
-<h5 id="4、select-from-ren-where-p-age-gt-20"><a href="#4、select-from-ren-where-p-age-gt-20" class="headerlink" title="4、select * from ren where p_age&gt;20"></a>4、select * from ren where p_age&gt;20</h5><p>​		以运算符为条件的查询，常用的：&gt;, &lt;,&lt;&#x3D;,&gt;&#x3D;,!&#x3D;,&lt;&gt;(表示不等于)</p>
-<h5 id="5、select-from-ren-where-p-age-gt-20-or-p-age-lt-40"><a href="#5、select-from-ren-where-p-age-gt-20-or-p-age-lt-40" class="headerlink" title="5、select * from ren where p_age&gt;20 or p_age&lt;40"></a>5、select * from ren where p_age&gt;20 or p_age&lt;40</h5><p>​		多条件查询，链接条件的关键字：and&#x2F;or and表示逻辑与，两边同时满足；or表示逻辑或，两边满足其中之一</p>
-<h5 id="6、select-from-ren-where-p-id-x3D-select-p-leader-from-ren-where-p-name-x3D-’周芷若’"><a href="#6、select-from-ren-where-p-id-x3D-select-p-leader-from-ren-where-p-name-x3D-’周芷若’" class="headerlink" title="6、select * from ren where p_id&#x3D;(select p_leader from ren where p_name&#x3D;’周芷若’)"></a>6、select * from ren where p_id&#x3D;(select p_leader from ren where p_name&#x3D;’周芷若’)</h5><p>​		子条件查询，注意：子语句所查结果需为单一字段结果</p>
-<h5 id="7、select-from-ren-where-p-name-like-‘-王-’"><a href="#7、select-from-ren-where-p-name-like-‘-王-’" class="headerlink" title="7、select * from ren where p_name like ‘%王%’"></a>7、select * from ren where p_name like ‘%王%’</h5><p>​		模糊查询，关键字：like表示模糊，查询条件以’%值%’包裹<br>​		注意：like ‘王%’ 表示以王开头的所有数据<br>​		      like ‘%王’ 表示以王结尾的所有数据<br>​		      like ‘%王%’表示字段含有王的所有数据</p>
-<h5 id="8、select-from-ren-where-p-menpai-in-‘明教’-’峨眉’"><a href="#8、select-from-ren-where-p-menpai-in-‘明教’-’峨眉’" class="headerlink" title="8、select * from ren where p_menpai in(‘明教’,’峨眉’)"></a>8、select * from ren where p_menpai in(‘明教’,’峨眉’)</h5><p>​		以集合方式查询，语句等同于select * from ren where p_menpai&#x3D;’明教’ or p_menpai&#x3D;’峨眉’<br>​			关键字：in(‘’,’’),小括号中为要查询的条件的集合</p>
-<h5 id="9、select-from-ren-where-p-age-between-20-and-70"><a href="#9、select-from-ren-where-p-age-between-20-and-70" class="headerlink" title="9、select * from ren where p_age between 20 and 70"></a>9、select * from ren where p_age between 20 and 70</h5><p>​		按区间查询，等同于<strong>select * from ren where p_age&gt;&#x3D;20 and p_age&lt;&#x3D;70</strong><br>​			关键字：between and,查询方式：between 值1 and 值2</p>
-<h5 id="10、select-from-ren-order-by-p-age-asc"><a href="#10、select-from-ren-order-by-p-age-asc" class="headerlink" title="10、select * from ren order by p_age asc"></a>10、select * from ren order by p_age asc</h5><p>​		排序，关键字：order by,后面跟字段（要排序的字段）<br>​		asc:正序（从小到大）<br>​		desc:倒序（从大到小）</p>
-<h5 id="11、select-from-ren-where-p-leader-is-null"><a href="#11、select-from-ren-where-p-leader-is-null" class="headerlink" title="11、select * from ren where p_leader is null"></a>11、select * from ren where p_leader is null</h5><p>​		查询字段值默认为空状态的数据，若果手动填充null值，则按照正常方式查询<br>​		如果字段值为空，查询方式按照正常方式来查询（’’）</p>
-<h5 id="12、select-from-ren-limit-9-3"><a href="#12、select-from-ren-limit-9-3" class="headerlink" title="12、select * from ren limit 9,3"></a>12、select * from ren limit 9,3</h5><p>​		分页查询，关键字limit 数据1，数据2； 数据1表示从第几条开始查询，数据2表示每页显示（查询）多少条<br>​		注意：数据1从0开始<br>​		注意：如果只写一个数据，默认为从第0条开始查询，每页显示数据条数</p>
-<h5 id="13、select-distinct-p-menpai-from-ren-where-p-menpai-x3D-’明教’"><a href="#13、select-distinct-p-menpai-from-ren-where-p-menpai-x3D-’明教’" class="headerlink" title="13、select distinct(p_menpai) from ren where p_menpai&#x3D;’明教’"></a>13、select distinct(p_menpai) from ren where p_menpai&#x3D;’明教’</h5><p>​		取唯一，关键字distinct(要区唯一的字段)</p>
-<h5 id="14、select-max-p-age-from-ren"><a href="#14、select-max-p-age-from-ren" class="headerlink" title="14、select max(p_age) from ren"></a>14、select max(p_age) from ren</h5><p>​	求最大值，关键字max(需要求最大值的字段名称)</p>
-<h5 id="15、select-min-p-age-from-ren"><a href="#15、select-min-p-age-from-ren" class="headerlink" title="15、select min(p_age) from ren"></a>15、select min(p_age) from ren</h5><p>​	求最小值，关键字min(需要求最小值的字段名称)</p>
-<h5 id="16、select-avg-p-age-from-ren"><a href="#16、select-avg-p-age-from-ren" class="headerlink" title="16、select avg(p_age) from ren"></a>16、select avg(p_age) from ren</h5><p>​	求平均值，关键字avg(需要求平均值的字段名称)</p>
-<h5 id="17、select-sum-p-age-from-ren"><a href="#17、select-sum-p-age-from-ren" class="headerlink" title="17、select sum(p_age) from ren"></a>17、select sum(p_age) from ren</h5><p>​	求和，关键字sum(需要求和的字段名称)</p>
-<h5 id="18、select-count-from-ren"><a href="#18、select-count-from-ren" class="headerlink" title="18、select count(*) from ren"></a>18、select count(*) from ren</h5><p>​	统计当前表格的行数<br>注意：以上聚合函数针对于int类型的字段</p>
-<h5 id="18、select-from-ren-group-by-p-menpai"><a href="#18、select-from-ren-group-by-p-menpai" class="headerlink" title="18、select * from ren group by p_menpai"></a>18、select * from ren group by p_menpai</h5><p>​	分组函数，将属于同一组的数据合并起来只显示其中一条，关键字group by，后面跟以哪一个字段进行分组<br>​	分组函数一般与聚合函数一起使用</p>
-<h5 id="19、select-avg-p-age-p-menpai-from-ren-group-by-p-menpai-having-avg-p-age-gt-30"><a href="#19、select-avg-p-age-p-menpai-from-ren-group-by-p-menpai-having-avg-p-age-gt-30" class="headerlink" title="19、select avg(p_age),p_menpai from ren group by p_menpai having avg(p_age)&gt;30"></a>19、select avg(p_age),p_menpai from ren group by p_menpai having avg(p_age)&gt;30</h5><p>​	分组函数加条件查询，关键字（分组函数专用的条件关键字）having，后面一般跟聚合函数做条件</p>
-<h5 id="20、select-p-name-as-name-from-ren"><a href="#20、select-p-name-as-name-from-ren" class="headerlink" title="20、select p_name as name from ren"></a>20、select p_name as name from ren</h5><p>​	别名：关键字：as,作用：为查询结果起一个别名<br>​	注意：默认as可以省略</p>
-<h5 id="21、select-from-ren-wei-where-ren-p-wei-x3D-wei-w-name"><a href="#21、select-from-ren-wei-where-ren-p-wei-x3D-wei-w-name" class="headerlink" title="21、select * from ren,wei where ren.p_wei&#x3D;wei.w_name"></a>21、select * from ren,wei where ren.p_wei&#x3D;wei.w_name</h5><p>​	多表联合查询，所查询到的结果为两表数据的乘积（笛卡尔乘积），需要加入where条件进行过滤<br>​		过滤方式：表1.字段名称&#x3D;表2.字段名称<br>​	注意：表与表之间用,间隔</p>
-<h5 id="22、select-from-ren-left-join-wei-on-ren-p-wei-x3D-wei-w-name"><a href="#22、select-from-ren-left-join-wei-on-ren-p-wei-x3D-wei-w-name" class="headerlink" title="22、select * from ren left join wei on ren.p_wei&#x3D;wei.w_name"></a>22、select * from ren left join wei on ren.p_wei&#x3D;wei.w_name</h5><p>​	左连接查询，以左表为准，左表数据全部留下，右表的数据进行匹配，如果没有相匹配的数据则以null填充</p>
-<h5 id="23、select-from-ren-right-join-wei-on-ren-p-wei-x3D-wei-w-name"><a href="#23、select-from-ren-right-join-wei-on-ren-p-wei-x3D-wei-w-name" class="headerlink" title="23、select * from ren right join wei on ren.p_wei&#x3D;wei.w_name"></a>23、select * from ren right join wei on ren.p_wei&#x3D;wei.w_name</h5><p>​	右连接查询，匹配原则与左联相反</p>
-<h5 id="24、select-from-ren-inner-join-wei-on-ren-p-wei-x3D-wei-w-name"><a href="#24、select-from-ren-inner-join-wei-on-ren-p-wei-x3D-wei-w-name" class="headerlink" title="24、select * from ren inner join wei on ren.p_wei&#x3D;wei.w_name"></a>24、select * from ren inner join wei on ren.p_wei&#x3D;wei.w_name</h5><p>​	内连接查询，两表数据相互匹配，如果有不能匹配数据则全部清除<br>​	on在left&#x2F;right&#x2F;inner时的条件关键字，后面跟过滤数据的语句</p>
-<h5 id="25、insert-into-ren-p-id-p-name-p-sex-p-age-values-‘p012’-’金毛狮王’-’男’-23"><a href="#25、insert-into-ren-p-id-p-name-p-sex-p-age-values-‘p012’-’金毛狮王’-’男’-23" class="headerlink" title="25、insert into ren (p_id,p_name,p_sex,p_age) values (‘p012’,’金毛狮王’,’男’,23)"></a>25、insert into ren (p_id,p_name,p_sex,p_age) values (‘p012’,’金毛狮王’,’男’,23)</h5><p>​	新增，insert into (字段名称，字段名称,…) values (‘’,’’,’’,…)<br>​	注意：字段名称与第二个括号中的值必须一一对应</p>
-<h5 id="26、update-ren-set-p-leader-x3D-’p002’-p-menpai-x3D-’明教’-where-p-id-x3D-’p011’"><a href="#26、update-ren-set-p-leader-x3D-’p002’-p-menpai-x3D-’明教’-where-p-id-x3D-’p011’" class="headerlink" title="26、update ren set p_leader&#x3D;’p002’,p_menpai&#x3D;’明教’ where p_id&#x3D;’p011’"></a>26、update ren set p_leader&#x3D;’p002’,p_menpai&#x3D;’明教’ where p_id&#x3D;’p011’</h5><p>​	修改：update 表名 set 字段1&#x3D;’’,字段2&#x3D;’’,…where 主键&#x3D;’’</p>
-<h5 id="27、delete-from-ren-where-p-id-x3D-’p011’"><a href="#27、delete-from-ren-where-p-id-x3D-’p011’" class="headerlink" title="27、delete from ren where p_id&#x3D;’p011’"></a>27、delete from ren where p_id&#x3D;’p011’</h5><p>​	删除：delete from 表名 where 主键&#x3D;’’</p>
-<p>​                 </p>
+          <h4 id="1-pop方法，删除数组-索引值最大的元素-，返回值为被删除的那个元素，会影响原数组。"><a href="#1-pop方法，删除数组-索引值最大的元素-，返回值为被删除的那个元素，会影响原数组。" class="headerlink" title="1.pop方法，删除数组 索引值最大的元素 ，返回值为被删除的那个元素，会影响原数组。"></a>1.<strong>pop</strong>方法，删除数组 索引值最大的元素 ，返回值为被删除的那个元素，会<strong>影响原数组</strong>。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">pop</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//4</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-push方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会影响原数组。"><a href="#2-push方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会影响原数组。" class="headerlink" title="2.push方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会影响原数组。"></a>2.<strong>push</strong>方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会<strong>影响原数组</strong>。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">push</span>(<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//6</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,5,6]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-unshift方法，在数组前面插入一个或者多个元素，返回数组的新长度，会影响原数组。"><a href="#3-unshift方法，在数组前面插入一个或者多个元素，返回数组的新长度，会影响原数组。" class="headerlink" title="3.unshift方法，在数组前面插入一个或者多个元素，返回数组的新长度，会影响原数组。"></a>3.<strong>unshift</strong>方法，在数组前面插入一个或者多个元素，返回数组的新长度，会<strong>影响原数组</strong>。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">unshift</span>(<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//6</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[5,6,1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-shift方法，删除数组第一个元素，返回被删除的那个元素，会影响原数组。"><a href="#4-shift方法，删除数组第一个元素，返回被删除的那个元素，会影响原数组。" class="headerlink" title="4.shift方法，删除数组第一个元素，返回被删除的那个元素，会影响原数组。"></a>4.<strong>shift</strong>方法，删除数组第一个元素，返回被删除的那个元素，会<strong>影响原数组</strong>。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">shift</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[2,3,4]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-reverse方法，将数组内容倒序，返回新的数组，并且会影响原数组"><a href="#5-reverse方法，将数组内容倒序，返回新的数组，并且会影响原数组" class="headerlink" title="5.reverse方法，将数组内容倒序，返回新的数组，并且会影响原数组"></a>5.<strong>reverse</strong>方法，将数组内容倒序，返回新的数组，并且会<strong>影响原数组</strong></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">reverse</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[4,3,2,1]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[4,3,2,1]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-join方法，将数组以join指定的字符连接成字符串，返回新数组，不会影响原数组。"><a href="#6-join方法，将数组以join指定的字符连接成字符串，返回新数组，不会影响原数组。" class="headerlink" title="6.join方法，将数组以join指定的字符连接成字符串，返回新数组，不会影响原数组。"></a>6.<strong>join</strong>方法，将数组以join指定的字符连接成字符串，返回新数组，<strong>不会影响原数组</strong>。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">join</span>(<span class="string">&quot;-&quot;</span>);<span class="comment">//默认是，</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="number">1</span>-<span class="number">2</span>-<span class="number">3</span>-<span class="number">4</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-sort方法，-将数组进行排序-升序-返回新数组，影响原数组"><a href="#7-sort方法，-将数组进行排序-升序-返回新数组，影响原数组" class="headerlink" title="7.sort方法， 将数组进行排序(升序),返回新数组，影响原数组"></a>7.<strong>sort</strong>方法， 将数组进行排序(升序),返回新数组，<strong>影响原数组</strong></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">sort</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[1,2,3,4]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="8-splice方法-在任意位置添加或删除元素-返回删除或被替换的值，如果没有被删除或替换则返回空数组-影响原数组"><a href="#8-splice方法-在任意位置添加或删除元素-返回删除或被替换的值，如果没有被删除或替换则返回空数组-影响原数组" class="headerlink" title="8.splice方法, 在任意位置添加或删除元素,返回删除或被替换的值，如果没有被删除或替换则返回空数组; ,影响原数组"></a>8.<strong>splice</strong>方法, 在任意位置添加或删除元素,返回删除或被替换的值，如果没有被删除或替换则返回空数组; ,<strong>影响原数组</strong></h4><p>1.只有一个参数时,  从当前位置删除到数组末尾 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">splice</span>(<span class="number">1</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2,3,4]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1]</span></span><br></pre></td></tr></table></figure>
+
+<p>2.有两个参数时,第一个值为删除的位置，第二个值为删除的个数; </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">splice</span>(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,3,4]</span></span><br></pre></td></tr></table></figure>
+
+<p>3.有三个或者多个值时，第一个值为插入元素的位置，第二个值为替换的个数，后面的值都为插入的新元素； </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">splice</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2,3]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,6,7,8,4]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="9-slice方法"><a href="#9-slice方法" class="headerlink" title="9.slice方法"></a>9.<strong>slice</strong>方法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">slice</span>(<span class="number">1</span>,<span class="number">2</span>);<span class="comment">//截取从索引1到索引2，但是不包括2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="10-map方法"><a href="#10-map方法" class="headerlink" title="10.map方法"></a>10.<strong>map</strong>方法</h4><p>参数1：当前索引值</p>
+<p>参数2：当前下标</p>
+<p>参数3：原数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">map</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item*<span class="number">2</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2,4,6,8,10]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,5]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[&#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;,&#123;<span class="attr">a</span>:<span class="number">3</span>,<span class="attr">b</span>:<span class="number">4</span>&#125;,&#123;<span class="attr">a</span>:<span class="number">5</span>,<span class="attr">b</span>:<span class="number">6</span>&#125;];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">map</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item.<span class="property">a</span>=item.<span class="property">a</span>*<span class="number">2</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[ 2, 6, 10 ]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[ &#123; a: 2, b: 2 &#125;, &#123; a: 6, b: 4 &#125;, &#123; a: 10, b: 6 &#125; ]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>当数组中元素是值类型，map不会改变原数组；当是引用类型，则可以改变原数组</strong> </p>
+<h4 id="11-indexOf方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1"><a href="#11-indexOf方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1" class="headerlink" title="11.indexOf方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1"></a>11.<strong>indexOf</strong>方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> index=arr.<span class="title function_">indexOf</span>(<span class="number">3</span>)<span class="comment">//没找到则返回-1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,3,5]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(index)<span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="12-find方法，找到第一个满足条件得值，没找到返回undifine"><a href="#12-find方法，找到第一个满足条件得值，没找到返回undifine" class="headerlink" title="12.find方法，找到第一个满足条件得值，没找到返回undifine"></a>12.<strong>find</strong>方法，找到第一个满足条件得值，没找到返回undifine</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> value=arr.<span class="title function_">find</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item&gt;<span class="number">3</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,3,5]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(value)<span class="comment">//4</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="13-forEach方法，数组遍历，没有return，即使有return，也会返回undifine。"><a href="#13-forEach方法，数组遍历，没有return，即使有return，也会返回undifine。" class="headerlink" title="13.forEach方法，数组遍历，没有return，即使有return，也会返回undifine。"></a>13.<strong>forEach</strong>方法，数组遍历，没有return，即使有return，也会返回undifine。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> index=arr.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(item,index,arr)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> <span class="number">0</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">2</span> <span class="number">1</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">3</span> <span class="number">2</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">4</span> <span class="number">3</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">3</span> <span class="number">4</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">5</span> <span class="number">5</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br></pre></td></tr></table></figure>
+
+<h4 id="14-filter方法，过滤数组"><a href="#14-filter方法，过滤数组" class="headerlink" title="14.filter方法，过滤数组"></a>14.<strong>filter</strong>方法，过滤数组</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> index=arr.<span class="title function_">filter</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item&gt;<span class="number">1</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,3,5]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(index)<span class="comment">//[2,3,4,3,5]</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -461,7 +306,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/29/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/31/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/29/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="extend next" rel="next" href="/page/31/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -529,19 +374,19 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -581,12 +426,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">95k</span>
+    <span title="站点总字数">98k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:26</span>
+    <span title="站点阅读时长">1:29</span>
 </div>
 
         

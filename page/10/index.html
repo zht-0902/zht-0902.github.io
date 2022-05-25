@@ -210,7 +210,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-10 17:42:33" itemprop="dateModified" datetime="2022-01-10T17:42:33+08:00">2022-01-10</time>
+                <time title="修改时间：2022-05-25 10:36:10" itemprop="dateModified" datetime="2022-05-25T10:36:10+08:00">2022-05-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,7 +228,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -280,7 +280,9 @@
 <p>简单举例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchFieldException &#123;</span><br><span class="line">    Student student=<span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">    <span class="type">Class</span> <span class="variable">studentClass</span> <span class="operator">=</span> student.getClass();</span><br><span class="line">    <span class="comment">//获取所有非私有方法包括父类</span></span><br><span class="line">    Method[] methods1 = studentClass.getMethods();</span><br><span class="line">    <span class="comment">//获取所有当前类中（this）中的所有方法</span></span><br><span class="line">    Method[] methods2 = studentClass.getDeclaredMethods();</span><br><span class="line">    <span class="comment">//获取所有当前类的非私有属性</span></span><br><span class="line">    Field[] fields = studentClass.getFields();</span><br><span class="line">    <span class="comment">//获取某一个属性</span></span><br><span class="line">    <span class="type">Field</span> <span class="variable">sex</span> <span class="operator">=</span> studentClass.getDeclaredField(<span class="string">&quot;sex&quot;</span>);</span><br><span class="line">    <span class="comment">//属性赋值</span></span><br><span class="line">    sex.set(student,<span class="string">&quot;男&quot;</span>);</span><br><span class="line">    System.out.println(sex.get(student));</span><br><span class="line">    <span class="comment">//获取某一个方法</span></span><br><span class="line">    <span class="type">Method</span> <span class="variable">methods</span> <span class="operator">=</span> studentClass.getDeclaredMethod(<span class="string">&quot;say&quot;</span>);</span><br><span class="line">                <span class="comment">//private修饰 暴露私有 不然会报错</span></span><br><span class="line">               methods.setAccessible(<span class="literal">true</span>);</span><br><span class="line">               <span class="comment">//调用方法</span></span><br><span class="line">               methods.invoke(studentClass.newInstance());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>多练…………………………..</p>
+<p>推荐文章：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/huangliniqng/article/details/88554510">https://blog.csdn.net/huangliniqng/article/details/88554510</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a745233700/article/details/82893076">https://blog.csdn.net/a745233700/article/details/82893076</a></p>
 
       
     </div>
@@ -299,7 +301,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -367,19 +369,19 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -419,12 +421,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">95k</span>
+    <span title="站点总字数">98k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:26</span>
+    <span title="站点阅读时长">1:29</span>
 </div>
 
         
