@@ -179,7 +179,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/29/js%E6%95%B0%E7%BB%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/31/SSM%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
@@ -193,7 +193,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/08/29/js%E6%95%B0%E7%BB%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">js数组常用方法</a>
+            <a href="/2021/08/31/SSM%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">SSM项目基本配置</a>
         </h2>
 
         <div class="post-meta">
@@ -203,14 +203,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-08-29 08:53:25" itemprop="dateCreated datePublished" datetime="2021-08-29T08:53:25+08:00">2021-08-29</time>
+              <time title="创建时间：2021-08-31 09:53:25" itemprop="dateCreated datePublished" datetime="2021-08-31T09:53:25+08:00">2021-08-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-24 16:48:54" itemprop="dateModified" datetime="2022-05-24T16:48:54+08:00">2022-05-24</time>
+                <time title="修改时间：2022-05-20 20:49:16" itemprop="dateModified" datetime="2022-05-20T20:49:16+08:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,7 +218,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                  <a href="/categories/javaweb/" itemprop="url" rel="index"><span itemprop="name">javaweb</span></a>
                 </span>
             </span>
 
@@ -228,14 +228,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>10 分钟</span>
             </span>
 
         </div>
@@ -247,46 +247,215 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="1-pop方法，删除数组-索引值最大的元素-，返回值为被删除的那个元素，会影响原数组。"><a href="#1-pop方法，删除数组-索引值最大的元素-，返回值为被删除的那个元素，会影响原数组。" class="headerlink" title="1.pop方法，删除数组 索引值最大的元素 ，返回值为被删除的那个元素，会影响原数组。"></a>1.<strong>pop</strong>方法，删除数组 索引值最大的元素 ，返回值为被删除的那个元素，会<strong>影响原数组</strong>。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">pop</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//4</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3]</span></span><br></pre></td></tr></table></figure>
+          <p>maven项目项目结构图：</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/4CUaMF"><img src="https://z3.ax1x.com/2021/09/13/4CUaMF.png" alt="4CUaMF.png"></a></p>
+<h3 id="1-pom-xml基本配置如下："><a href="#1-pom-xml基本配置如下：" class="headerlink" title="1.pom.xml基本配置如下："></a>1.pom.xml基本配置如下：</h3><pre><code>  &lt;properties&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;
+    &lt;spring.version&gt;4.1.4.RELEASE&lt;/spring.version&gt;
+    &lt;jackson.version&gt;2.5.0&lt;/jackson.version&gt;
+  &lt;/properties&gt;
 
-<h4 id="2-push方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会影响原数组。"><a href="#2-push方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会影响原数组。" class="headerlink" title="2.push方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会影响原数组。"></a>2.<strong>push</strong>方法，在数组最后添加一个或多个元素，返回值为数组的新长度，会<strong>影响原数组</strong>。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">push</span>(<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//6</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,5,6]</span></span><br></pre></td></tr></table></figure>
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;4.11&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;!-- spring --&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+      &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+  &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+&lt;/dependency&gt;
 
-<h4 id="3-unshift方法，在数组前面插入一个或者多个元素，返回数组的新长度，会影响原数组。"><a href="#3-unshift方法，在数组前面插入一个或者多个元素，返回数组的新长度，会影响原数组。" class="headerlink" title="3.unshift方法，在数组前面插入一个或者多个元素，返回数组的新长度，会影响原数组。"></a>3.<strong>unshift</strong>方法，在数组前面插入一个或者多个元素，返回数组的新长度，会<strong>影响原数组</strong>。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">unshift</span>(<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//6</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[5,6,1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+  &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+&lt;/dependency&gt;
 
-<h4 id="4-shift方法，删除数组第一个元素，返回被删除的那个元素，会影响原数组。"><a href="#4-shift方法，删除数组第一个元素，返回被删除的那个元素，会影响原数组。" class="headerlink" title="4.shift方法，删除数组第一个元素，返回被删除的那个元素，会影响原数组。"></a>4.<strong>shift</strong>方法，删除数组第一个元素，返回被删除的那个元素，会<strong>影响原数组</strong>。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">shift</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[2,3,4]</span></span><br></pre></td></tr></table></figure>
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;
+  &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+&lt;/dependency&gt;
 
-<h4 id="5-reverse方法，将数组内容倒序，返回新的数组，并且会影响原数组"><a href="#5-reverse方法，将数组内容倒序，返回新的数组，并且会影响原数组" class="headerlink" title="5.reverse方法，将数组内容倒序，返回新的数组，并且会影响原数组"></a>5.<strong>reverse</strong>方法，将数组内容倒序，返回新的数组，并且会<strong>影响原数组</strong></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">reverse</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[4,3,2,1]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[4,3,2,1]</span></span><br></pre></td></tr></table></figure>
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+  &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+&lt;/dependency&gt;
 
-<h4 id="6-join方法，将数组以join指定的字符连接成字符串，返回新数组，不会影响原数组。"><a href="#6-join方法，将数组以join指定的字符连接成字符串，返回新数组，不会影响原数组。" class="headerlink" title="6.join方法，将数组以join指定的字符连接成字符串，返回新数组，不会影响原数组。"></a>6.<strong>join</strong>方法，将数组以join指定的字符连接成字符串，返回新数组，<strong>不会影响原数组</strong>。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">join</span>(<span class="string">&quot;-&quot;</span>);<span class="comment">//默认是，</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="number">1</span>-<span class="number">2</span>-<span class="number">3</span>-<span class="number">4</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+  &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+&lt;/dependency&gt;
 
-<h4 id="7-sort方法，-将数组进行排序-升序-返回新数组，影响原数组"><a href="#7-sort方法，-将数组进行排序-升序-返回新数组，影响原数组" class="headerlink" title="7.sort方法， 将数组进行排序(升序),返回新数组，影响原数组"></a>7.<strong>sort</strong>方法， 将数组进行排序(升序),返回新数组，<strong>影响原数组</strong></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">sort</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[1,2,3,4]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+  &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+&lt;/dependency&gt;
 
-<h4 id="8-splice方法-在任意位置添加或删除元素-返回删除或被替换的值，如果没有被删除或替换则返回空数组-影响原数组"><a href="#8-splice方法-在任意位置添加或删除元素-返回删除或被替换的值，如果没有被删除或替换则返回空数组-影响原数组" class="headerlink" title="8.splice方法, 在任意位置添加或删除元素,返回删除或被替换的值，如果没有被删除或替换则返回空数组; ,影响原数组"></a>8.<strong>splice</strong>方法, 在任意位置添加或删除元素,返回删除或被替换的值，如果没有被删除或替换则返回空数组; ,<strong>影响原数组</strong></h4><p>1.只有一个参数时,  从当前位置删除到数组末尾 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">splice</span>(<span class="number">1</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2,3,4]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1]</span></span><br></pre></td></tr></table></figure>
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+  &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+  &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
 
-<p>2.有两个参数时,第一个值为删除的位置，第二个值为删除的个数; </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">splice</span>(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,3,4]</span></span><br></pre></td></tr></table></figure>
+&lt;!-- mybatis 包 --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+  &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+  &lt;version&gt;3.2.8&lt;/version&gt;
+&lt;/dependency&gt;
 
-<p>3.有三个或者多个值时，第一个值为插入元素的位置，第二个值为替换的个数，后面的值都为插入的新元素； </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">splice</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2,3]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,6,7,8,4]</span></span><br></pre></td></tr></table></figure>
+&lt;!--mybatis spring 插件 --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+  &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+  &lt;version&gt;1.2.2&lt;/version&gt;
+&lt;/dependency&gt;
 
-<h4 id="9-slice方法"><a href="#9-slice方法" class="headerlink" title="9.slice方法"></a>9.<strong>slice</strong>方法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">slice</span>(<span class="number">1</span>,<span class="number">2</span>);<span class="comment">//截取从索引1到索引2，但是不包括2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+&lt;!-- mysql连接 注意版本 --&gt;
 
-<h4 id="10-map方法"><a href="#10-map方法" class="headerlink" title="10.map方法"></a>10.<strong>map</strong>方法</h4><p>参数1：当前索引值</p>
-<p>参数2：当前下标</p>
-<p>参数3：原数组</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">map</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item*<span class="number">2</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[2,4,6,8,10]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,5]</span></span><br></pre></td></tr></table></figure>
+&lt;dependency&gt;
+  &lt;groupId&gt;mysql&lt;/groupId&gt;
+  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+  &lt;version&gt;5.1.6&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- 数据源 --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+  &lt;artifactId&gt;druid&lt;/artifactId&gt;
+  &lt;version&gt;1.0.12&lt;/version&gt;
+&lt;/dependency&gt;
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[&#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;,&#123;<span class="attr">a</span>:<span class="number">3</span>,<span class="attr">b</span>:<span class="number">4</span>&#125;,&#123;<span class="attr">a</span>:<span class="number">5</span>,<span class="attr">b</span>:<span class="number">6</span>&#125;];</span><br><span class="line"><span class="keyword">let</span> ret=arr.<span class="title function_">map</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item.<span class="property">a</span>=item.<span class="property">a</span>*<span class="number">2</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ret)<span class="comment">//[ 2, 6, 10 ]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[ &#123; a: 2, b: 2 &#125;, &#123; a: 6, b: 4 &#125;, &#123; a: 10, b: 6 &#125; ]</span></span><br></pre></td></tr></table></figure>
+&lt;dependency&gt;
+  &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+  &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+  &lt;version&gt;1.8.4&lt;/version&gt;
+&lt;/dependency&gt;
 
-<p><strong>当数组中元素是值类型，map不会改变原数组；当是引用类型，则可以改变原数组</strong> </p>
-<h4 id="11-indexOf方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1"><a href="#11-indexOf方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1" class="headerlink" title="11.indexOf方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1"></a>11.<strong>indexOf</strong>方法，查找某个元素的索引值，如果有多个相同的，则返回第一个值得索引，如果没找到，返回-1</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> index=arr.<span class="title function_">indexOf</span>(<span class="number">3</span>)<span class="comment">//没找到则返回-1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,3,5]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(index)<span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+&lt;!-- log4j --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;log4j&lt;/groupId&gt;
+  &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+  &lt;version&gt;1.2.17&lt;/version&gt;
+&lt;/dependency&gt;
 
-<h4 id="12-find方法，找到第一个满足条件得值，没找到返回undifine"><a href="#12-find方法，找到第一个满足条件得值，没找到返回undifine" class="headerlink" title="12.find方法，找到第一个满足条件得值，没找到返回undifine"></a>12.<strong>find</strong>方法，找到第一个满足条件得值，没找到返回undifine</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> value=arr.<span class="title function_">find</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item&gt;<span class="number">3</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,3,5]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(value)<span class="comment">//4</span></span><br></pre></td></tr></table></figure>
+&lt;!-- servlet --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+  &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+  &lt;version&gt;3.0-alpha-1&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
 
-<h4 id="13-forEach方法，数组遍历，没有return，即使有return，也会返回undifine。"><a href="#13-forEach方法，数组遍历，没有return，即使有return，也会返回undifine。" class="headerlink" title="13.forEach方法，数组遍历，没有return，即使有return，也会返回undifine。"></a>13.<strong>forEach</strong>方法，数组遍历，没有return，即使有return，也会返回undifine。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> index=arr.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(item,index,arr)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> <span class="number">0</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">2</span> <span class="number">1</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">3</span> <span class="number">2</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">4</span> <span class="number">3</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">3</span> <span class="number">4</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br><span class="line"><span class="number">5</span> <span class="number">5</span> [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span> ]</span><br></pre></td></tr></table></figure>
+&lt;dependency&gt;
+  &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+  &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+  &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
 
-<h4 id="14-filter方法，过滤数组"><a href="#14-filter方法，过滤数组" class="headerlink" title="14.filter方法，过滤数组"></a>14.<strong>filter</strong>方法，过滤数组</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> index=arr.<span class="title function_">filter</span>(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item&gt;<span class="number">1</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr)<span class="comment">//[1,2,3,4,3,5]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(index)<span class="comment">//[2,3,4,3,5]</span></span><br></pre></td></tr></table></figure>
+&lt;!-- json --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.codehaus.jackson&lt;/groupId&gt;
+  &lt;artifactId&gt;jackson-mapper-asl&lt;/artifactId&gt;
+  &lt;version&gt;1.9.13&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+  &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+  &lt;version&gt;1.2.3&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+  &lt;artifactId&gt;jackson-annotations&lt;/artifactId&gt;
+  &lt;version&gt;$&#123;jackson.version&#125;&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+  &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;
+  &lt;version&gt;$&#123;jackson.version&#125;&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+  &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+  &lt;version&gt;$&#123;jackson.version&#125;&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- 文件上传 --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;commons-io&lt;/groupId&gt;
+  &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
+  &lt;version&gt;2.4&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+  &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+  &lt;version&gt;1.2.2&lt;/version&gt;
+&lt;/dependency&gt;
+  &lt;/dependencies&gt;
+</code></pre>
+<h3 id="2-web-xml配置："><a href="#2-web-xml配置：" class="headerlink" title="2.web.xml配置："></a>2.web.xml配置：</h3><pre><code>  &lt;context-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;classpath:applicationContext*.xml&lt;/param-value&gt;
+    &lt;/context-param&gt;
+
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;springMvc&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath:springmvc.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springMvc&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;!-- 编码Filter 加载配置 Start --&gt;
+    &lt;filter&gt;
+        &lt;filter-name&gt;SetCharacterEncoding&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;encoding&lt;/param-name&gt;
+            &lt;param-value&gt;UTF-8&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;SetCharacterEncoding&lt;/filter-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/filter-mapping&gt;
+</code></pre>
+<h3 id="3-applicationContext-dao-xml配置："><a href="#3-applicationContext-dao-xml配置：" class="headerlink" title="3.applicationContext-dao.xml配置："></a>3.applicationContext-dao.xml配置：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">   xmlns:context=&quot;http://www.springframework.org/schema/context&quot; xmlns:p=&quot;http://www.springframework.org/schema/p&quot;</span><br><span class="line">   xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot; xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</span><br><span class="line">   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">   xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</span><br><span class="line">   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd</span><br><span class="line">   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd</span><br><span class="line">   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd&quot;&gt;</span><br><span class="line">   </span><br><span class="line">   &lt;!-- 数据库连接池 --&gt;</span><br><span class="line">   &lt;!-- 加载配置文件 --&gt;</span><br><span class="line">   &lt;context:property-placeholder location=&quot;classpath:dbconfig.properties&quot; /&gt;</span><br><span class="line">   &lt;!-- 数据库连接池 --&gt;</span><br><span class="line">   &lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;</span><br><span class="line">      &lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot; /&gt;</span><br><span class="line">      &lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot; /&gt;</span><br><span class="line">      &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot; /&gt;</span><br><span class="line">      &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;jdbc.driver&#125;&quot; /&gt;</span><br><span class="line">   &lt;/bean&gt;</span><br><span class="line">   &lt;!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 --&gt;</span><br><span class="line">   &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;</span><br><span class="line">      &lt;!-- 数据库连接池 --&gt;</span><br><span class="line">      &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;</span><br><span class="line">      &lt;!-- 加载mybatis的全局配置文件 --&gt;</span><br><span class="line">      &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath*:com/zht/mapper/*.xml&quot;&gt;&lt;/property&gt;</span><br><span class="line">   &lt;/bean&gt;</span><br><span class="line">   &lt;!-- 自动扫描 将Mapper接口生成代理注入到Spring --&gt;</span><br><span class="line">   &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;</span><br><span class="line">      &lt;property name=&quot;basePackage&quot; value=&quot;com.zht.dao&quot; /&gt;</span><br><span class="line">   &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>4.applicationContext-service.xml配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">   xmlns:context=&quot;http://www.springframework.org/schema/context&quot; xmlns:p=&quot;http://www.springframework.org/schema/p&quot;</span><br><span class="line">   xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot; xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</span><br><span class="line">   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">   xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</span><br><span class="line">   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd</span><br><span class="line">   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd</span><br><span class="line">   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd&quot;&gt;</span><br><span class="line">      </span><br><span class="line">      &lt;!-- spring自动去扫描base-pack下面或者子包下面的java文件--&gt;</span><br><span class="line">      &lt;!--管理Service实现类--&gt;</span><br><span class="line">      &lt;context:component-scan base-package=&quot;com.zht.service&quot;/&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-springmvc-xml配置："><a href="#5-springmvc-xml配置：" class="headerlink" title="5.springmvc.xml配置："></a>5.springmvc.xml配置：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:p=&quot;http://www.springframework.org/schema/p&quot;</span><br><span class="line">   xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">   xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;</span><br><span class="line">   xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd</span><br><span class="line">        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   &lt;!-- Spring 来扫描指定包下的类，并注册被@Component，@Controller，@Service，@Repository等注解标记的组件 --&gt;</span><br><span class="line">   &lt;mvc:annotation-driven /&gt;</span><br><span class="line"></span><br><span class="line">   &lt;!-- 扫描controller --&gt;</span><br><span class="line">   &lt;context:component-scan base-package=&quot;com.zht.controller&quot; /&gt;</span><br><span class="line"></span><br><span class="line">   &lt;!-- 配置SpringMVC的视图解析器 suffer prefix --&gt;</span><br><span class="line">   &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;</span><br><span class="line">   &lt;/bean&gt;</span><br><span class="line">   &lt;mvc:default-servlet-handler/&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-dbconfig-properties配置："><a href="#6-dbconfig-properties配置：" class="headerlink" title="6.dbconfig.properties配置："></a>6.dbconfig.properties配置：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver=com.mysql.jdbc.Driver </span><br><span class="line">jdbc.url=jdbc:mysql://localhost:3306/数据库名?characterEncoding=utf-8</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=数据库密码</span><br></pre></td></tr></table></figure>
 
 
       
@@ -306,7 +475,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/29/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="extend next" rel="next" href="/page/31/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/29/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/31/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -374,7 +543,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -426,12 +595,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">102k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:32</span>
 </div>
 
         

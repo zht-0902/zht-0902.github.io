@@ -179,7 +179,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/09/org.apache.ibatis.binding.BindingException%20Invalid%20bound%20statement%20(not%20found)/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/10/String%E5%92%8CStringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
@@ -193,7 +193,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/09/09/org.apache.ibatis.binding.BindingException%20Invalid%20bound%20statement%20(not%20found)/" class="post-title-link" itemprop="url">org.apache.ibatis.binding.BindingException报错解决</a>
+            <a href="/2021/09/10/String%E5%92%8CStringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">String和StringBuffer、StringBuilder的区别是什么？</a>
         </h2>
 
         <div class="post-meta">
@@ -203,14 +203,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-09-09 09:53:25" itemprop="dateCreated datePublished" datetime="2021-09-09T09:53:25+08:00">2021-09-09</time>
+              <time title="创建时间：2021-09-10 09:53:25" itemprop="dateCreated datePublished" datetime="2021-09-10T09:53:25+08:00">2021-09-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-12 20:37:38" itemprop="dateModified" datetime="2021-10-12T20:37:38+08:00">2021-10-12</time>
+                <time title="修改时间：2022-05-25 10:39:23" itemprop="dateModified" datetime="2022-05-25T10:39:23+08:00">2022-05-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,7 +218,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaweb/" itemprop="url" rel="index"><span itemprop="name">javaweb</span></a>
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
                 </span>
             </span>
 
@@ -228,7 +228,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>564</span>
+              <span>743</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -247,14 +247,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>错误信息：	<strong>org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.zht.dao.BookMapper.selAll</strong></p>
-<p>关于这个问题，我的是 Maven 项目，在访问程序的接口时，抛出异常信息，无效的绑定语句。在检查调用的 Mapper 接口时，发现在目标文件中没有找到 Mapper 映射的配置文件，这是因为idea不会编译src的java目录的xml文件，所以在程序启动时，就找不到对应的映射文件，导致的这个错误。</p>
-<p>解决办法如下：</p>
-<p>在pom.xml中的build标签中加入以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;resources&gt;</span><br><span class="line">  &lt;resource&gt;</span><br><span class="line">    &lt;directory&gt;src/main/java&lt;/directory&gt;</span><br><span class="line">    &lt;includes&gt;</span><br><span class="line">      &lt;include&gt;**/*.xml&lt;/include&gt;</span><br><span class="line">    &lt;/includes&gt;</span><br><span class="line">  &lt;/resource&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
-
-<p>在这之前，一定要查看mapper.xml中的namespace是否写对或者对应的方法名与id是否一致！！！</p>
-<p>还有一种方式就是直接把java文件夹移到src目录下。。。。。</p>
+          <h2 id="String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的-？"><a href="#String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的-？" class="headerlink" title="String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的 ？"></a><strong>String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的</strong> ？</h2><p><strong>可变性</strong> </p>
+<p>String类中使用字符数组保存字符串，private final char value[]，所以string对象是不可变的。StringBuilder与 StringBuffer都继承自AbstractStringBuilder类，在AbstractStringBuilder中也是使用字符数组保存字符串，char[]  value，这两种对象都是可变的。 </p>
+<p><strong>线程安全性</strong> </p>
+<p>String中的对象是不可变的，也就可以理解为常量，线程安全。AbstractStringBuilder是StringBuilder与StringBuffer的公共父类，定义了一些字符串的基本操作，如expandCapacity、append、insert、indexOf等公共方法。StringBuffer对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder并没有对方法进行加同步锁，所以是非线程安全的。 </p>
+<p><strong>性能</strong></p>
+<p>每次对String 类型进行改变的时候，都会生成一个新的String对象，然后将指针指向新的String 对象。StringBuffer每次都会对StringBuffer对象本身进行操作，而不是生成新的对象并改变对象引用。</p>
+<p>相同情况下使用StirngBuilder 相比使用StringBuffer 仅能获得10%~15% 左右的性能提升，但却要冒多线程不安全的风险。 </p>
+<p><strong>对于三者使用的总结</strong> </p>
+<p>如果要操作少量的数据用 &#x3D; String </p>
+<p>单线程操作字符串缓冲区下操作大量数据 &#x3D; StringBuilder </p>
+<p>多线程操作字符串缓冲区下操作大量数据 &#x3D; StringBuffer </p>
+<p>​    </p>
 
       
     </div>
@@ -273,7 +277,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -341,7 +345,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -393,12 +397,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">102k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:32</span>
 </div>
 
         

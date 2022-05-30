@@ -179,7 +179,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/10/String%E5%92%8CStringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/%E6%95%85%E4%B9%A1%E7%9A%84%E5%B0%8F%E8%AF%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
@@ -193,7 +193,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/09/10/String%E5%92%8CStringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">String和StringBuffer、StringBuilder的区别是什么？</a>
+            <a href="/2021/09/15/%E6%95%85%E4%B9%A1%E7%9A%84%E5%B0%8F%E8%AF%97/" class="post-title-link" itemprop="url">故乡的小诗</a>
         </h2>
 
         <div class="post-meta">
@@ -203,14 +203,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-09-10 09:53:25" itemprop="dateCreated datePublished" datetime="2021-09-10T09:53:25+08:00">2021-09-10</time>
+              <time title="创建时间：2021-09-15 09:53:25" itemprop="dateCreated datePublished" datetime="2021-09-15T09:53:25+08:00">2021-09-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-25 10:39:23" itemprop="dateModified" datetime="2022-05-25T10:39:23+08:00">2022-05-25</time>
+                <time title="修改时间：2021-09-16 20:28:11" itemprop="dateModified" datetime="2021-09-16T20:28:11+08:00">2021-09-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,7 +218,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
                 </span>
             </span>
 
@@ -228,7 +228,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>743</span>
+              <span>331</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -247,18 +247,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的-？"><a href="#String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的-？" class="headerlink" title="String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的 ？"></a><strong>String和StringBuffer、StringBuilder的区别是什么？String为什么是不可变的</strong> ？</h2><p><strong>可变性</strong> </p>
-<p>String类中使用字符数组保存字符串，private final char value[]，所以string对象是不可变的。StringBuilder与 StringBuffer都继承自AbstractStringBuilder类，在AbstractStringBuilder中也是使用字符数组保存字符串，char[]  value，这两种对象都是可变的。 </p>
-<p><strong>线程安全性</strong> </p>
-<p>String中的对象是不可变的，也就可以理解为常量，线程安全。AbstractStringBuilder是StringBuilder与StringBuffer的公共父类，定义了一些字符串的基本操作，如expandCapacity、append、insert、indexOf等公共方法。StringBuffer对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder并没有对方法进行加同步锁，所以是非线程安全的。 </p>
-<p><strong>性能</strong></p>
-<p>每次对String 类型进行改变的时候，都会生成一个新的String对象，然后将指针指向新的String 对象。StringBuffer每次都会对StringBuffer对象本身进行操作，而不是生成新的对象并改变对象引用。</p>
-<p>相同情况下使用StirngBuilder 相比使用StringBuffer 仅能获得10%~15% 左右的性能提升，但却要冒多线程不安全的风险。 </p>
-<p><strong>对于三者使用的总结</strong> </p>
-<p>如果要操作少量的数据用 &#x3D; String </p>
-<p>单线程操作字符串缓冲区下操作大量数据 &#x3D; StringBuilder </p>
-<p>多线程操作字符串缓冲区下操作大量数据 &#x3D; StringBuffer </p>
-<p>​    </p>
+          <h3 id="《故乡的小诗》————-做个梦给你"><a href="#《故乡的小诗》————-做个梦给你" class="headerlink" title="《故乡的小诗》———— 做个梦给你"></a>《故乡的小诗》———— 做个梦给你</h3> <br/>
+
+<p>桂花树在早秋的日子里</p>
+<p>等了一整个清晨</p>
+<p>像酝酿着萌芽的梦想一般</p>
+<p>轻轻地、静静地、慢慢地钻出土来</p>
+ <br/>
+
+
+<p>我在院子里</p>
+<p>看一树的花开</p>
+<p>看斑驳的墙角</p>
+<p>青砖白瓦纸似的翻了边</p>
+<p>展露出灰白的石墙</p>
+ <br/>
+
+<p>树影交错掉落 横在泥土地上</p>
+<p>树缝间的点点阳光 若隐若现</p>
+<p>描摹而出的明暗倩影</p>
+<p>铺在水泥小道上</p>
+ <br/>
+
+<p>墙尾的自行车</p>
+<p>已很难被人记起</p>
+<p>车轮早已瘪了下去</p>
+<p>锈迹斑斑</p>
+<p>仿佛记留着它走过的长街巷尾</p>
+<p>踩过的青石巷</p>
+<p>载过的稚童幼女</p>
+<p>欢声、笑语、沉默</p>
+<p>都还停留在不停滚动的车轮上</p>
+<p>岁月把车座打磨得光亮</p>
+<p>厚厚的灰尘也难掩它的光泽</p>
+<p>曾经的我们也坐在自行车后座上</p>
+<p>感受着耳边的风声呼呼</p>
+<p>观赏着天边的晚霞静默</p>
+<p>落日滚圆滚圆的</p>
+<p>快乐与悲伤</p>
+<p>都一并被收进旧时光的大口袋里</p>
+<p>点点滴滴的积攒着</p>
+ <br/>
+
+<p>时过经年 </p>
+<p>静默着静默着</p>
+<p>无需告诉太阳和月亮</p>
+<p>只留星星照看他们</p>
+<p>陪着他们永不枯萎</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/4nokKH"><img src="https://z3.ax1x.com/2021/09/16/4nokKH.jpg" alt="4nokKH.jpg"></a></p>
 
       
     </div>
@@ -277,7 +313,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -345,7 +381,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -397,12 +433,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">102k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:32</span>
 </div>
 
         

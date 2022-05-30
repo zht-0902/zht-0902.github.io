@@ -22,26 +22,26 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="Zht&#x2F;Blog">
-<meta property="og:url" content="http://example.com/archives/2021/08/index.html">
+<meta property="og:url" content="http://example.com/page/36/index.html">
 <meta property="og:site_name" content="Zht&#x2F;Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Zht">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/archives/2021/08/">
+<link rel="canonical" href="http://example.com/page/36/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
+    isHome : true,
     isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Zht/Blog</title>
+  <title>Zht/Blog</title>
   
 
 
@@ -173,92 +173,113 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/28/%E9%85%8D%E7%BD%AEJDK/">
 
-  
-  
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">还行! 目前共计 36 篇日志。 继续努力。</span>
-      </div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
+      <meta itemprop="name" content="Zht">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zht/Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/28/%E9%85%8D%E7%BD%AEJDK/" class="post-title-link" itemprop="url">配置JDK</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-28 08:53:25" itemprop="dateCreated datePublished" datetime="2021-06-28T08:53:25+08:00">2021-06-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-23 18:29:58" itemprop="dateModified" datetime="2022-05-23T18:29:58+08:00">2022-05-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>411</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+          <ol>
+<li><p>此电脑–高级系统设置–系统属性–高级–环境变量</p>
+</li>
+<li><p>在系统变量下点击新建,变量名为JAVA_HOME，变量值为C:\Program Files\Java\jdk1.8.0_152（这个为你安装jdk的路径，我的是这个，你们自己的时情况而定），如图所示：<img src="https://i.loli.net/2021/06/29/Feo7g2VfEwQK8yi.png"></p>
+</li>
+<li><p>和JAVA_HOME一样，新建一个名为“CLASSPATH”的环境变量，变量值为 .;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar（同上，找到自己电脑所对应的即可），如图所示：<img src="https://i.loli.net/2021/06/29/XfoeqjNnUySQwYP.png"></p>
+</li>
+<li><p>设置Path环境变量，该变量已经存在，所以在列表中选择Path，点击下方的“编辑”按钮，在弹出的窗口中添加如下信息：%JAVA_HOME%\bin，然后点击“确认”按钮即可。如图所示：<img src="https://i.loli.net/2021/06/29/v19YRktTaiGodW7.png"></p>
+</li>
+<li><p>在配置好环境变量后，可以进入cmd中检查Java是否安装正确，检查的命令为 java -version，如图所示：<img src="https://i.loli.net/2021/06/29/fZ5R6EM1uBzb9cH.png"></p>
+<p>如果能正确的输出Java的版本和JVM版本信息，则说明Java安装正确。</p>
+</li>
+</ol>
+
+      
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-08-31T09:53:25+08:00"
-              content="2021-08-31">
-          08-31
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/08/31/SSM%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" itemprop="url">
-            <span itemprop="name">SSM项目基本配置</span>
-          </a>
-      </div>
-
-    </header>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-08-29T08:53:25+08:00"
-              content="2021-08-29">
-          08-29
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/08/29/js%E6%95%B0%E7%BB%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" itemprop="url">
-            <span itemprop="name">js数组常用方法</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-08-24T09:53:25+08:00"
-              content="2021-08-24">
-          08-24
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/08/24/Mysql%E5%B8%B8%E7%94%A8sql%E8%AF%AD%E5%8F%A5/" itemprop="url">
-            <span itemprop="name">Mysql常用sql语句</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-
-    </div>
-  </div>
   
   
   
 
+
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/35/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span>
+  </nav>
 
 
 
